@@ -4,7 +4,7 @@ const { MessageEmbed } = require('discord.js');
 
 module.exports = {
     name: 'nowlyrics',
-    aliases: ['ㅜㅐ지ㅛ걏ㄴ'],
+    aliases: ['ㅜㅐ지ㅛ걏ㄴ','nl','ㅟ'],
     category: "music",
     run: async (client, message, args, tools) => {
         const serverQueue = client.musicManager.queue.get(message.guild.id);

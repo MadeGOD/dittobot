@@ -93,8 +93,8 @@ client.on("ready", () => {
 			});
 		};
 	} catch {
-		console.error;
-	};
+		console.error
+	}
 })
 .on('guildCreate', guild => {
 	console.log(`${chalk.blue('Guild Create')} name: ${guild.name} (${guild.id}), owner: ${guild.owner.user.tag} (${guild.ownerID})`)

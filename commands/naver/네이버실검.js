@@ -9,7 +9,7 @@ module.exports = {
         const { data } = await fetch('https://www.naver.com/srchrank?frm=main').then(e => e.json());
         let resp = ``;
 
-        for (var i = 0; i < 10; i++) {
+        for (let i = 0; i < 10; i++) {
             resp += `**${i+1}위**\n[${data[i].keyword}](https://search.naver.com/search.naver?sm=tab_hty.top&where=nexearch&query=${data[i].keyword.replace(/ /gi, '+')})\n\n`
         };
 
