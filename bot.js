@@ -68,7 +68,6 @@ client.on("ready", () => {
 
 	if (message.channel.type === 'dm' && (message.author.id !== process.env.OWNER_ID)) {
 		message.channel.send(`DM에서는 ${client.user.username}을(를) 사용하실 수 없습니다.\n${client.user.username}이(가) 있는 서버에서 사용해 주세요.`);
-		message.attachments.first().url ? console.log(message.attachments.first().url) : null;
 		return console.log(`${chalk.green('DM Message')} ${message.author.username} (${message.author.id}): ${message.content}`)
 	}
 
