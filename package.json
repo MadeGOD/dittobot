@@ -32,7 +32,9 @@
     "node-fetch": "^2.6.0",
     "nodemailer": "^6.4.6",
     "slyrics": "^0.1.42",
-    "util": "^0.12.2"
+    "sqlite": "^4.0.7",
+    "util": "^0.12.2",
+    "vultrex.db": "^1.4.1"
   },
   "devDependencies": {
     "eslint": "^6.8.0",

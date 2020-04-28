@@ -4,12 +4,21 @@ const { Client, Collection } = require("discord.js");
 const { readdirSync } = require("fs");
 const chalk = require("chalk");
 
+const { VultrexDB } = require('vultrex.db');
+
+const db = new VultrexDB({
+	provider: "sqlite",
+	table: "main",
+	fileName: "main"
+});
+
 const client = new Client();
 
 client.commands = new Collection();
 client.aliases = new Collection();
 client.categories = readdirSync("./commands/");
 client.musicManager = null;
+client.db = null;
 
 const ascii = require('ascii-table');
 const table = new ascii().setHeading("Command", "Status");
@@ -33,11 +42,13 @@ readdirSync("./commands/").forEach(dir => {
 });
 
 process.on('unhandledRejection', console.error)
-.on("uncaughtException", console.error)
-.on('warning', console.warn)
-.on('exit', console.log);
+	.on("uncaughtException", console.error)
+	.on('warning', console.warn)
+	.on('exit', console.log);
 
 client.login();
+
+db.connect().then(() => console.log('db is connected'));
 
 client.on("ready", () => {
 	console.log(`${table.toString()}\nLogin ${client.user.username}\n----------------------------`);
@@ -48,14 +59,16 @@ client.on("ready", () => {
 		client.user.setActivity(activity[Math.floor(Math.random() * activity.length)]);
 	}, 10000);
 
-	const MusicManager = require('./structures/MusicManager')
+	const MusicManager = require('./structures/MusicManager');
 	client.musicManager = new MusicManager(client);
+	client.db = db
 })
 .on("message", async message => {
 	if (message.author.bot || message.system || !message.content.startsWith(process.env.PREFIX)) return;
 
 	if (message.channel.type === 'dm' && (message.author.id !== process.env.OWNER_ID)) {
-		message.channel.send(`DM에서는 ${client.user.username}을(를) 사용하실 수 없습니다.\n${client.user.username}이(가) 있는 서버에서 사용해 주세요.`)
+		message.channel.send(`DM에서는 ${client.user.username}을(를) 사용하실 수 없습니다.\n${client.user.username}이(가) 있는 서버에서 사용해 주세요.`);
+		message.attachments.first().url ? console.log(message.attachments.first().url) : null;
 		return console.log(`${chalk.green('DM Message')} ${message.author.username} (${message.author.id}): ${message.content}`)
 	}
 
@@ -88,7 +101,7 @@ client.on("ready", () => {
 						query: cmd
 					}
 				})
-			}).then(res => res.json()).then(({response: { replies: [{text}] }}) => {
+			}).then(res => res.json()).then(({ response: { replies: [{ text }] } }) => {
 				message.channel.send(text)
 			});
 		};
