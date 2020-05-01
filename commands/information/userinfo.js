@@ -28,7 +28,7 @@ module.exports = {
             .addField(`${client.emojis.cache.find(x => x.name == "discord")} 디스코드 태그`, `**${member.user.tag}**`)
             .addField('🆔 ID', stripIndents`**${member.user.id}**`)
 
-        if (member.user.presence.status !== "offline" && member.user.bot === false) {
+        if (member.user.presence.status !== "offline" && !member.user.bot) {
             if (member.user.presence.clientStatus.desktop) {
                 embed.addField(`${client.emojis.cache.find(x => x.name == "discord")} 디스코드 클라이언트`, `**🖥 디스코드 앱**`)
             } else if (member.user.presence.clientStatus.web) {

@@ -10,6 +10,6 @@ module.exports = {
         if (!message.member.voice.channel) return message.channel.send(new MessageEmbed().setColor(0xFF0000).setDescription(`❌ 음성 채널에 먼저 들어가 주세요!`))
 
         const song = serverQueue.songs[0];
-        message.channel.send(new MessageEmbed().setThumbnail(`https://img.youtube.com/vi/${song.identifier}/mqdefault.jpg`).setTitle(song.info.title).setURL(song.info.uri).setDescription(`${serverQueue.playing ? "🎶 재생 중" : "⏸ 일시 정지됨"}\nAuthor: **${song.info.author}**`).setColor(0x00FF00));
+        message.channel.send(new MessageEmbed().setThumbnail(`https://img.youtube.com/vi/${song.info.identifier}/mqdefault.jpg`).setTitle(song.info.title).setURL(song.info.uri).setDescription(`${serverQueue.playing ? "🎶 재생 중" : "⏸ 일시 정지됨"}\nAuthor: **${song.info.author}**`).setColor(0x00FF00));
     }
 };

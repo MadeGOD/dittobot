@@ -86,10 +86,6 @@ class MusicManager {
         const result = await Rest.load(node, query);
 
         switch(result.loadType) {
-            case "PLAYLIST_LOADED": {
-                return //result.playlistInfo
-            }
-
             case "TRACK_LOADED": {
                 return result.tracks
             }
