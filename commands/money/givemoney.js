@@ -1,7 +1,8 @@
 module.exports = {
     name: 'givemoney',
     aliases: ['돈내놔', '돈줘', 'ehssoshk', 'ehswnj'],
-    cooldowns: 30,
+    category: 'money',
+    cooldowns: 60,
     run: async (client, message, args) => {
         let get = await client.db.get(`money_${message.author.id}`);
         let ran = Math.floor(Math.random() * 90) + 10;

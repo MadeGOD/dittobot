@@ -1,6 +1,7 @@
 module.exports = {
     name: 'money',
     aliases: ['돈', 'ㅡㅐㅜ됴', 'ehs', '내돈', 'soehs'],
+    category: 'money',
     run: async (client, message, args) => {
         let member = message.guild.members.cache.get(args.join(" "));
 

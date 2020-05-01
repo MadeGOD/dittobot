@@ -1,6 +1,7 @@
 module.exports = {
     name: 'betting',
     aliases: ['베팅', '배팅', 'qoxld', 'qpxld'],
+    category: 'money',
     cooldowns: 60,
     run: async (client, message, args) => {
         let ran = Math.floor(Math.random() * 2)

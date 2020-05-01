@@ -20,14 +20,13 @@ client.cooldowns = new Collection();
 client.categories = readdirSync("./commands/");
 client.musicManager = null;
 client.db = null;
+client.inspect = !1;
 
 const ascii = require('ascii-table');
 const table = new ascii().setHeading("Command", "Status");
 
 readdirSync("./commands/").forEach(dir => {
-	const commands = readdirSync(`./commands/${dir}`).filter(f => f.endsWith(".js"));
-
-	for (let file of commands) {
+	for (let file of readdirSync(`./commands/${dir}`).filter(f => f.endsWith(".js"))) {
 		let pull = require(`./commands/${dir}/${file}`);
 
 		if (pull.name) {
@@ -35,10 +34,9 @@ readdirSync("./commands/").forEach(dir => {
 			table.addRow(file, '✅');
 		} else {
 			table.addRow(file, '❌');
-			continue;
 		};
 
-		if (pull.aliases && Array.isArray(pull.aliases)) pull.aliases.forEach(alias => client.aliases.set(alias, pull.name));
+		if (pull.aliases && Array.isArray(pull.aliases)) pull.aliases.forEach(a => client.aliases.set(a, pull.name));
 	};
 });
 
@@ -65,7 +63,7 @@ client.on("ready", () => {
 	client.db = db
 })
 .on("message", async message => {
-	if (message.author.bot || message.system || !message.content.startsWith(process.env.PREFIX)) return;
+	if (message.author.bot || message.system || !message.content.startsWith(process.env.PREFIX) || (client.inspect && (message.author.id !== process.env.OWNER_ID))) return;
 
 	if (message.channel.type === 'dm' && (message.author.id !== process.env.OWNER_ID)) {
 		message.channel.send(`DM에서는 ${client.user.username}을(를) 사용하실 수 없습니다.\n${client.user.username}이(가) 있는 서버에서 사용해 주세요.`);
@@ -123,7 +121,7 @@ client.on("ready", () => {
 						query: cmd
 					}
 				})
-			}).then(res => res.json()).then(({ response: { replies: [{ text }] } }) => {
+			}).then(r => r.json()).then(({ response: { replies: [{ text }] } }) => {
 				message.channel.send(text)
 			});
 		};

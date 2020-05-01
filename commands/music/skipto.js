@@ -11,10 +11,9 @@ module.exports = {
         
         if (!serverQueue.playing) serverQueue.playing = true;
 
-        if (args[0] >= serverQueue.length || args[0] < 0 || isNaN(args[0]) || args[0].includes('.')) return message.channel.send(new MessageEmbed().setDescription(`❌ 1 ~ 100 까지의 자연수만 써 주세요!`).setColor(0xFF0000));
+        if (args[0] >= serverQueue.songs.length || args[0] < 0 || isNaN(args[0]) || args[0].includes('.')) return message.channel.send(new MessageEmbed().setDescription(`❌ `).setColor(0xFF0000));
 
-        serverQueue.splice(0, parseInt(args[0] - 1));
+        serverQueue.songs.splice(0, parseInt(args[0] - 1));
         serverQueue.skip()
-        //message.channel.send(new MessageEmbed().setColor(0x00FF00).setTitle("스킵 완료!").setDescription(`✅ **[${serverQueue.songs[0].info.title}](${serverQueue.songs[0].info.uri})**이(가) 스킵되었습니다!`));
     }
 };

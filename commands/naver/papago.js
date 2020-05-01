@@ -33,9 +33,7 @@ module.exports = {
     aliases: ["파파고", "앵무새"],
     category: "naver",
     run: async (client, message, args) => {
-        if (!args[0]) return;
-        if (!args[1]) return;
-        if (!args.slice(2).join(" ")) return;
+        if (!args[0] || !args[1] || !args.slice(2).join(' ')) return;
 
         if (!languageList.includes(args[0]) || !languageList.includes(args[1])) return message.channel.send("파파고 API에서 지원하지 않는 언어가 들어 있습니다.");
 
