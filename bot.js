@@ -8,8 +8,14 @@ const { VultrexDB } = require('vultrex.db');
 
 const db = new VultrexDB({
 	provider: "sqlite",
-	table: "main",
-	fileName: "main"
+	table: "db/main",
+	fileName: "db/main"
+});
+
+const tagDb = new VultrexDB({
+	provider: "sqlite",
+	table: "db/tag",
+	fileName: "db/tag"
 });
 
 const client = new Client();
@@ -20,10 +26,10 @@ client.cooldowns = new Collection();
 client.categories = readdirSync("./commands/");
 client.musicManager = null;
 client.db = null;
-client.inspect = !1;
+client.tagDb = null;
+client.inspect = !0;
 
-const ascii = require('ascii-table');
-const table = new ascii().setHeading("Command", "Status");
+const table = (new(require('ascii-table'))).setHeading("Command", "Status")
 
 readdirSync("./commands/").forEach(dir => {
 	for (let file of readdirSync(`./commands/${dir}`).filter(f => f.endsWith(".js"))) {
@@ -48,22 +54,30 @@ process.on('unhandledRejection', console.error)
 client.login();
 
 db.connect().then(() => console.log('db is connected'));
+tagDb.connect().then(() => console.log('tag DB is connected'))
 
 client.on("ready", () => {
 	console.log(`${table.toString()}\nLogin ${client.user.username}\n----------------------------`);
 
 	const activity = [`${client.guilds.cache.size}개의 서버`, `${client.users.cache.filter(e => !e.bot).size}명의 유저`, `${client.guilds.cache.size} guilds`, `${client.users.cache.filter(e => !e.bot).size} users`, `https://is.gd/dittoBot`];
 
-	setInterval(() => {
-		client.user.setActivity(activity[Math.floor(Math.random() * activity.length)]);
-	}, 10000);
+	if (!client.inspect) {
+		setInterval(() => {
+			client.user.setActivity(activity[Math.floor(Math.random() * activity.length)]);
+		}, 10000)
+	} else {
+		client.user.setActivity('점검중');
+		client.user.setStatus('dnd')
+	};
 
 	const MusicManager = require('./structures/MusicManager');
 	client.musicManager = new MusicManager(client);
-	client.db = db
+	client.db = db;
+	client.tagDb = tagDb
 })
 .on("message", async message => {
-	if (message.author.bot || message.system || !message.content.startsWith(process.env.PREFIX) || (client.inspect && (message.author.id !== process.env.OWNER_ID))) return;
+	if (message.system || !message.content.startsWith(process.env.PREFIX) || (client.inspect && (message.author.id !== process.env.OWNER_ID))) return;
+	if (message.author.bot && !(message.author.id === '685095151991128070')) return;
 
 	if (message.channel.type === 'dm' && (message.author.id !== process.env.OWNER_ID)) {
 		message.channel.send(`DM에서는 ${client.user.username}을(를) 사용하실 수 없습니다.\n${client.user.username}이(가) 있는 서버에서 사용해 주세요.`);
@@ -74,14 +88,15 @@ client.on("ready", () => {
 
 	if (!message.guild.me.hasPermission('EMBED_LINKS')) return message.channel.send(`${client.user.username}을(를) 원활하게 이용하실려면 **EMBED_LINKS**(링크 보내기) 권한이 필요합니다!`)
 
-	const args = message.content.slice(process.env.PREFIX.length).trim().split(/ +/g);
+	const args = message.content.slice(process.env.PREFIX.length).trim().split(/ +/g)
 	const cmd = args.shift().toLowerCase();
 	const command = client.commands.get(cmd) || client.commands.get(client.aliases.get(cmd));
 
 	try {
-		let ops = {
+		const ops = {
 			ownerID: process.env.OWNER_ID,
-			prefix: process.env.PREFIX
+			prefix: process.env.PREFIX,
+			season: 2
 		};
 
 		if (command) {
@@ -123,8 +138,8 @@ client.on("ready", () => {
 				})
 			}).then(r => r.json()).then(({ response: { replies: [{ text }] } }) => {
 				message.channel.send(text)
-			});
-		};
+			})
+		}
 	} catch {
 		console.error
 	}

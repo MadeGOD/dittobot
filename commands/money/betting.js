@@ -2,20 +2,23 @@ module.exports = {
     name: 'betting',
     aliases: ['베팅', '배팅', 'qoxld', 'qpxld'],
     category: 'money',
-    cooldowns: 60,
+    cooldowns: 30,
     run: async (client, message, args) => {
         let ran = Math.floor(Math.random() * 2)
-        let money = await client.db.get(`money_${message.author.id}`)
+        let money = await client.db.get(message.author.id)
+
+        if (!money) return message.reply(`${client.user.username} 가입을 먼저 해 주세요!\n\`${ops.prefix}가입\``)
 
         if (!args[0]) return message.channel.send('베팅할 돈을 입력해 주세요!')
-        if (isNaN(args[0]) || args[0].includes('.') || parseInt(args[0]) <= 0 || parseInt(args[0]) > money) return message.channel.send('ㄴㄴ');
+        if (isNaN(args[0]) || args[0].includes('.') || parseInt(args[0]) <= 0 || parseInt(args[0]) > money.money) return message.channel.send('ㄴㄴ');
 
         if (ran === 0) {
-            await client.db.set(`money_${message.author.id}`, money - args[0])
-            message.channel.send(`베팅 실패...\n${money}원 -> ${money - args[0]}원... (-${args[0]}원)`)
+            await client.db.set(message.author.id, { money: money.money - args[0], level: money.level })
+            message.channel.send(`베팅 실패...\n${money.money}원 -> ${money.money - args[0]}원... (-${args[0]}원)`)
         } else {
-            await client.db.set(`money_${message.author.id}`, money + (args[0] * (Math.floor(Math.random() * 2) + 2)))
-            message.channel.send(`베팅 성공...!\n${money}원 -> ${money + (args[0] * (Math.floor(Math.random() * 2) + 2))}원! (+${args[0] * (Math.floor(Math.random() * 2) + 2)}원)`)
+            let random = Math.floor(Math.random() * 2) + 2
+            await client.db.set(message.author.id, { money: money.money + (args[0] * random), level: money.level })
+            message.channel.send(`베팅 성공...!\n${money.money}원 -> ${money.money + (args[0] * random)}원! (+${args[0] * random}원)`)
         }
     }
 }

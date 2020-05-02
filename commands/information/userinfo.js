@@ -54,4 +54,4 @@ const status = {
     idle: ':crescent_moon: 자리 비움',
     dnd: ':no_entry: 다른 용무 중',
     offline: ':white_square_button: 오프라인'
-};
+}
