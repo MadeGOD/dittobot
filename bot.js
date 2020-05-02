@@ -27,7 +27,7 @@ client.categories = readdirSync("./commands/");
 client.musicManager = null;
 client.db = null;
 client.tagDb = null;
-client.inspect = !0;
+client.inspect = !1;
 
 const table = (new(require('ascii-table'))).setHeading("Command", "Status")
 
