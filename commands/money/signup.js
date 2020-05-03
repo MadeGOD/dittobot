@@ -19,11 +19,11 @@ module.exports = {
             });
 
             collector.on('end', async (collected) => {
-                if (collected && collected.first().emoji.name === '✅') {
+                if (collected.size > 0 && collected.first().emoji.name === '✅') {
                     await client.db.set(message.author.id, { money: 0, level: 0 })
-                    message.channel.send(`${client.user.username} 가입 완료!`)
+                    e.edit(new MessageEmbed().setTitle(`✅ ${client.user.username} 가입 완료!`).setColor(0x00FF00))
                 } else {
-                    message.channel.send(`${client.user.username} 가입이 취소되었습니다.`)
+                    e.edit(new MessageEmbed().setTitle(`❌ ${client.user.username} 가입이 취소되었습니다.`).setColor(0xFF0000))
                 };
                 
                 if (message.guild.me.hasPermission("MANAGE_MESSAGES")) e.reactions.removeAll()

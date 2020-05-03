@@ -18,6 +18,6 @@ module.exports = {
         let money = await client.db.get(member.id);
         if (!money) return message.channel.send(`${member.tag}님은 돈이 없어요...`);
 
-        message.channel.send(`${member.tag}님은 현재 ${money.money}원 보유 중`)
+        message.channel.send(`${member.tag}님은 현재 ${parseInt(money.money).toLocaleString()}원 보유 중`)
     }
 }

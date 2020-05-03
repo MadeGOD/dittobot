@@ -8,13 +8,13 @@ const { VultrexDB } = require('vultrex.db');
 
 const db = new VultrexDB({
 	provider: "sqlite",
-	table: "db/main",
+	table: "main",
 	fileName: "db/main"
 });
 
 const tagDb = new VultrexDB({
 	provider: "sqlite",
-	table: "db/tag",
+	table: "tag",
 	fileName: "db/tag"
 });
 
@@ -76,8 +76,7 @@ client.on("ready", () => {
 	client.tagDb = tagDb
 })
 .on("message", async message => {
-	if (message.system || !message.content.startsWith(process.env.PREFIX) || (client.inspect && (message.author.id !== process.env.OWNER_ID))) return;
-	if (message.author.bot && !(message.author.id === '685095151991128070')) return;
+	if (message.author.bot || message.system || !message.content.startsWith(process.env.PREFIX) || (client.inspect && (message.author.id !== process.env.OWNER_ID))) return;
 
 	if (message.channel.type === 'dm' && (message.author.id !== process.env.OWNER_ID)) {
 		message.channel.send(`DM에서는 ${client.user.username}을(를) 사용하실 수 없습니다.\n${client.user.username}이(가) 있는 서버에서 사용해 주세요.`);
@@ -86,7 +85,7 @@ client.on("ready", () => {
 
 	if (message.channel.type === 'text' && (message.author.id !== process.env.OWNER_ID)) console.log(`${chalk.yellow('Message')} ${message.author.username} (${message.author.id}): ${message.content} | GUILD: ${message.guild.name} (${message.guild.id}) | CHANNEL: ${message.channel.name} (${message.channel.id})`);
 
-	if (!message.guild.me.hasPermission('EMBED_LINKS')) return message.channel.send(`${client.user.username}을(를) 원활하게 이용하실려면 **EMBED_LINKS**(링크 보내기) 권한이 필요합니다!`)
+	if (message.channel.type === 'text' && !message.guild.me.hasPermission('EMBED_LINKS')) return message.channel.send(`${client.user.username}을(를) 원활하게 이용하실려면 **EMBED_LINKS**(링크 보내기) 권한이 필요합니다!`)
 
 	const args = message.content.slice(process.env.PREFIX.length).trim().split(/ +/g)
 	const cmd = args.shift().toLowerCase();
@@ -115,7 +114,7 @@ client.on("ready", () => {
 		
 				if (now < expirationTime) {
 					const timeLeft = (expirationTime - now) / 1000;
-					return message.channel.send(`\`${timeLeft.toFixed(1)}\`초 후에 \`${command.name}\` 명령어를 다시 사용하실 수 있습니다.`)
+					return message.reply(`\`${timeLeft.toFixed(1)}\`초 후에 \`${command.name}\` 명령어를 다시 사용하실 수 있습니다.`)
 				}
 			};
 		

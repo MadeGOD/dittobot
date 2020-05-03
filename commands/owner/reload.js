@@ -5,7 +5,7 @@ module.exports = {
     name: "reload",
     aliases: ["리로드", "ㄱ디ㅐㅁㅇ", "ffe", "ㄹㄹㄷ", "flfhem"],
     category: "owner",
-    developer: true,
+    developer: !0,
     run: async (client, message, args) => {
         const m = await message.channel.send(new MessageEmbed().setTitle(`${client.emojis.cache.get('677129501645209601')} 모든 파일을 리로드 중... (${client.commands.size}개)`).setColor(0xffff00));
 

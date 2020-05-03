@@ -5,7 +5,7 @@ module.exports = {
     name: "eval",
     aliases: ["compile", "com", "컴파일", "comp", "ev", "ㄷㅍ미", "실행"],
     category: "owner",
-    developer: true,
+    developer: !0,
     run: async (client, message, args, ops) => {
         if (!args[0]) return;
 

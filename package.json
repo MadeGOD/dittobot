@@ -32,6 +32,8 @@
     "slyrics": "^0.1.42",
     "sqlite": "^4.0.7",
     "util": "^0.12.2",
+    "vhost": "^3.0.2",
+    "vhttps": "^0.1.1",
     "vultrex.db": "^1.4.1"
   },
   "devDependencies": {
