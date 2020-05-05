@@ -3,6 +3,8 @@ require("dotenv").config();
 const { Client, Collection } = require("discord.js");
 const { readdirSync } = require("fs");
 const chalk = require("chalk");
+const koreanbots = require('koreanbots')
+const Bot = new koreanbots.MyBot(process.env.KOREANBOTS_TOKEN)
 
 const { VultrexDB } = require('vultrex.db');
 
@@ -73,7 +75,8 @@ client.on("ready", () => {
 	const MusicManager = require('./structures/MusicManager');
 	client.musicManager = new MusicManager(client);
 	client.db = db;
-	client.tagDb = tagDb
+	client.tagDb = tagDb;
+	Bot.update(client.guilds.cache.size)
 })
 .on("message", async message => {
 	if (message.author.bot || message.system || !message.content.startsWith(process.env.PREFIX) || (client.inspect && (message.author.id !== process.env.OWNER_ID))) return;

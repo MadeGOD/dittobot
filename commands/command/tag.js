@@ -27,7 +27,7 @@ module.exports = {
             })
             message.channel.send(`\`${args[1]}\` 태그가 추가되었습니다.`)
         } else if (args[0] === 'rank' || args[0] === '랭킹') {
-            const tags = await client.tagDb.getAll().then(n => n.filter(a => a.value.guild === message.guild.id).sort((a, b) => parseInt(b.value.usageCount) - parseInt(a.value.usageCount)).map((r, i) => `**${i+1}위** ${r.key} - ${r.value.usageCount}회`))
+            const tags = await client.tagDb.getAll().then(n => n.filter(a => a.value.guild === message.guild.id).sort((a, b) => parseInt(b.value.usageCount) - parseInt(a.value.usageCount)).map((r, i) => `**${i+1}위** ${r.key.replace(`${message.guild.id}_`, '')} - ${r.value.usageCount}회`).join('\n'))
             if (!tags) return message.channel.send('태그 데이터가 없습니다.')
 
             message.channel.send(`**${message.guild.name} 서버의 태그 랭킹**\n${tags}`)
