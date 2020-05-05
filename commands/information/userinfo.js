@@ -5,7 +5,7 @@ moment.locale('ko-KR');
 
 module.exports = {
     name: "userinfo",
-    aliases: ["정보", "내정보", "user-info", "user-information", "user", "info-user", "user_info", "유저정보", "유저 정보"],
+    aliases: ["정보", "내정보", "user-info", "user-information", "user", "info-user", "user_info", "유저정보"],
     usage: "[id, | mention]",
     category: "information",
     run: async (client, message, args) => {
@@ -43,6 +43,10 @@ module.exports = {
             .addField('📥 디스코드 가입 날짜', `**${moment(member.user.createdAt).tz('Asia/seoul').format('YYYY년 MM월 DD일 dd요일 HH시 mm분')}**`)
 
         const embed2 = new MessageEmbed().setTitle(`${member.user.username}님의 역할 (${member.roles.cache.filter(n => n.id !== message.guild.id).size}개)`).setDescription(`**${member.roles.cache.filter(r => r.id !== message.guild.id).map(r => r).join(", ") || "없음"}**`).setColor(member.displayHexColor === "#000000" ? "#FFFFFF" : member.displayHexColor)
+        if (member.roles.cache.filter(n => n.id !== message.guild.id).size > 25) {
+            embed.setDescription(`**${member.roles.cache.filter(r => r.id !== message.guild.id).map(r => r).join(", ") || "없음"}**`)
+            embed.setTitle(`${member.user.username}님의 역할 (${member.roles.cache.filter(n => n.id !== message.guild.id).size}개 중 25개)`)
+        }
 
         message.channel.send(embed);
         if (member.roles.cache.size !== 0) message.channel.send(embed2);

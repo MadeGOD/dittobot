@@ -40,7 +40,6 @@ module.exports = {
             roleembed.setTitle(`${message.guild.name} 서버의 역할 (${message.guild.roles.cache.filter(r => r.id !== message.guild.id).size}개 중 25개)`);
         };
 
-
         const emojiembed = new MessageEmbed().setColor(0xffff00).setTitle(`${message.guild.name} 서버의 이모지 (${message.guild.emojis.cache.size}개)`).setDescription(message.guild.emojis.cache.map(e => e.toString()).join(" "));
 
         if (message.guild.emojis.cache.size > 30) {

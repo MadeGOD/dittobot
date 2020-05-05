@@ -18,29 +18,24 @@ module.exports = {
                 region: $('div.sort_box > div.lst_select > div.select_box > span.btn_select > em').text(),
                 stats: {
                     result: $('div.today_area._mainTabContent > div.main_info > div.info_data > ul.info_list > li > p.cast_txt').text().split(',')[0],
-                    stats: $('div.today_area._mainTabContent > div.main_info > div.info_data > ul.info_list > li > p.cast_txt').text(),
-                    emoji: stats[$('div.today_area._mainTabContent > div.main_info > div.info_data > ul.info_list > li > p.cast_txt').text().split(',')[0]]
+                    stats: $('div.today_area._mainTabContent > div.main_info > div.info_data > ul.info_list > li > p.cast_txt').text()
                 },
                 temp: $('div.today_area._mainTabContent > div.main_info > div > p > span.todaytemp').text(),
                 findDust: {
                     result: $('div.today_area > div.sub_info > div.detail_box > dl.indicator > dd > span.num').eq(0).text().split('㎍/㎥')[0],
-                    stats: $('div.today_area > div.sub_info > div.detail_box > dl.indicator > dd').first().text().split('㎍/㎥')[1],
-                    emoji: findDust[$('div.today_area > div.sub_info > div.detail_box > dl.indicator > dd').first().text().split('㎍/㎥')[1]]
+                    stats: $('div.today_area > div.sub_info > div.detail_box > dl.indicator > dd').first().text().split('㎍/㎥')[1]
                 },
                 ultrafineDust: {
                     result: $('div.today_area > div.sub_info > div.detail_box > dl.indicator > dd > span.num').eq(1).text().split('㎍/㎥')[0],
-                    stats: $('div.today_area > div.sub_info > div.detail_box > dl.indicator > dd').eq(1).text().split('㎍/㎥')[1],
-                    emoji: findDust[$('div.today_area > div.sub_info > div.detail_box > dl.indicator > dd').eq(1).text().split('㎍/㎥')[1]]
+                    stats: $('div.today_area > div.sub_info > div.detail_box > dl.indicator > dd').eq(1).text().split('㎍/㎥')[1]
                 },
                 ozoneIndex: {
                     result: $('div.today_area > div.sub_info > div.detail_box > dl.indicator > dd > span.num').eq(2).text().split('ppm')[0],
-                    stats: $('div.today_area > div.sub_info > div.detail_box > dl.indicator > dd').eq(2).text().split('ppm')[1],
-                    emoji: findDust[$('div.today_area > div.sub_info > div.detail_box > dl.indicator > dd').eq(2).text().split('ppm')[1]]
+                    stats: $('div.today_area > div.sub_info > div.detail_box > dl.indicator > dd').eq(2).text().split('ppm')[1]
                 },
                 ultravioletRays: {
                     result: $('div.today_area > div.main_info > div.info_data > ul.info_list > li:nth-child(3) > span.indicator > span > span.num').first().text(),
-                    stats: $('div.today_area > div.main_info > div.info_data > ul.info_list > li:nth-child(3) > span.indicator > span').first().text().split(`${$('div.today_area > div.main_info > div.info_data > ul.info_list > li:nth-child(3) > span.indicator > span > span.num').first().text()}`)[1],
-                    emoji: ultravioletRays[$('div.today_area > div.main_info > div.info_data > ul.info_list > li:nth-child(3) > span.indicator > span').first().text().split(`${$('div.today_area > div.main_info > div.info_data > ul.info_list > li:nth-child(3) > span.indicator > span > span.num').first().text()}`)[1]]
+                    stats: $('div.today_area > div.main_info > div.info_data > ul.info_list > li:nth-child(3) > span.indicator > span').first().text().split($('div.today_area > div.main_info > div.info_data > ul.info_list > li:nth-child(3) > span.indicator > span > span.num').first().text())[1]
                 },
                 sensoryTemp: $('div.today_area > div.main_info > div.info_data > ul.info_list > li:nth-child(2) > span.sensible > em').text().split('˚')[0],
                 precipitationPerHour: $('div.today_area > div.main_info > div.info_data > ul.info_list > li:nth-child(3) > span.rainfall > em').text().split('mm')[0],
@@ -53,23 +48,21 @@ module.exports = {
                 update: $('div.guide_bx._guideBox > p.guide > span.guide_txt > span.update').eq(0).text()
             };
 
-            let s = `\`자외선\`: **${get.ultravioletRays.result} ${get.ultravioletRays.stats} ${get.ultravioletRays.emoji}**`;
+            let s = `\`자외선\`: **${get.ultravioletRays.result} ${get.ultravioletRays.stats} ${ultravioletRays[get.ultravioletRays.stats]}**`;
 
             if (!get.region || get.region.includes(process.env.REGION)) return message.channel.send('지역을 찾을 수 없습니다.');
 
             if (!get.ultravioletRays.result) s = `\`시간당 강수량\`: **${get.precipitationPerHour}mm**`;
     
-            const embed = new MessageEmbed().setColor(0x00ffff).setTimestamp().setFooter(message.author.username, message.author.displayAvatarURL())
+            message.channel.send(new MessageEmbed().setColor(0x00ffff).setTimestamp().setFooter(message.author.username, message.author.displayAvatarURL())
             .setFooter(`${get.update} 업데이트`, message.author.displayAvatarURL())
             .setTitle(get.region)
-            .setDescription(`**${get.stats.emoji} ${get.stats.stats}**\n\`현재 온도\`: **${get.temp}℃**\n\`체감 온도\`: **${get.sensoryTemp}˚**\n\`최저 / 최고\`: **${get.lowestTemperature}˚ / ${get.peakTemperature}˚**\n\n${s}\n\`강수 확률\`: **${get.probabilityOfPrecipitation}%**\n\`풍속\`: **${get.windSpeed}m/s (${get.windDirection}쪽)**\n\`습도\`: **${get.humidity}%**`)
+            .setDescription(`**${stats[get.stats.result]} ${get.stats.stats}**\n\`현재 온도\`: **${get.temp}℃**\n\`체감 온도\`: **${get.sensoryTemp}˚**\n\`최저 / 최고\`: **${get.lowestTemperature}˚ / ${get.peakTemperature}˚**\n\n${s}\n\`강수 확률\`: **${get.probabilityOfPrecipitation}%**\n\`풍속\`: **${get.windSpeed}m/s (${get.windDirection}쪽)**\n\`습도\`: **${get.humidity}%**`)
             .addFields([
-                { name: '미세먼지', value: `**${get.findDust.result}㎍/㎥ ${get.findDust.stats} ${get.findDust.emoji}\n초미세먼지: ${get.ultrafineDust.result}㎍/㎥ ${get.ultrafineDust.stats} ${get.ultrafineDust.emoji}**`, inline: true },
-                { name: '오존지수', value: `**${get.ozoneIndex.result}ppm ${get.ozoneIndex.stats} ${get.ozoneIndex.emoji}**`, inline: true }
-            ]);
-    
-            message.channel.send(embed);
-        });
+                { name: '미세먼지', value: `**${get.findDust.result}㎍/㎥ ${get.findDust.stats} ${findDust[get.findDust.stats]}\n초미세먼지: ${get.ultrafineDust.result}㎍/㎥ ${get.ultrafineDust.stats} ${findDust[get.ultrafineDust.stats]}**`, inline: true },
+                { name: '오존지수', value: `**${get.ozoneIndex.result}ppm ${get.ozoneIndex.stats} ${findDust[get.ozoneIndex.stats]}**`, inline: true }
+            ]))
+        })
     }
 };
 
