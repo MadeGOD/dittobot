@@ -67,7 +67,8 @@ client.on("ready", () => {
 	const MusicManager = require('./structures/MusicManager');
 	client.musicManager = new MusicManager(client);
 	client.tagDb = tagDb;
-	Bot.update(client.guilds.cache.size)
+
+	if (!koreanbots.Bots.getByID(client.user.id).then(a => a.data.servers) === client.guilds.cache.size) Bot.update(client.guilds.cache.size)
 })
 .on("message", async message => {
 	if (message.author.bot || message.system || !message.content.startsWith(process.env.PREFIX) || (client.inspect && (message.author.id !== process.env.OWNER_ID))) return;
@@ -93,28 +94,6 @@ client.on("ready", () => {
 		};
 
 		if (command) {
-			// Pod 오픈소스
-			
-			if (!client.cooldowns.has(command.name)) {
-				client.cooldowns.set(command.name, new Collection());
-			}
-		
-			const now = Date.now();
-			const timestamps = client.cooldowns.get(command.name);
-			const cooldownAmount = (command.cooldowns) * 1000;
-		
-			if (timestamps.has(message.author.id) && (message.author.id !== process.env.OWNER_ID)) {
-				const expirationTime = timestamps.get(message.author.id) + cooldownAmount;
-		
-				if (now < expirationTime) {
-					const timeLeft = (expirationTime - now) / 1000;
-					return message.reply(`\`${timeLeft.toFixed(1)}\`초 후에 \`${command.name}\` 명령어를 다시 사용하실 수 있습니다.`)
-				}
-			};
-		
-			timestamps.set(message.author.id, now);
-			setTimeout(() => timestamps.delete(message.author.id), cooldownAmount);
-
 			if (command.developer && (message.author.id !== process.env.OWNER_ID)) return message.channel.send(`\`${client.user.username} 개발자\`만 가능합니다.`);
 			command.run(client, message, args, ops)
 		} else {
