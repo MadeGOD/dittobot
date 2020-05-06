@@ -8,12 +8,6 @@ const Bot = new koreanbots.MyBot(process.env.KOREANBOTS_TOKEN)
 
 const { VultrexDB } = require('vultrex.db');
 
-const db = new VultrexDB({
-	provider: "sqlite",
-	table: "main",
-	fileName: "db/main"
-});
-
 const tagDb = new VultrexDB({
 	provider: "sqlite",
 	table: "tag",
@@ -27,7 +21,6 @@ client.aliases = new Collection();
 client.cooldowns = new Collection();
 client.categories = readdirSync("./commands/");
 client.musicManager = null;
-client.db = null;
 client.tagDb = null;
 client.inspect = !1;
 
@@ -55,7 +48,6 @@ process.on('unhandledRejection', console.error)
 
 client.login();
 
-db.connect().then(() => console.log('db is connected'));
 tagDb.connect().then(() => console.log('tag DB is connected'))
 
 client.on("ready", () => {
@@ -74,7 +66,6 @@ client.on("ready", () => {
 
 	const MusicManager = require('./structures/MusicManager');
 	client.musicManager = new MusicManager(client);
-	client.db = db;
 	client.tagDb = tagDb;
 	Bot.update(client.guilds.cache.size)
 })

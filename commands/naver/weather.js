@@ -48,16 +48,16 @@ module.exports = {
                 update: $('div.guide_bx._guideBox > p.guide > span.guide_txt > span.update').eq(0).text()
             };
 
-            let s = `\`자외선\`: **${get.ultravioletRays.result} ${get.ultravioletRays.stats} ${ultravioletRays[get.ultravioletRays.stats]}**`;
+            let s = `자외선: **${get.ultravioletRays.result} ${get.ultravioletRays.stats} ${ultravioletRays[get.ultravioletRays.stats]}**`;
 
             if (!get.region || get.region.includes(process.env.REGION)) return message.channel.send('지역을 찾을 수 없습니다.');
 
-            if (!get.ultravioletRays.result) s = `\`시간당 강수량\`: **${get.precipitationPerHour}mm**`;
+            if (!get.ultravioletRays.result) s = `시간당 강수량: **${get.precipitationPerHour}mm**`;
     
             message.channel.send(new MessageEmbed().setColor(0x00ffff).setTimestamp().setFooter(message.author.username, message.author.displayAvatarURL())
-            .setFooter(`${get.update} 업데이트`, message.author.displayAvatarURL())
+            .setFooter(`${get.update} 업데이트`)
             .setTitle(get.region)
-            .setDescription(`**${stats[get.stats.result]} ${get.stats.stats}**\n\`현재 온도\`: **${get.temp}℃**\n\`체감 온도\`: **${get.sensoryTemp}˚**\n\`최저 / 최고\`: **${get.lowestTemperature}˚ / ${get.peakTemperature}˚**\n\n${s}\n\`강수 확률\`: **${get.probabilityOfPrecipitation}%**\n\`풍속\`: **${get.windSpeed}m/s (${get.windDirection}쪽)**\n\`습도\`: **${get.humidity}%**`)
+            .setDescription(`**${stats[get.stats.result]} ${get.stats.stats}**\n현재 온도: **${get.temp}℃**\n체감 온도: **${get.sensoryTemp}˚**\n최저 / 최고: **${get.lowestTemperature}˚ / ${get.peakTemperature}˚**\n\n${s}\n강수 확률: **${get.probabilityOfPrecipitation}%**\n풍속: **${get.windSpeed}m/s (${get.windDirection}쪽)**\n습도: **${get.humidity}%**`)
             .addFields([
                 { name: '미세먼지', value: `**${get.findDust.result}㎍/㎥ ${get.findDust.stats} ${findDust[get.findDust.stats]}\n초미세먼지: ${get.ultrafineDust.result}㎍/㎥ ${get.ultrafineDust.stats} ${findDust[get.ultrafineDust.stats]}**`, inline: true },
                 { name: '오존지수', value: `**${get.ozoneIndex.result}ppm ${get.ozoneIndex.stats} ${findDust[get.ozoneIndex.stats]}**`, inline: true }
@@ -86,4 +86,4 @@ const stats = {
     "맑음": "☀",
     "흐림": "☁",
     "구름많음": "🌥"
-};
+}

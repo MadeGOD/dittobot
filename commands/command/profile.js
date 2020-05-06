@@ -2,7 +2,7 @@ const { MessageEmbed } = require("discord.js");
 
 module.exports = {
     name: "profile",
-    aliases: ["내 프사", "프사", "내프사", "ㅔ개랴ㅣㄷ", "vmtk"],
+    aliases: ["내 프사", "프사", "내프사", "ㅔ개랴ㅣㄷ", "vmtk", '프로필사진', 'vmfhvlftkwls'],
     usage: "[id, | mention]",
     category: "command",
     run: async (client, message, args) => {
