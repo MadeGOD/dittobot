@@ -22,7 +22,6 @@ client.cooldowns = new Collection();
 client.categories = readdirSync("./commands/");
 client.musicManager = null;
 client.tagDb = null;
-client.inspect = !1;
 
 const table = (new(require('ascii-table'))).setHeading("Command", "Status")
 
@@ -55,14 +54,9 @@ client.on("ready", () => {
 
 	const activity = [`${client.guilds.cache.size}개의 서버`, `${client.users.cache.filter(e => !e.bot).size}명의 유저`, `${client.guilds.cache.size} guilds`, `${client.users.cache.filter(e => !e.bot).size} users`, `https://is.gd/dittoBot`];
 
-	if (!client.inspect) {
-		setInterval(() => {
-			client.user.setActivity(activity[Math.floor(Math.random() * activity.length)]);
-		}, 10000)
-	} else {
-		client.user.setActivity('점검중');
-		client.user.setStatus('dnd')
-	};
+	setInterval(() => {
+		client.user.setActivity(activity[Math.floor(Math.random() * activity.length)]);
+	}, 10000)
 
 	const MusicManager = require('./structures/MusicManager');
 	client.musicManager = new MusicManager(client);
@@ -89,8 +83,7 @@ client.on("ready", () => {
 	try {
 		const ops = {
 			ownerID: process.env.OWNER_ID,
-			prefix: process.env.PREFIX,
-			season: 2
+			prefix: process.env.PREFIX
 		};
 
 		if (command) {

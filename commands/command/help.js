@@ -5,7 +5,7 @@ module.exports = {
     name: "help",
     aliases: ["도움", "ㅗ디ㅔ", "ehdna", "도움말"],
     category: "command",
-    usage: "[command | alias]",
+    usage: "디토야 도움 | 디토야 도움 [명령어 이름]",
     description: 'help command',
     run: async (client, message, args, ops) => {
         if (args.join(' ')) {
@@ -82,12 +82,6 @@ const commandName = {
     'clear': '삭제',
     'kick': '추방',
     'unban': '언밴',
-    'betting': '베팅',
-    'givemoney': '돈줘',
-    'leaderboard':'리더보드',
-    'money': '돈',
-    'season': '시즌',
-    'signup': '가입',
     'loopqueue': '반복',
     'nowlyrics': 'nowlyrics',
     'nowplaying': '현재곡',

@@ -23,7 +23,7 @@ module.exports = {
 
         if (!username) return message.channel.send(`${args.join(' ')}(이)라는 유저를 찾을 수 없습니다...`)
 
-        const embed = new MessageEmbed().setColor(0x00ff00).setTitle(username).setURL(`https://playentry.org/${args.join(' ')}`).setThumbnail(avatarImage ? `https://playentry.org/uploads/profile/${_id.substr(0, 2)}/${_id.substr(2, 2)}/avatar_${_id}.png` : 'https://playentry.org/img/assets/avatar_img.png').addField('상태메세지', description).addField('계정', roles[role])
+        const embed = new MessageEmbed().setColor(0x00ff00).setTitle(username).setURL(`https://playentry.org/${args.join(' ')}`).setThumbnail(avatarImage ? `https://playentry.org/uploads/profile/${_id.substr(0, 2)}/${_id.substr(2, 2)}/avatar_${_id}.png` : 'https://playentry.org/img/assets/avatar_img.png').addField('상태메세지', description ? description : "없음").addField('계정', roles[role])
         if (created) embed.addField('가입 날짜', moment(created).tz('Asia/seoul').format('YYYY년 MM월 DD일'))
 
         message.channel.send(embed)
