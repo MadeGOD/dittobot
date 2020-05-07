@@ -14,6 +14,8 @@ const tagDb = new VultrexDB({
 	fileName: "db/tag"
 });
 
+tagDb.connect().then(() => console.log('tag DB is connected'))
+
 const client = new Client();
 
 client.commands = new Collection();
@@ -46,8 +48,6 @@ process.on('unhandledRejection', console.error)
 	.on('exit', console.log);
 
 client.login();
-
-tagDb.connect().then(() => console.log('tag DB is connected'))
 
 client.on("ready", () => {
 	console.log(`${table.toString()}\nLogin ${client.user.username}\n----------------------------`);
