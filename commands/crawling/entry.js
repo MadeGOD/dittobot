@@ -20,10 +20,18 @@ module.exports = {
         }
 
         const { username, description, _id, role, avatarImage, created } = res
-        const { count } = await fetch(`https://playentry.org/api/project/find?option=list&tab=my_project&type=project&user=${_id}`).then(e => e.json())
+        const project = await fetch(`https://playentry.org/api/project/find?option=list&tab=my_project&type=project&user=${_id}`).then(e => e.json())
 
-        const embed = new MessageEmbed().setColor(0x00ff00).setTitle(username).setURL(`https://playentry.org/${args.join(' ')}`).setThumbnail(avatarImage ? `https://playentry.org/uploads/profile/${_id.substr(0, 2)}/${_id.substr(2, 2)}/avatar_${_id}.png` : 'https://playentry.org/img/assets/avatar_img.png').addField('상태메세지', description ? description : "없음").addField('계정', roles[role]).addField('작품 수', count)
+        const embed = new MessageEmbed().setColor(0x00ff00).setTitle(username).setURL(`https://playentry.org/${args.join(' ')}`).setThumbnail(avatarImage ? `https://playentry.org/uploads/profile/${_id.substr(0, 2)}/${_id.substr(2, 2)}/avatar_${_id}.png` : 'https://playentry.org/img/assets/avatar_img.png').addField('상태메세지', description ? description : "없음").addField('계정', roles[role]).addField('작품 수', project.count)
         if (created) embed.addField('가입 날짜', moment(created).tz('Asia/seoul').format('YYYY년 MM월 DD일'))
+
+        let like = 0
+
+        for (let i of project.data) {
+            like += i.likeCnt
+        }
+
+        embed.addField('좋아요', like)
 
         message.channel.send(embed)
     }

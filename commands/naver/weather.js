@@ -7,7 +7,8 @@ module.exports = {
     aliases: ["날씨", "skfTl", "ㅈㄷㅁ솓ㄱ"],
     category: "naver",
     run: async (client, message, args) => {
-        if (!args[0]) return;
+        message.channel.send('망')
+        /*if (!args[0]) return;
 
         await axios.get(`https://search.naver.com/search.naver?sm=top_hty&fbm=1&ie=utf8&query=${encodeURI(`${args.join(" ").replace(/[\{\}\[\]\/?.,;:|\)*~`!^\-_+<>@\#$%&\\\=\(\'\"]/gi, '')} 날씨`)}`).then(res => {
             if (res.status !== 200) return;
@@ -62,7 +63,7 @@ module.exports = {
                 { name: '미세먼지', value: `**${get.findDust.result}㎍/㎥ ${get.findDust.stats} ${findDust[get.findDust.stats]}\n초미세먼지: ${get.ultrafineDust.result}㎍/㎥ ${get.ultrafineDust.stats} ${findDust[get.ultrafineDust.stats]}**`, inline: true },
                 { name: '오존지수', value: `**${get.ozoneIndex.result}ppm ${get.ozoneIndex.stats} ${findDust[get.ozoneIndex.stats]}**`, inline: true }
             ]))
-        })
+        })*/
     }
 };
 
