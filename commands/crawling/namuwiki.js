@@ -5,6 +5,7 @@ const cheerio = require('cheerio');
 module.exports = {
     name: 'namuwiki',
     aliases: ['나무위키', '꺼무위키'],
+    category: 'crawling',
     run: async (client, message, args) => {
         if (!args.join(" ")) return;
 

@@ -6,6 +6,7 @@ moment.locale("ko-KR");
 module.exports = {
     name: "github",
     aliases: ["깃허브", "깃헙"],
+    category: 'crawling',
     run: async (client, message, args) => {
         if (!args[0]) return;
 

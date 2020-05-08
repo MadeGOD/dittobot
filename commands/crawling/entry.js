@@ -1,7 +1,5 @@
 const fetch = require('node-fetch')
 const { MessageEmbed } = require('discord.js')
-const moment = require('moment-timezone')
-moment.locale('ko-KR')
 
 module.exports = {
     name: 'entry',
@@ -19,19 +17,23 @@ module.exports = {
             return message.channel.send(`Error\n${e}`)
         }
 
-        const { username, description, _id, role, avatarImage, created } = res
+        const { username, description, _id, role, avatarImage, blogImage } = res
         const project = await fetch(`https://playentry.org/api/project/find?option=list&tab=my_project&type=project&user=${_id}`).then(e => e.json())
+        const discuss = await fetch(`https://playentry.org/api/discuss/find?username=${username}`).then(e => e.json())
 
-        const embed = new MessageEmbed().setColor(0x00ff00).setTitle(username).setURL(`https://playentry.org/${args.join(' ')}`).setThumbnail(avatarImage ? `https://playentry.org/uploads/profile/${_id.substr(0, 2)}/${_id.substr(2, 2)}/avatar_${_id}.png` : 'https://playentry.org/img/assets/avatar_img.png').addField('상태메세지', description ? description : "없음").addField('계정', roles[role]).addField('작품 수', project.count)
-        if (created) embed.addField('가입 날짜', moment(created).tz('Asia/seoul').format('YYYY년 MM월 DD일'))
-
-        let like = 0
+        const embed = new MessageEmbed().setColor(0x00ff00).setTitle(username).setURL(`https://playentry.org/${args.join(' ')}`).setThumbnail(avatarImage ? `https://playentry.org/uploads/profile/${_id.substr(0, 2)}/${_id.substr(2, 2)}/avatar_${_id}.png` : 'https://playentry.org/img/assets/avatar_img.png').addField('상태메세지', description ? description : "없음").addField('계정', roles[role]).addField('작품 수', project.count, true)
+        if (blogImage) embed.setImage(`https://playentry.org/uploads/profile/${_id.substr(0, 2)}/${_id.substr(2, 2)}/blog_${_id}.png`)
+        
+        let like = 0, visitCount = 0, commentCount = 0, childCount = 0
 
         for (let i of project.data) {
             like += i.likeCnt
+            visitCount += i.visit
+            commentCount += i.comment
+            childCount += i.childCnt
         }
 
-        embed.addField('좋아요', like)
+        embed.addField('❤ 좋아요 수', parseInt(like).toLocaleString(), true).addField('👀 조회수', parseInt(visitCount).toLocaleString()).addField('🗨 작품 댓글 수', parseInt(commentCount).toLocaleString()).addField('작품 사본 수', parseInt(childCount).toLocaleString()).addField('💬 글 수', parseInt(discuss.count).toLocaleString())
 
         message.channel.send(embed)
     }

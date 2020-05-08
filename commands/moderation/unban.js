@@ -3,6 +3,7 @@ const { MessageEmbed } = require("discord.js");
 module.exports = {
     name: 'unban',
     aliases: ['언밴'],
+    category: 'moderation',
     run: async (client, message, args) => {
         if (!args[0]) return message.reply('언밴할 멤버를 ID로 적어주세요. (멘션은 되지 않습니다.)\n(ID는 설정에서 **개발자 모드**를 키신 후 언밴할 멤버의 ID를 복사하면 됩니다.)');
 
