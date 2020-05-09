@@ -91,6 +91,7 @@ const commandName = {
     'remove': '제거',
     'resume': '다시재생',
     'scplay': '사운드클라우드',
+    'seek': 'seek',
     'skip': '스킵',
     'skipto': '이동',
     'stop': '정지',

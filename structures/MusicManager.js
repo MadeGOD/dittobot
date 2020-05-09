@@ -6,7 +6,7 @@ const Queue = require("./Queue");
 /**
  * @class MusicManager
  */
-class MusicManager {
+module.exports = class MusicManager {
     /**
      * @param {import("./MusicClient")} client
      */
@@ -96,5 +96,3 @@ class MusicManager {
         }
     }
 }
-
-module.exports = MusicManager;

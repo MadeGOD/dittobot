@@ -1,7 +1,9 @@
+const { ms, s, m, h } = require('./time-convert')
+
 /**
  * @class Queue
  */
-class Queue {
+module.exports = class Queue {
     /**
      * @param {import("./MusicClient")} client
      * @param {Object} data
@@ -55,6 +57,27 @@ class Queue {
         this.client.musicManager.queue.delete(this.textChannel.guild.id);
         await this.client.musicManager.manager.leave(this.textChannel.guild.id);
     }
-}
 
-module.exports = Queue;
+    songProgress(message, count = 20) {
+        const res = new Array(count).fill('▬')
+        res[Math.floor((this.client.musicManager.queue.get(message.guild.id).player.state.position / this.client.musicManager.queue.get(message.guild.id).songs[0].info.length) * count)] = '🔘'
+        return res.join('')
+    }
+
+    format(s, m, h) {
+        if (isNaN(s) || isNaN(m) || isNaN(h)) return '00:00:00'
+        s = s < 10 ? `0${s}` : s
+        m = m < 10 ? `0${m}` : m
+        h = h < 10 ? `0${h}` : h
+        return `${h}:${m}:${s}`
+    }
+
+    duration(time) {
+        const [hour, min, sec] = ms.to(h, m, s)(time)
+        return this.format(sec, min, hour)
+    }
+
+    percent(message) {
+        return ((this.client.musicManager.queue.get(message.guild.id).player.state.position / this.client.musicManager.queue.get(message.guild.id).songs[0].info.length) * 100).toFixed(1)
+    }
+}

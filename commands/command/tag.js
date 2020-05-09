@@ -16,7 +16,8 @@ module.exports = {
             if (tagCheck) return message.channel.send('이미 존재하는 태그입니다.')
 
             if (client.commands.get(args[1]) || client.aliases.get(args[1])) return message.channel.send('디토봇에 존재하는 커멘드 이름은 추가되지 않습니다.')
-
+            if (args[1].includes('@everyone') || args[1].includes('@here')) return message.channel.send('태그에는 everyone, here 멘션이 되지 않습니다.')
+            
             await client.tagDb.set(`${message.guild.id}_${args[1]}`, {
                 name: args[1],
                 description: args.slice(2).join(' '),
