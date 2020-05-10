@@ -55,6 +55,7 @@ const category = {
 const commandName = {
     'botinfo': '봇정보',
     'ping': '핑',
+    'system': '시스템',
     'email': '이메일',
     'help': '도움',
     'invite': '초대링크',
