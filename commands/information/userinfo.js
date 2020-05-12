@@ -44,7 +44,7 @@ module.exports = {
 
         const embed2 = new MessageEmbed().setTitle(`${member.user.username}님의 역할 (${member.roles.cache.filter(n => n.id !== message.guild.id).size}개)`).setDescription(member.roles.cache.filter(r => r.id !== message.guild.id).map(r => r).join(", ") || "없음").setColor(member.displayHexColor === "#000000" ? "#FFFFFF" : member.displayHexColor)
         if (member.roles.cache.filter(n => n.id !== message.guild.id).size > 25) {
-            embed2.setDescription(member.roles.cache.filter(r => r.id !== message.guild.id).map(r => r).join(", ") || "없음")
+            embed2.setDescription(member.roles.cache.filter(r => r.id !== message.guild.id).map(r => r).splice(0, 25).join(", ") || "없음")
             embed2.setTitle(`${member.user.username}님의 역할 (${member.roles.cache.filter(n => n.id !== message.guild.id).size}개 중 25개)`)
         }
 
