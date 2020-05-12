@@ -42,9 +42,9 @@ module.exports = {
             .addField('📥 서버에 들어온 날짜', `**${moment(member.joinedAt).tz('Asia/seoul').format('YYYY년 MM월 DD일 dd요일 HH시 mm분')}**`)
             .addField('📥 디스코드 가입 날짜', `**${moment(member.user.createdAt).tz('Asia/seoul').format('YYYY년 MM월 DD일 dd요일 HH시 mm분')}**`)
 
-        const embed2 = new MessageEmbed().setTitle(`${member.user.username}님의 역할 (${member.roles.cache.filter(n => n.id !== message.guild.id).size}개)`).setDescription(`**${member.roles.cache.filter(r => r.id !== message.guild.id).map(r => r).join(", ") || "없음"}**`).setColor(member.displayHexColor === "#000000" ? "#FFFFFF" : member.displayHexColor)
+        const embed2 = new MessageEmbed().setTitle(`${member.user.username}님의 역할 (${member.roles.cache.filter(n => n.id !== message.guild.id).size}개)`).setDescription(member.roles.cache.filter(r => r.id !== message.guild.id).map(r => r).join(", ") || "없음").setColor(member.displayHexColor === "#000000" ? "#FFFFFF" : member.displayHexColor)
         if (member.roles.cache.filter(n => n.id !== message.guild.id).size > 25) {
-            embed2.setDescription(`**${member.roles.cache.filter(r => r.id !== message.guild.id).map(r => r).join(", ") || "없음"}**`)
+            embed2.setDescription(member.roles.cache.filter(r => r.id !== message.guild.id).map(r => r).join(", ") || "없음")
             embed2.setTitle(`${member.user.username}님의 역할 (${member.roles.cache.filter(n => n.id !== message.guild.id).size}개 중 25개)`)
         }
 

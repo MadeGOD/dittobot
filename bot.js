@@ -65,7 +65,7 @@ client.on("ready", () => {
 	if (!koreanbots.Bots.getByID(client.user.id).then(a => a.data.servers) === client.guilds.cache.size) Bot.update(client.guilds.cache.size)
 })
 .on("message", async message => {
-	if (message.author.bot || message.system || !message.content.startsWith(process.env.PREFIX) || (client.inspect && (message.author.id !== process.env.OWNER_ID))) return;
+	if (message.author.bot || message.system || !message.content.startsWith(process.env.PREFIX)) return;
 
 	if (message.channel.type === 'dm' && (message.author.id !== process.env.OWNER_ID)) {
 		message.channel.send(`DM에서는 ${client.user.username}을(를) 사용하실 수 없습니다.\n${client.user.username}이(가) 있는 서버에서 사용해 주세요.`);
