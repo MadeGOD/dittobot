@@ -28,7 +28,7 @@ module.exports = {
             })
             message.channel.send(`\`${args[1]}\` 태그가 추가되었습니다.`)
         } else if (args[0] === 'rank' || args[0] === '랭킹') {
-            const tags = await client.tagDb.getAll().then(n => n.filter(a => a.value.guild === message.guild.id).sort((a, b) => parseInt(b.value.usageCount) - parseInt(a.value.usageCount)).map((r, i) => `**${i+1}위** ${r.key.replace(`${message.guild.id}_`, '')} - ${r.value.usageCount}회`).join('\n'))
+            const tags = await client.tagDb.getAll().then(n => n.filter(a => a.value.guild === message.guild.id).sort((a, b) => parseInt(b.value.usageCount) - parseInt(a.value.usageCount)).map((r, i) => `**${i+1}위** \`${r.key.replace(`${message.guild.id}_`, '')}\` - \`${r.value.usageCount}회\``).join('\n'))
             if (!tags) return message.channel.send('태그 데이터가 없습니다.')
 
             message.channel.send(`**${message.guild.name} 서버의 태그 랭킹**\n${tags}`)
@@ -43,7 +43,7 @@ module.exports = {
 
             message.channel.send('모든 태그 삭제 완료')
         } else if (args[0] === 'info' || args[0] === '정보') {
-            const tag = await client.tagDb.getAll().then(n => n.filter(a => a.value.guild === message.guild.id).find(e => e.key === `${message.guild.id}_${args.slice(1).join(' ')}`))
+            const tag = await client.tagDb.getAll().then(n => n.filter(a => a.value.guild === message.guild.id).find(e => e.key === `${message.guild.id}_${args[1]}`))
             if (!tag) return message.channel.send(`\`${args.slice(1).join(' ')}\`(이)라는 태그를 찾을 수 없습니다.`)
 
             message.channel.send(`**${args[1]} 태그 정보**\nDescription: **${tag.value.description}**\n만들어진 날짜: **${moment(tag.value.createdAt).tz('Asia/seoul').format('YYYY년 MM일 DD일')}**\n만든 사람: **${client.users.cache.get(tag.value.user).tag}**\n사용 횟수: **${tag.value.usageCount}회**`)
@@ -63,16 +63,18 @@ module.exports = {
             })
             message.channel.send(`\`${args[1]}\` 태그를 수정하였습니다.`)
         } else if (args[0] === 'remove' || args[0] === '삭제') {
-            const tag = await client.tagDb.getAll().then(n => n.filter(a => a.value.guild === message.guild.id).find(e => e.key === `${message.guild.id}_${args.slice(1).join(' ')}`))
-            if (!tag) return message.channel.send(`\`${args.slice(1).join(' ')}\`(이)라는 태그를 찾을 수 없습니다.`)
+            const tag = await client.tagDb.getAll().then(n => n.filter(a => a.value.guild === message.guild.id).find(e => e.key === `${message.guild.id}_${args[1]}`))
+            if (!tag) return message.channel.send(`\`${args[1]}\`(이)라는 태그를 찾을 수 없습니다.`)
 
-            if ((message.author.id !== tag.user) && (message.author.id !== process.env.OWNER_ID) && (message.author.id !== message.guild.owner.id)) return message.channel.send(`\`${args.slice(1).join(' ')}\`(이)라는 태그를 삭제할 권한이 부족합니다.\n태그를 만든 사람, 태그의 서버장, ${client.user.username} 개발자만 삭제 가능`)
+            if ((message.author.id !== tag.user) && (message.author.id !== process.env.OWNER_ID) && (message.author.id !== message.guild.owner.id)) return message.channel.send(`\`${args[1]}\`(이)라는 태그를 삭제할 권한이 부족합니다.\n태그를 만든 사람, 태그의 서버장, ${client.user.username} 개발자만 삭제 가능`)
 
-            await client.tagDb.delete(`${message.guild.id}_${args.slice(1).join(' ')}`)
-            message.channel.send(`\`${args.slice(1).join(' ')}\`(이)라는 태그를 삭제하였습니다.`)
+            await client.tagDb.delete(`${message.guild.id}_${args[1]}`)
+            message.channel.send(`\`${args[1]}\`(이)라는 태그를 삭제하였습니다.`)
         } else {
-            const tag = await client.tagDb.getAll().then(n => n.filter(a => a.value.guild === message.guild.id).find(e => e.key === `${message.guild.id}_${args.join(' ')}`))
-            await client.tagDb.set(`${message.guild.id}_${args.join(' ')}`, {
+            const tag = await client.tagDb.getAll().then(n => n.filter(a => a.value.guild === message.guild.id).find(e => e.key === `${message.guild.id}_${args[0]}`))
+            if (!tag) return message.channel.send(`\`${args[0]}\`(이)라는 태그를 찾을 수 없습니다.`)
+
+            await client.tagDb.set(`${message.guild.id}_${args[0]}`, {
                 name: args.join(' '),
                 description: tag.value.description,
                 guild: tag.value.guild,
@@ -80,11 +82,8 @@ module.exports = {
                 usageCount: tag.value.usageCount + 1,
                 createdAt: tag.value.createdAt
             })
-            if (!tag) return message.channel.send(`\`${args.join(' ')}\`(이)라는 태그를 찾을 수 없습니다.`)
 
-            const Tag = await client.tagDb.getAll().then(n => n.filter(a => a.value.guild === message.guild.id).find(e => e.key === `${message.guild.id}_${args.join(' ')}`)).then(e => e.value.description)
-
-            message.channel.send(Tag
+            message.channel.send(tag.value.description
                 .replace(/{user_name}/g, message.author.username)
                 .replace(/{user_id}/g, message.author.id)
                 .replace(/{user_tag}/g, message.author.tag)
