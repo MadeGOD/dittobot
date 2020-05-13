@@ -84,7 +84,6 @@ const commandName = {
     'kick': '추방',
     'unban': '언밴',
     'loopqueue': '반복',
-    'nowlyrics': 'nowlyrics',
     'nowplaying': '현재곡',
     'pause': '정지',
     'play': '재생',

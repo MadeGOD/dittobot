@@ -5,7 +5,7 @@ module.exports = {
     name: 'tag',
     aliases: ['태그', 'ㅅㅁㅎ', 'xorm'],
     category: 'command',
-    run: async (client, message, args) => {
+    run: async (client, message, args, ops) => {
         if (!args[0]) return
 
         if (args[0] === "add" || args[0] === '추가' || args[0] === '생성') {
@@ -87,8 +87,6 @@ module.exports = {
                 .replace(/{user_name}/g, message.author.username)
                 .replace(/{user_id}/g, message.author.id)
                 .replace(/{user_tag}/g, message.author.tag)
-                .replace(/{mention}/g, `<@${message.author.id}>`)
-                .replace(/{user_id}/g, message.author.id)
                 .replace(/{user_discriminator}/g, message.author.discriminator)
                 .replace(/{channel_name}/g, message.channel.name)
                 .replace(/{channel_id}/g, message.channel.id)
@@ -96,6 +94,10 @@ module.exports = {
                 .replace(/{user_display_name}/g, message.member.displayName)
                 .replace(/{user_avatar}/g, message.author.avatar)
                 .replace(/{user_status}/g, message.author.presence.status)
+                .replace(/{mention}/g, message.author.toString())
+                .replace(/{args;[0-9]+}/g, e => args[parseInt(e.substring(ops.prefix.length + 2, e.length))])
+                .replace(/{args;slice;[0-9]+}/g, e => args.slice(parseInt(e)).join(' '))
+                .replace(/{args;join}/g, args.join(' '))
             )
         }
     }
