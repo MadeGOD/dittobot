@@ -11,8 +11,9 @@ module.exports = {
 
         if (!serverQueue.playing) serverQueue.playing = true;
 
-        if (args[0] > serverQueue.songs.length || args[0] < 0 || isNaN(args[0]) || args[0].includes('.')) return message.channel.send(new MessageEmbed().setDescription(`❌ `).setColor(0xFF0000));
+        if (args[0] > serverQueue.songs.length || args[0] < 0 || isNaN(args[0]) || args[0].includes('.')) return message.channel.send(new MessageEmbed().setDescription(`❌ **${args[0]}**번째 대기열을 제거할 수 없습니다.`).setColor(0xFF0000));
 
-        serverQueue.songs.splice(args[0] - 1, 1);
+        serverQueue.songs.splice(parseInt(args[0]), 1);
+        message.channel.send(new MessageEmbed().setDescription(`✅ **${args[0]}**번째 음악이 제거되었습니다!`).setColor(0x00FF00))
     }
 }

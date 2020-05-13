@@ -10,6 +10,6 @@ module.exports = {
         if (!message.member.voice.channel) return message.channel.send(new MessageEmbed().setColor(0xFF0000).setDescription(`❌ 음성 채널에 먼저 들어가 주세요!`))
         
         serverQueue.destroy();
-        message.channel.send(new MessageEmbed().setColor(0x00FF00).setDescription(`✅ 모든 음악을 정지하였습니다!`));
+        message.channel.send(new MessageEmbed().setColor(0x00FF00).setDescription(`✅ 모든 대기열이 제거되었습니다!`));
     }
 };

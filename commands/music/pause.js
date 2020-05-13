@@ -12,6 +12,6 @@ module.exports = {
         if (!serverQueue.playing) return message.channel.send(new MessageEmbed().setColor(0xFF0000).setDescription(`❌ 이미 일시 정지되어 있어요!`))
 
         serverQueue.pause();
-        message.channel.send(new MessageEmbed().setColor(0x00FF00).setDescription(`⏸ 일시 정지되었습니다!`));
+        message.channel.send(new MessageEmbed().setColor(0x00FF00).setDescription(`✅ **${serverQueue.songs[0].info.title}**이(가) 일시 정지되었습니다!`));
     }
 };

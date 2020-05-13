@@ -58,9 +58,13 @@ module.exports = class Queue {
         await this.client.musicManager.manager.leave(this.textChannel.guild.id);
     }
 
-    songProgress(message, count = 20) {
+    /*
+        https://github.com/TeamZenithy/Araha/blob/master/instances/guild.js
+    */
+
+    songProgress(count = 20) {
         const res = new Array(count).fill('▬')
-        res[Math.floor((this.client.musicManager.queue.get(message.guild.id).player.state.position / this.client.musicManager.queue.get(message.guild.id).songs[0].info.length) * count)] = '🔘'
+        res[Math.floor((this.player.state.position / this.songs[0].info.length) * count)] = '🔘'
         return res.join('')
     }
 
@@ -77,7 +81,19 @@ module.exports = class Queue {
         return this.format(sec, min, hour)
     }
 
-    percent(message) {
-        return ((this.client.musicManager.queue.get(message.guild.id).player.state.position / this.client.musicManager.queue.get(message.guild.id).songs[0].info.length) * 100).toFixed(1)
+    percent() {
+        return ((this.player.state.position / this.songs[0].info.length) * 100).toFixed(1)
     }
+
+    seek (s, m = 0, h = 0) {
+        if (isNaN(s) || isNaN(m) || isNaN(h)) return
+        if (!this.songs[0].info.isSeekable) return
+        const time = (s * 1000) + (m * 60 * 1000) + (h * 60 * 60 * 1000)
+        this.player.seek(time)
+        return this.format(s, m, h)
+    }
+
+    /*
+        https://github.com/TeamZenithy/Araha/blob/master/instances/guild.js
+    */
 }

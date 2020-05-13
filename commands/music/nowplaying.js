@@ -10,6 +10,6 @@ module.exports = {
 
         const song = serverQueue.songs[0];
 
-        message.channel.send(new MessageEmbed().setThumbnail(`https://img.youtube.com/vi/${song.info.identifier}/mqdefault.jpg`).setTitle(song.info.title).setURL(song.info.uri).setDescription(`${serverQueue.playing ? "🎶 재생 중" : "⏸ 일시 정지됨"}\n채널: **${song.info.author}**\n\`${serverQueue.songProgress(message)}\`\n${serverQueue.duration(serverQueue.player.state.position)} / ${serverQueue.duration(song.info.length)} (${serverQueue.percent(message)}%)`).setColor(0x00FF00));
+        message.channel.send(new MessageEmbed().setThumbnail(`https://img.youtube.com/vi/${song.info.identifier}/mqdefault.jpg`).setTitle(song.info.title).setURL(song.info.uri).setDescription(`${serverQueue.playing ? "🎶 재생 중" : "⏸ 일시 정지됨"}\n채널: **${song.info.author}**\n\`${serverQueue.songProgress()}\`\n${serverQueue.duration(serverQueue.player.state.position)} / ${serverQueue.duration(serverQueue.songs[0].info.length)} (${serverQueue.percent()}%)`).setColor(0x00FF00));
     }
 }

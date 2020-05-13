@@ -10,6 +10,6 @@ module.exports = {
         if (!message.member.voice.channel) return message.channel.send(new MessageEmbed().setColor(0xFF0000).setDescription(`❌ 음성 채널에 먼저 들어가 주세요!`))
 
         serverQueue.loop = !serverQueue.loop;
-        message.channel.send(new MessageEmbed().setColor(0x00FF00).setDescription(`✅ ${serverQueue.loop ? "지금부터 대기열이 반복됩니다!" : "대기열 반복 중지!"}`));
+        message.channel.send(new MessageEmbed().setColor(0x00FF00).setDescription(`✅ ${serverQueue.loop ? "지금부터 대기열이 반복됩니다!" : "지금부터 대기열 반복이 되지 않습니다!"}`));
     }
 };

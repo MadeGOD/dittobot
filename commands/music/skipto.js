@@ -11,7 +11,7 @@ module.exports = {
         
         if (!serverQueue.playing) serverQueue.playing = true;
 
-        if (args[0] > serverQueue.songs.length || args[0] < 0 || isNaN(args[0]) || args[0].includes('.')) return message.channel.send(new MessageEmbed().setDescription(`❌ `).setColor(0xFF0000));
+        if (args[0] > serverQueue.songs.length || args[0] < 0 || isNaN(args[0]) || args[0].includes('.')) return message.channel.send(new MessageEmbed().setDescription(`❌ **${args[0]}**으로 스킵할 수 없습니다.`).setColor(0xFF0000));
 
         serverQueue.songs.splice(0, parseInt(args[0] - 1));
         serverQueue.skip()

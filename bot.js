@@ -62,7 +62,7 @@ client.on("ready", () => {
 	client.musicManager = new MusicManager(client);
 	client.tagDb = tagDb;
 
-	if (!koreanbots.Bots.getByID(client.user.id).then(a => a.data.servers) === client.guilds.cache.size) Bot.update(client.guilds.cache.size)
+	Bot.update(client.guilds.cache.size)
 })
 .on("message", async message => {
 	if (message.author.bot || message.system || !message.content.startsWith(process.env.PREFIX)) return;
