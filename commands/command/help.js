@@ -13,22 +13,20 @@ module.exports = {
         
             const cmd = client.commands.get(args.join(" ").toLowerCase()) || client.commands.get(client.aliases.get(args.join(" ").toLowerCase()));
         
-            let info = `**${args.join(" ").toLowerCase()}**에 대한 명령어를 찾을 수 없습니다.`;
+            let info = '';
         
-            if (!cmd) return message.channel.send(embed.setColor(0xff0000).setTitle(info));
+            if (!cmd) return message.channel.send(embed.setColor(0xff0000).setTitle(`**${args.join(" ").toLowerCase()}**에 대한 명령어를 찾을 수 없습니다.`));
         
-            if (cmd.name) embed.setTitle(`${cmd.name} info`);
-            if (cmd.aliases) info = `\n**Aliases**\n${cmd.aliases.map(a => `${a}`).join(", ")}\n`;
-            if (cmd.description) info += `\n**Description**\n${cmd.description}\n`;
+            if (cmd.name) embed.setTitle(`${cmd.name} 명령어 정보`);
+            if (cmd.aliases) info = `\n**별칭**\n${cmd.aliases.map(a => `${a}`).join(", ")}\n`;
+            if (cmd.description) info += `\n**설명**\n${cmd.description}\n`;
             if (cmd.usage) {
-                info += `\n**Usage**\n${cmd.usage}\n`;
-                embed.setFooter(`Syntax: <> = required, [] = optional`);
+                info += `\n**사용 방법**\n${cmd.usage}\n`;
+                embed.setFooter(`문법: <> = 필수, [] = 선택`);
             };
-            if (cmd.category) info += `\n**Category**\n${cmd.category}`;
+            if (cmd.category) info += `\n**카테고리**\n${category[cmd.category]}`;
         
-            embed.setDescription(info).setColor(0x00ffff);
-        
-            return message.channel.send(embed);
+            message.channel.send(embed.setDescription(info).setColor(0x00ffff));
         } else {
             const commandEmbed = new MessageEmbed().setColor(0x00ff00).setTitle(`${client.user.username} 도움말`).setFooter(`${ops.prefix} 도움 <명령어 이름> 으로 더 자세히 아실 수 있습니다.`);
         
