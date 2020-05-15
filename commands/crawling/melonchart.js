@@ -4,7 +4,7 @@ const { MessageEmbed } = require('discord.js');
 
 module.exports = {
     name: "melonchart",
-    aliases: ["멜론 차트", "멜론차트"],
+    aliases: ["멜론차트", '멜차', 'melcha', 'ㅡ디촘', 'ㅡ디ㅐㅜ촘ㄳ', 'apffhsckxm', 'apfck'],
     category: 'crawling',
     run: async (client, message, args) => {
         await axios.get('http://www.melon.com/chart/').then(res => {
