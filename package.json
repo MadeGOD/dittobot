@@ -21,7 +21,7 @@
     "discord.js": "^12.2.0",
     "dotenv": "^8.2.0",
     "isgd": "^1.1.3",
-    "koreanbots": "^1.0.6",
+    "koreanbots": "^1.0.9",
     "lavacord": "^1.1.7",
     "moment-timezone": "^0.5.28",
     "mongodb": "^3.5.7",
