@@ -4,7 +4,7 @@ moment.locale('ko-KR');
 
 module.exports = {
     name: "serverinfo",
-    aliases: ["서버정보", "정보서버", "정보 서버", "서정", "server-info", "서버 정보"],
+    aliases: ["서버정보", "정보서버", "정보 서버", "서정", "server-info", "서버 정보", '섭정보', 'tjqwjdqh'],
     category: "information",
     run: async (client, message, args) => {
         const embed = new MessageEmbed()
