@@ -83,7 +83,7 @@ const commandName = {
     'unban': '언밴',
     'loopqueue': '반복',
     'nowplaying': '현재곡',
-    'pause': '정지',
+    'pause': '일시정지',
     'play': '재생',
     'queue': '대기열',
     'remove': '제거',
