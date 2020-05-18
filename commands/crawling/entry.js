@@ -3,7 +3,7 @@ const { MessageEmbed } = require('discord.js')
 
 module.exports = {
     name: 'entry',
-    aliases: ['엔트리', 'dpsxmfl', '둣교'],
+    aliases: ['엔트리', 'dpsxmfl', '둣교', '엔틜', 'dpsxmlf'],
     category: 'crawling',
     run: async (client, message, args) => {
         if (!args.join(' ')) return message.channel.send('검색할 엔트리 유저 닉네임을 입력해 주세요!')
@@ -14,7 +14,7 @@ module.exports = {
             res = await fetch(`https://playentry.org/api/getUserByUsername/${encodeURI(args.join(' '))}`).then(e => e.json())
             if (!res) return message.channel.send(`${args.join(' ')}(이)라는 유저를 찾을 수 없습니다...\n1. 탈퇴한 유저\n2. 존재하지 않는 유저`)
         } catch (e) {
-            return message.channel.send(`Error\n${e}`)
+            return message.channel.send(`에러\n${e}`)
         }
 
         const { username, description, _id, role, avatarImage, blogImage } = res
