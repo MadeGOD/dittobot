@@ -33,13 +33,13 @@ readdirSync("./commands/").forEach(dir => {
 
 		if (pull.name) {
 			client.commands.set(pull.name, pull);
-			table.addRow(file, '✅');
+			table.addRow(file, '✅')
 		} else {
-			table.addRow(file, '❌');
-		};
-
-		if (pull.aliases && Array.isArray(pull.aliases)) pull.aliases.forEach(a => client.aliases.set(a, pull.name));
-	};
+			table.addRow(file, '❌')
+		}
+		
+		if (pull.aliases && Array.isArray(pull.aliases)) pull.aliases.forEach(a => client.aliases.set(a, pull.name))
+	}
 });
 
 process.on('unhandledRejection', console.error)
@@ -101,9 +101,7 @@ client.on("ready", () => {
 						query: cmd
 					}
 				})
-			}).then(r => r.json()).then(({ response: { replies: [{ text }] } }) => {
-				message.channel.send(text)
-			})
+			}).then(r => r.json()).then(({ response: { replies: [{ text }] } }) => message.channel.send(text))
 		}
 	} catch {
 		console.error
