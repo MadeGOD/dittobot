@@ -9,7 +9,7 @@ module.exports = {
     run: async (client, message, args, ops) => {
         if (!args[0]) return;
 
-        let input = `const Discord = require("discord.js");\nconst axios = require("axios");\nconst cheerio = require("cheerio");\nconst beautify = require("beautify");\nconst util = require("util");\nconst fetch = require("node-fetch");\nconst { stripIndents } = require("common-tags");\nconst fs = require("fs");\nconst moment = require("moment-timezone");\nmoment.locale("ko-KR");\nconst ascii = require("ascii-table");\nconst child = require("child_process");\nconst chalk = require('chalk');\n${args.join(" ")}`;
+        let input = `const Discord = require("discord.js");\nconst axios = require("axios");\nconst cheerio = require("cheerio");\nconst beautify = require("beautify");\nconst util = require("util");\nconst fetch = require("node-fetch");\nconst { stripIndents } = require("common-tags");\nconst fs = require("fs");\nconst ascii = require("ascii-table");\nconst child = require("child_process");\nconst chalk = require('chalk');\n${args.join(" ")}`;
 
         let type;
         new Promise(resolve => resolve(eval(input))).then(res => {

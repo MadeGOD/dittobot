@@ -22,7 +22,7 @@ module.exports = {
             if (cmd.description) info += `\n**설명**\n${cmd.description}\n`;
             if (cmd.usage) {
                 info += `\n**사용 방법**\n${cmd.usage}\n`;
-                embed.setFooter(`문법: <> = 필수, [] = 선택`);
+                embed.setFooter(`<> = 필수, [] = 선택`);
             };
             if (cmd.category) info += `\n**카테고리**\n${category[cmd.category]}`;
         

@@ -83,7 +83,11 @@ client.on("ready", () => {
 	try {
 		const ops = {
 			ownerID: process.env.OWNER_ID,
-			prefix: process.env.PREFIX
+			prefix: process.env.PREFIX,
+			formatTime: time => {
+				const date = new Date(time)
+				return `${date.getFullYear()}년 ${date.getMonth()}월 ${date.getDate()}일 ${date.getHours()}시 ${date.getMinutes()}분 ${date.getSeconds()}초`
+			}
 		};
 
 		if (command) {
@@ -103,7 +107,7 @@ client.on("ready", () => {
 				})
 			}).then(r => r.json()).then(({ response: { replies: [{ text }] } }) => message.channel.send(text))
 		}
-	} catch {
+	} catch(e) {
 		console.error
 	}
 })

@@ -6,8 +6,9 @@ module.exports = {
     name: 'lyrics',
     aliases: ['가사검색', 'lyric', '가사'],
     category: "command",
+    usage: '디토야 가사 <노래 이름>',
     run: async (client, message, args, tools) => {
-        if (!args[0]) return message.channel.send('가사를 검색할 노래 이름을 입력해 주세요!');
+        if (!args.join(' ')) return message.channel.send('가사를 검색할 노래 이름을 입력해 주세요!');
 
         const result = await lyrics.get('melon', args.join(' '));
 

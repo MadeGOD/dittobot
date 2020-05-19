@@ -7,15 +7,14 @@ module.exports = {
     aliases: ["인스타", "insta", "instargram", "인스타그램"],
     category: "crawling",
     run: async (client, message, args) => {
-        if (!args[0]) return message.reply("검색할 인스타그램 유저를 입력해 주세요!");
+        if (!args.join(' ')) return message.reply("검색할 인스타그램 유저를 입력해 주세요!");
 
         let res;
 
         try {
-            res = await fetch(`https://www.instagram.com/${args.join(" ").toString().replace(/ /gi, '+')}/?__a=1`).then(e => e.json());
+            res = await fetch(`https://www.instagram.com/${encodeURI(args.join(" ").replace(/ /g, '+'))}/?__a=1`).then(e => e.json());
         } catch (e) {
-            console.error;
-            return message.channel.send(`\`${args.join(" ")}\` (이)라는 유저를 찾을 수 없습니다...`);
+            return message.channel.send(`에러...\n${e}`)
         };
 
         const account = res.graphql.user;
@@ -45,17 +44,17 @@ module.exports = {
                 },
                 {
                     name: '계정 게시글 수',
-                    value: `**${account.edge_owner_to_timeline_media.count}개**`,
+                    value: `**${parseInt(account.edge_owner_to_timeline_media.count).toLocaleString()}개**`,
                     inline: true
                 },
                 {
                     name: '계정 팔로워 수',
-                    value: `**${account.edge_followed_by.count}명**`,
+                    value: `**${parseInt(account.edge_followed_by.count).toLocaleString()}명**`,
                     inline: true
                 },
                 {
                     name: '계정 팔로우 수',
-                    value: `**${account.edge_follow.count}명**`,
+                    value: `**${parseInt(account.edge_follow.count).toLocaleString()}명**`,
                     inline: true
                 }
             ])

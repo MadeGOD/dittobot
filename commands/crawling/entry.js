@@ -21,7 +21,7 @@ module.exports = {
         const project = await fetch(`https://playentry.org/api/project/find?option=list&tab=my_project&type=project&user=${_id}`).then(e => e.json())
         const discuss = await fetch(`https://playentry.org/api/discuss/find?username=${encodeURI(username)}`).then(e => e.json())
 
-        const embed = new MessageEmbed().setColor(0x00ff00).setTitle(username).setURL(`https://playentry.org/${encodeURI(args.join(' '))}`).addField('상태메세지', description ? description : "없음").addField('계정', roles[role]).addField('작품 수', project.count, true)
+        const embed = new MessageEmbed().setColor(0x00ff00).setTitle(username).setURL(`https://playentry.org/${encodeURI(args.join(' '))}`).addField('상태메세지', description ? description : "없음").addField('계정', roles[role]).addField('🆔 ID', _id).addField('작품 수', project.count, true)
         
         embed.setThumbnail(!avatarImage ? 'https://playentry.org/img/assets/avatar_img.png' : `https://playentry.org/uploads/profile/${_id.substr(0, 2)}/${_id.substr(2, 2)}/avatar_${_id}.png`)
 
@@ -36,7 +36,7 @@ module.exports = {
             childCount += i.childCnt
         }
 
-        embed.addField('❤ 좋아요 수', parseInt(like).toLocaleString(), true).addField('👀 조회수', parseInt(visitCount).toLocaleString()).addField('🗨 작품 댓글 수', parseInt(commentCount).toLocaleString()).addField('작품 사본 수', parseInt(childCount).toLocaleString()).addField('💬 글 수', parseInt(discuss.count).toLocaleString())
+        embed.addField('❤ 좋아요 수', parseInt(like).toLocaleString(), true).addField('👀 조회수', parseInt(visitCount).toLocaleString(), true).addField('🗨 작품 댓글 수', parseInt(commentCount).toLocaleString(), true).addField('작품 사본 수', parseInt(childCount).toLocaleString(), true).addField('💬 글 수', parseInt(discuss.count).toLocaleString(), true)
 
         message.channel.send(embed)
     }

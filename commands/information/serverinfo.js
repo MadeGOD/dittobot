@@ -1,12 +1,10 @@
 const { MessageEmbed } = require("discord.js");
-const moment = require('moment-timezone');
-moment.locale('ko-KR');
 
 module.exports = {
     name: "serverinfo",
     aliases: ["서버정보", "정보서버", "정보 서버", "서정", "server-info", "서버 정보", '섭정보', 'tjqwjdqh'],
     category: "information",
-    run: async (client, message, args) => {
+    run: async (client, message, args, ops) => {
         const embed = new MessageEmbed()
             .setTitle(`${message.guild.name} 서버의 정보`)
             .setColor(0xffff00)
@@ -17,7 +15,7 @@ module.exports = {
             .addField('🌎 서버 지역', `**${region[message.guild.region]}**`)
             .addField('🆔 서버 ID', `**${message.guild.id}**`)
             .addField('🙎‍♂️ 서버 유저', `**ALL: ${message.guild.memberCount} (USER: ${message.guild.members.cache.filter(m => !m.user.bot).size} | BOT: ${message.guild.members.cache.filter(m => m.user.bot).size})**`)
-            .addField('🎂 서버 생일', `**${moment(message.guild.createdAt).tz('Asia/seoul').format('YYYY년 MM월 DD일 dd요일 HH시 mm분')}**`)
+            .addField('🎂 서버 생일', `**${ops.formatTime(message.guild.createdAt)}**`)
             .addField('💬 채팅 채널', `**ALL: ${message.guild.channels.cache.size} (TEXT: ${message.guild.channels.cache.filter(x => x.type === "text").size} | CATEGORY: ${message.guild.channels.cache.filter(x => x.type === "category").size} | VOICE: ${message.guild.channels.cache.filter(x => x.type === "voice").size})**`)
             .addField('💤 잠수 채널', `**${message.guild.afkChannel ? message.guild.afkChannel.name : "없음"}**`, true)
 

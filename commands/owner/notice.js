@@ -13,7 +13,7 @@ module.exports = {
             Discord.Js Notice Bot by 오아시스 (iOas // Oasics#5074)
         */
 
-        const description = args.join(" ").replace('{username}', client.user.username).replace('{tag}', client.user.tag).replace('{id}', client.user.id).replace('{developer;username}', client.users.cache.get(ops.ownerID).username).replace('{developer;tag}', client.users.cache.get(ops.ownerID).tag)
+        const description = args.join(" ")
 
         let filter = (reaction, user) => (reaction.emoji.name === '❌' || reaction.emoji.name === '⭕') && user.id === message.author.id;
 
@@ -31,7 +31,7 @@ module.exports = {
                         let gc;
 
                         g.channels.cache.forEach(c => {
-                            if (c.name.includes(client.user.username) || c.name.includes('bot-notice') || c.name.includes('bot_notice') || c.name.includes('botnotice') || c.name.includes('봇공지') || c.name.includes('봇-공지') || c.name.includes('봇_공지') || c.name.includes('🌐|봇_실험')) gc = `${c.id}`;
+                            if (c.name.includes(client.user.username) || c.name.includes('bot-notice') || c.name.includes('bot_notice') || c.name.includes('botnotice') || c.name.includes('봇공지') || c.name.includes('봇-공지') || c.name.includes('봇_공지') || c.name.includes('🌐|봇_실험')) gc = c.id;
                         });
 
                         let ann = new MessageEmbed().setTitle(`${client.user.username} 공지사항`).setThumbnail(client.user.displayAvatarURL()).setDescription(description).setColor(0xffff00).setFooter(message.author.tag, message.author.displayAvatarURL()).setTimestamp();

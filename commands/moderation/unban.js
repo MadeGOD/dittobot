@@ -12,8 +12,6 @@ module.exports = {
 
         if (args[0] === client.user.id) return message.channel.send(`${client.user.username}으로 ${client.user.username}을 언밴하려고요...?`)
 
-        message.guild.members.unban(args[0], args.slice(1).join(" ") || null).then(e => {
-            message.channel.send(new MessageEmbed().setTitle('멤버 언밴').setColor(0xffff00).setFooter(e.tag, e.displayAvatarURL()).setDescription(`${e.tag}님이 ${message.guild.name}에서 언밴 처리 되었습니다.`))
-        }).catch(e => message.channel.send(`Error...\n${e}`));
+        message.guild.members.unban(args[0], args.slice(1).join(" ") || null).then(e => message.channel.send(new MessageEmbed().setTitle('멤버 언밴').setColor(0xffff00).setFooter(e.tag, e.displayAvatarURL()).setDescription(`${e.tag}님이 ${message.guild.name}에서 언밴 처리 되었습니다.`))).catch(e => message.channel.send(`Error...\n${e}`));
     }
 };

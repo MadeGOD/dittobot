@@ -1,6 +1,3 @@
-const moment = require('moment-timezone')
-moment.locale('ko-KR')
-
 module.exports = {
     name: 'tag',
     aliases: ['태그', 'ㅅㅁㅎ', 'xorm'],
@@ -24,7 +21,7 @@ module.exports = {
                 guild: message.guild.id,
                 user: message.author.id,
                 usageCount: 0,
-                createdAt: moment()._d
+                createdAt: new Date()
             })
             message.channel.send(`\`${args[1]}\` 태그가 추가되었습니다.`)
         } else if (args[0] === 'rank' || args[0] === '랭킹') {
@@ -46,7 +43,7 @@ module.exports = {
             const tag = await client.tagDb.getAll().then(n => n.filter(a => a.value.guild === message.guild.id).find(e => e.key === `${message.guild.id}_${args[1]}`))
             if (!tag) return message.channel.send(`\`${args.slice(1).join(' ')}\`(이)라는 태그를 찾을 수 없습니다.`)
 
-            message.channel.send(`**${args[1]} 태그 정보**\nDescription: **${tag.value.description}**\n만들어진 날짜: **${moment(tag.value.createdAt).tz('Asia/seoul').format('YYYY년 MM일 DD일')}**\n만든 사람: **${client.users.cache.get(tag.value.user).tag}**\n사용 횟수: **${tag.value.usageCount}회**`)
+            message.channel.send(`**${args[1]} 태그 정보**\nDescription: **${tag.value.description}**\n만들어진 날짜: **${ops.formatTime(tag.value.createdAt)}**\n만든 사람: **${client.users.cache.get(tag.value.user).tag}**\n사용 횟수: **${tag.value.usageCount}회**`)
         } else if (args[0] === 'edit' || args[0] === '수정') {
             const tag = await client.tagDb.getAll().then(n => n.filter(a => a.value.guild === message.guild.id).find(e => e.key === `${message.guild.id}_${args[1]}`))
             if (!tag) return message.channel.send(`\`${args[1]}\`(이)라는 태그를 찾을 수 없습니다.`)

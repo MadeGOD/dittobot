@@ -1,14 +1,12 @@
 const fetch = require("node-fetch");
 const { MessageEmbed } = require("discord.js");
-const moment = require("moment-timezone");
-moment.locale("ko-KR");
 
 module.exports = {
     name: "github",
     aliases: ["깃허브", "깃헙"],
     category: 'crawling',
-    run: async (client, message, args) => {
-        if (!args[0]) return;
+    run: async (client, message, args, ops) => {
+        if (!args.join(' ')) return;
 
         const { login, avatar_url, location, created_at, followers, following, email, blog, html_url, bio, public_repos, public_gists } = await fetch(`https://api.github.com/users/${encodeURI(args.join(" "))}`).then(e => e.json());
 
@@ -24,8 +22,8 @@ module.exports = {
             {name: "블로그", value: `**${blog ? blog : "없음"}**`},
             {name: "팔로워", value: `**${followers ? `${followers}명` : "없음"}**`, inline: true},
             {name: "팔로잉", value: `**${following ? `${following}명` : "없음"}**`, inline: true},
-            {name: "가입 날짜", value: `**${moment(created_at).tz("Asia/seoul").format("YYYY년 MM월 DD일 dd요일 HH시 mm분")}**`},
+            {name: "가입 날짜", value: `**${ops.formatTime(created_at)}**`},
             {name: "이메일", value: `**${email ? email : "없음"}**`, inline: true}
-        ]));
+        ]))
     }
-};
+}
