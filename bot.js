@@ -1,12 +1,13 @@
 require("dotenv").config();
 
-const { Client, Collection } = require("discord.js");
+const { Client, Collection, MessageEmbed } = require("discord.js");
 const { readdirSync } = require("fs");
 const chalk = require("chalk");
-const koreanbots = require('koreanbots')
-const Bot = new koreanbots.MyBot(process.env.KOREANBOTS_TOKEN)
+const koreanbots = require('koreanbots');
+const { VultrexDB } = require('vultrex.db')
+const table = (new(require('ascii-table'))).setHeading("Command", "Status");
 
-const { VultrexDB } = require('vultrex.db');
+const Bot = new koreanbots.MyBot(process.env.KOREANBOTS_TOKEN);
 
 const tagDb = new VultrexDB({
 	provider: "sqlite",
@@ -14,18 +15,15 @@ const tagDb = new VultrexDB({
 	fileName: "db/tag"
 });
 
-tagDb.connect().then(() => console.log('tag DB is connected'))
-
 const client = new Client();
+
+client.login();
+tagDb.connect().then(() => console.log('tag DB is connected'));
 
 client.commands = new Collection();
 client.aliases = new Collection();
 client.cooldowns = new Collection();
 client.categories = readdirSync("./commands/");
-client.musicManager = null;
-client.tagDb = null;
-
-const table = (new(require('ascii-table'))).setHeading("Command", "Status")
 
 readdirSync("./commands/").forEach(dir => {
 	for (let file of readdirSync(`./commands/${dir}`).filter(f => f.endsWith(".js"))) {
@@ -41,13 +39,6 @@ readdirSync("./commands/").forEach(dir => {
 		if (pull.aliases && Array.isArray(pull.aliases)) pull.aliases.forEach(a => client.aliases.set(a, pull.name))
 	}
 });
-
-process.on('unhandledRejection', console.error)
-	.on("uncaughtException", console.error)
-	.on('warning', console.warn)
-	.on('exit', console.log);
-
-client.login();
 
 client.on("ready", () => {
 	console.log(`${table.toString()}\nLogin ${client.user.username}\n----------------------------`);
@@ -85,9 +76,10 @@ client.on("ready", () => {
 			ownerID: process.env.OWNER_ID,
 			prefix: process.env.PREFIX,
 			formatTime: time => {
-				const date = new Date(time)
-				return `${date.getFullYear()}년 ${date.getMonth()}월 ${date.getDate()}일 ${date.getHours()}시 ${date.getMinutes()}분 ${date.getSeconds()}초`
-			}
+				const date = new Date(time);
+				return `${date.getFullYear()}년 ${date.getMonth() + 1}월 ${date.getDate()}일 ${date.getHours()}시 ${date.getMinutes()}분 ${date.getSeconds()}초`
+			},
+			embed: new MessageEmbed()
 		};
 
 		if (command) {
@@ -116,3 +108,5 @@ client.on("ready", () => {
 .on('rateLimit', rateLimit => console.log(`${chalk.blueBright('RateLimit')} limit: ${rateLimit.limit}, timeout: ${rateLimit.timeout}, method: ${rateLimit.method}, route: ${rateLimit.route}`))
 .on('error', console.error)
 .on('warn', console.warn);
+
+process.on('unhandledRejection', console.error).on("uncaughtException", console.error).on('warning', console.warn);

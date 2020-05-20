@@ -3,4 +3,3 @@ node_modules/*
 package-lock.json
 Lavalink/*
 db/*
-yarn-error.log
