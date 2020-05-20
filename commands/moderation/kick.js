@@ -4,22 +4,22 @@ const { stripIndents } = require("common-tags");
 module.exports = {
     name: "kick",
     aliases: ["추방", "cnqkd", "킥", "ㅏㅑ차"],
-    usage: "[id, | mention]",
+    usage: "디토야 추방 <멘션|ID|유저이름|태그> [이유]",
     category: "moderation",
-    run: async (client, message, args) => {
-        if (message.deletable) message.delete();
+    run: async (client, message, args, ops) => {
+        if (!args.join(' ')) return message.reply('추방할 멤버를 멘션 또는 ID로 적어주세요.');
 
-        if (!args[0]) return message.reply('추방할 멤버를 멘션 또는 ID로 적어주세요.');
+        if (message.deletable) message.delete();
 
         if (!message.member.hasPermission("KICK_MEMBERS")) return message.channel.send("❌ 추방 권한이 필요해요...");
         if (!message.guild.me.hasPermission("KICK_MEMBERS")) return message.channel.send(`❌ ${client.user.username}에게 추방 권한이 필요해요...`);
 
-        const toKick = message.guild.members.cache.get(args[0]) || message.mentions.members.first();
+        const toKick = ops.getMember(message, args.join(' '));
 
         if (!toKick) return message.channel.send('멤버를 찾을 수 없습니다...');
 
         if (message.author.id === toKick.id) return message.channel.send('자기 자신을 추방할 수 없습니다...');
-        if (client.user.id === toKick.id) return message.channel.send(`${client.user.username}으로 ${client.user.username}을 추방하려고요...?`);
+        if (client.user.id === toKick.id) return message.channel.send(`${client.user.username}으로 ${client.user.username}을 추방할 수 없습니다...`);
 
         if (!toKick.kickable) return message.channel.send('역할이 높아서 추방을 못 하겠네요...');
 
@@ -46,13 +46,13 @@ module.exports = {
 
                     toKick.kick(args.slice(1).join(" ") || null).catch(err => message.channel.send(`Error...\n${err}`));
     
-                    message.channel.send(embed);
+                    message.channel.send(embed)
                 } else {
                     msg.delete();
 
-                    message.channel.send('추방이 취소 되었습니다!');
-                };
-            });
-        });
+                    message.channel.send('추방이 취소 되었습니다!')
+                }
+            })
+        })
     }
-};
+}

@@ -7,7 +7,6 @@ module.exports = {
     aliases: ["날씨", "skfTl", "ㅈㄷㅁ솓ㄱ"],
     category: "naver",
     run: async (client, message, args) => {
-        message.channel.send('망')
         /*if (!args[0]) return;
 
         await axios.get(`https://search.naver.com/search.naver?sm=top_hty&fbm=1&ie=utf8&query=${encodeURI(`${args.join(" ").replace(/[\{\}\[\]\/?.,;:|\)*~`!^\-_+<>@\#$%&\\\=\(\'\"]/gi, '')} 날씨`)}`).then(res => {

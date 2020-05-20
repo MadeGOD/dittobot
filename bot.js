@@ -1,6 +1,6 @@
 require("dotenv").config();
 
-const { Client, Collection, MessageEmbed } = require("discord.js");
+const { Client, Collection } = require("discord.js");
 const { readdirSync } = require("fs");
 const chalk = require("chalk");
 const koreanbots = require('koreanbots');
@@ -46,8 +46,8 @@ client.on("ready", () => {
 	const activity = [`${client.guilds.cache.size}개의 서버`, `${client.users.cache.filter(e => !e.bot).size}명의 유저`, `${client.guilds.cache.size} guilds`, `${client.users.cache.filter(e => !e.bot).size} users`, `https://is.gd/dittoBot`];
 
 	setInterval(() => {
-		client.user.setActivity(activity[Math.floor(Math.random() * activity.length)]);
-	}, 10000)
+		client.user.setActivity(activity[Math.floor(Math.random() * activity.length)])
+	}, 10000);
 
 	const MusicManager = require('./structures/MusicManager');
 	client.musicManager = new MusicManager(client);
@@ -79,7 +79,24 @@ client.on("ready", () => {
 				const date = new Date(time);
 				return `${date.getFullYear()}년 ${date.getMonth() + 1}월 ${date.getDate()}일 ${date.getHours()}시 ${date.getMinutes()}분 ${date.getSeconds()}초`
 			},
-			embed: new MessageEmbed()
+			getMember: (msg, mem) => {
+				let member = msg.guild.members.cache.get(mem);
+
+				if (!member && msg.mentions.members) member = msg.mentions.members.first();
+				if (!member && mem) member = msg.guild.members.cache.find(m => m.displayName.toLowerCase().includes(mem) || m.user.username.toLowerCase().includes(mem) || m.user.tag.toLowerCase().includes(mem));
+				if (!member) member = msg.member;
+
+				return member
+			},
+			getChannel: (msg, ch) => {
+				let channel = msg.guild.channels.cache.get(ch);
+
+				if (!channel && msg.mentions.channels) channel = msg.mentions.channels.first();
+				if (!channel && msg) channel = msg.guild.channels.cache.find(m => m.name.toLowerCase().includes(ch));
+				if (!channel) channel = msg.channel;
+
+				return channel
+			}
 		};
 
 		if (command) {

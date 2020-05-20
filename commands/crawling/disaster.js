@@ -10,10 +10,10 @@ module.exports = {
         
         let res = ``;
 
-        for (var i = 0; i < 5; i++) {
+        for (let i = 0; i < 5; i++) {
             res += `${getJSON[i].CONT} (${getJSON[i].SJ})\n\n`;
         };
 
-        message.channel.send(new MessageEmbed().setTitle('재난 문자').setColor(0xff0000).setDescription(res));
+        message.channel.send(new MessageEmbed().setTitle('재난 문자').setColor(0xff0000).setDescription(res))
     }
-};
+}

@@ -26,7 +26,7 @@ module.exports = {
             };
             if (cmd.category) info += `\n**카테고리**\n${category[cmd.category]}`;
         
-            message.channel.send(embed.setDescription(info).setColor(0x00ffff));
+            message.channel.send(embed.setDescription(info).setColor(0x00ffff))
         } else {
             const commandEmbed = new MessageEmbed().setColor(0x00ff00).setTitle(`${client.user.username} 도움말`).setFooter(`${ops.prefix} 도움 <명령어 이름> 으로 더 자세히 아실 수 있습니다.`);
         
@@ -34,10 +34,10 @@ module.exports = {
         
             const info = client.categories.filter(n => n !== "owner").map(a => stripIndents`**${category[a[0].toLowerCase() + a.slice(1)]}**\n${commands(a)}`).reduce((s, c) => `${s}\n\n${c}`)
 
-            message.channel.send(commandEmbed.setDescription(info));
+            message.channel.send(commandEmbed.setDescription(info))
         }
     }
-};
+}
 
 const category = {
     'botinfo': '봇정보',

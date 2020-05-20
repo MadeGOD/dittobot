@@ -23,6 +23,7 @@ module.exports = {
                 usageCount: 0,
                 createdAt: new Date()
             })
+
             message.channel.send(`\`${args[1]}\` 태그가 추가되었습니다.`)
         } else if (args[0] === 'rank' || args[0] === '랭킹') {
             const tags = await client.tagDb.getAll().then(n => n.filter(a => a.value.guild === message.guild.id).sort((a, b) => parseInt(b.value.usageCount) - parseInt(a.value.usageCount)).splice(0, 10).map((r, i) => `**${i+1}위** \`${r.key.replace(`${message.guild.id}_`, '')}\` - \`${r.value.usageCount}회\``).join('\n'))
@@ -58,6 +59,7 @@ module.exports = {
                 usageCount: tag.value.usageCount,
                 createdAt: tag.value.createdAt
             })
+
             message.channel.send(`\`${args[1]}\` 태그를 수정하였습니다.`)
         } else if (args[0] === 'remove' || args[0] === '삭제') {
             const tag = await client.tagDb.getAll().then(n => n.filter(a => a.value.guild === message.guild.id).find(e => e.key === `${message.guild.id}_${args[1]}`))
@@ -92,7 +94,7 @@ module.exports = {
                 .replace(/{user_avatar}/g, message.author.avatar)
                 .replace(/{user_status}/g, message.author.presence.status)
                 .replace(/{mention}/g, message.author.toString())
-                .replace(/{args;[0-9]+}/g, e => args[parseInt(e.substring(ops.prefix.length + 2, e.length))])
+                .replace(/{args;[0-9]+}/g, e => args[parseInt(e.substring(ops.prefix.length + this.name.length, e.length))])
                 .replace(/{args;slice;[0-9]+}/g, e => args.slice(parseInt(e)).join(' '))
                 .replace(/{args;join}/g, args.join(' '))
             )

@@ -4,21 +4,10 @@ const { stripIndents } = require("common-tags");
 module.exports = {
     name: "userinfo",
     aliases: ["정보", "내정보", "user-info", "user-information", "user", "info-user", "user_info", "유저정보"],
-    usage: "[id, | mention]",
+    usage: "디토야 유저정보 [멘션|ID|유저이름|태그]",
     category: "information",
     run: async (client, message, args, ops) => {
-        let member = message.guild.members.cache.get(args.join(" "));
-
-        if (!member && message.mentions.members) member = message.mentions.members.first();
-
-        if (!member && args.join(" ")) {
-            member = message.guild.members.cache.find(member => {
-                return member.displayName.toLowerCase().includes(args.join(" ")) ||
-                member.user.tag.toLowerCase().includes(args.join(" "))
-            });
-        }
-
-        if (!member) member = message.member;
+        let member = ops.getMember(message, args.join(' '))
 
         const embed = new MessageEmbed().setTitle(`${member.user.username}님의 정보`).setFooter(member.user.username, member.user.displayAvatarURL()).setThumbnail(member.user.displayAvatarURL()).setColor(member.displayHexColor === "#000000" ? "#FFFFFF" : member.displayHexColor).setTimestamp()
             .addField(`${client.emojis.cache.get('700242370804973578')} 유저 이름`, `**${member.user.username}**`)

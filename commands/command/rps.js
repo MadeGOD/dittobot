@@ -27,8 +27,8 @@ module.exports = {
 
                 if (message.guild.me.hasPermission("MANAGE_MESSAGES")) await t.reactions.removeAll();
 
-                t.edit(embed.setTitle(result).setDescription(`**${choose} vs ${bot}**`));
-            });
-        });
+                t.edit(embed.setTitle(result).setDescription(`**${choose} vs ${bot}**`))
+            })
+        })
     }
-};
+}

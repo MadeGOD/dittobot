@@ -15,13 +15,13 @@ module.exports = {
 
                 if (pull.name) {
                     delete require.cache[require.resolve(`../${dir}/${file}`)];
-                    client.commands.set(pull.name, pull);
+                    client.commands.set(pull.name, pull)
                 }
 
-                if (pull.aliases && Array.isArray(pull.aliases)) pull.aliases.forEach(a => client.aliases.set(a, pull.name));
-            };
-        });
+                if (pull.aliases && Array.isArray(pull.aliases)) pull.aliases.forEach(a => client.aliases.set(a, pull.name))
+            }
+        })
         
-        m.edit('', new MessageEmbed().setTitle(`✅ 모든 파일을 리로드 완료! (${client.commands.size}개)`).setColor(0xffff00));
+        m.edit('', new MessageEmbed().setTitle(`✅ 모든 파일을 리로드 완료! (${client.commands.size}개)`).setColor(0xffff00))
     }
-};
+}

@@ -2,7 +2,7 @@ const { MessageEmbed } = require("discord.js");
 
 module.exports = {
     name: "serverinfo",
-    aliases: ["서버정보", "정보서버", "정보 서버", "서정", "server-info", "서버 정보", '섭정보', 'tjqwjdqh'],
+    aliases: ["서버정보", "정보서버", "서정", "server-info", '섭정보', 'tjqwjdqh'],
     category: "information",
     run: async (client, message, args, ops) => {
         const embed = new MessageEmbed()
@@ -47,23 +47,23 @@ module.exports = {
 
         message.channel.send(embed);
 
-        if (message.member.hasPermission("MANAGE_ROLES") && message.guild.me.hasPermission("MANAGE_ROLES") && message.guild.roles.cache.filter(e => e.id !== message.guild.id).size !== 0) message.channel.send(roleembed)
-        if (message.member.hasPermission("MANAGE_EMOJIS") && message.guild.me.hasPermission("MANAGE_EMOJIS") && message.guild.emojis.cache.size !== 0) message.channel.send(emojiembed);
+        if (message.member.hasPermission("MANAGE_ROLES") && message.guild.me.hasPermission("MANAGE_ROLES") && message.guild.roles.cache.filter(e => e.id !== message.guild.id).size !== 0) message.channel.send(roleembed);
+        if (message.member.hasPermission("MANAGE_EMOJIS") && message.guild.me.hasPermission("MANAGE_EMOJIS") && message.guild.emojis.cache.size !== 0) message.channel.send(emojiembed)
     }
-};
+}
 
-const mfaLevel = ['없음', '활성화'];
+const mfaLevel = ['없음', '활성화']
 
 const explicitContentFilter = {
     DISABLED: '미디어 콘텐츠를 스캔하지 않음',
     MEMBERS_WITHOUT_ROLES: '역할 없는 멤버의 미디어 콘텐츠를 스캔',
     ALL_MEMBERS: '모든 멤버의 미디어 콘텐츠를 스캔'
-};
+}
 
 const defaultMessageNotifications = {
     ALL: '모든 메세지',
     MENTIONS: '@mentions만'
-};
+}
 
 const region = {
     "south-korea": ':flag_kr: 대한민국 (South Korea)',
@@ -80,7 +80,7 @@ const region = {
     "us-east": ":flag_us: 미국 동부 (US East)",
     "us-south": ":flag_us: 미국 남부 (US South)",
     "us-west": ":flag_us: 미국 서부 (US West)"
-};
+}
 
 const afkTimeout = {
     60: '1분',
@@ -88,7 +88,7 @@ const afkTimeout = {
     900: '15분',
     1800: '30분',
     3600: '1시간'
-};
+}
 
 const verificationLevel = {
     NONE: '제한 없음',
@@ -96,4 +96,4 @@ const verificationLevel = {
     MEDIUM: 'Discord에 가입한 지 5분',
     HIGH: '이 서버에 멤버가 된 지 10분',
     VERY_HIGH: '휴대폰 인증이 완료된 Discord 계정'
-};
+}

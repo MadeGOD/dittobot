@@ -4,7 +4,7 @@ const cheerio = require('cheerio');
 
 module.exports = {
     name: 'namuwiki',
-    aliases: ['나무위키', '꺼무위키'],
+    aliases: ['나무위키', '꺼무위키', 'ㅜ므ㅕ쟈ㅏㅑ', 'skandnlzl'],
     category: 'crawling',
     run: async (client, message, args) => {
         if (!args.join(" ")) return;
@@ -23,16 +23,16 @@ module.exports = {
             $('div.search-item').each((i, element) => {
                 result['result'][i] = $(element).find('h4 > a').text().trim();
                 result['goTo'][i] = `https://namu.wiki${$(element).find('h4 > a').attr('href')}`;
-                result['description'][i] = $(element).find('div').text().trim();
+                result['description'][i] = $(element).find('div').text().trim()
             });
 
             let str = ``;
 
             for (var i = 0; i < result.result.length; i++) {
-                str += `[${result.result[i]}](${result.goTo[i]})\n`;
+                str += `[${result.result[i]}](${result.goTo[i]})\n`
             };
     
-            message.channel.send(new MessageEmbed().setTitle('꺼무위키 검색 결과').setDescription(str).setColor(0x008275));
+            message.channel.send(new MessageEmbed().setTitle('꺼무위키 검색 결과').setDescription(str).setColor(0x008275))
         })
     }
-};
+}

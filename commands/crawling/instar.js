@@ -12,7 +12,7 @@ module.exports = {
         let res;
 
         try {
-            res = await fetch(`https://www.instagram.com/${encodeURI(args.join(" ").replace(/ /g, '+'))}/?__a=1`).then(e => e.json());
+            res = await fetch(`https://www.instagram.com/${encodeURI(args.join(" ").replace(/ /g, '+'))}/?__a=1`).then(e => e.json())
         } catch (e) {
             return message.channel.send(`에러...\n${e}`)
         };
@@ -58,6 +58,6 @@ module.exports = {
                     inline: true
                 }
             ])
-        );
+        )
     }
-};
+}
