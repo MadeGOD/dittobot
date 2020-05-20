@@ -6,7 +6,7 @@ module.exports = {
     category: "information",
     usage: '디토야 채널정보 [멘션|ID|채널이름]',
     run: async (client, message, args, ops) => {
-        let channel = ops.getChannel(args.join(' '));
+        let channel = ops.getChannel(message, args.join(' '));
 
         const embed = new MessageEmbed().setTitle(`${channel.name} 채널 정보`).setColor(0xffff00).setFooter(channel.guild.name, channel.guild.iconURL()).setTimestamp().addField('🆔 채널 ID', `**${channel.id}**`);
 
