@@ -7,7 +7,8 @@ module.exports = {
     category: "owner",
     developer: !0,
     run: async (client, message, args) => {
-        const m = await message.channel.send(new MessageEmbed().setTitle(`${client.emojis.cache.get('677129501645209601')} 모든 파일을 리로드 중... (${client.commands.size}개)`).setColor(0xffff00));
+        const embed = new MessageEmbed().setTitle(`${client.emojis.cache.get('677129501645209601')} 모든 파일을 리로드 중... (${client.commands.size}개)`).setColor(0x00ff00)
+        const m = await message.channel.send(embed);
 
         readdirSync("./commands/").forEach(dir => {
             for (let file of readdirSync(`./commands/${dir}`).filter(f => f.endsWith(".js"))) {
@@ -22,6 +23,6 @@ module.exports = {
             }
         })
         
-        m.edit('', new MessageEmbed().setTitle(`✅ 모든 파일을 리로드 완료! (${client.commands.size}개)`).setColor(0xffff00))
+        m.edit(embed.setTitle(`✅ 모든 파일을 리로드 완료! (${client.commands.size}개)`))
     }
 }

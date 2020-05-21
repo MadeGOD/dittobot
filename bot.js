@@ -53,7 +53,7 @@ client.on("ready", () => {
 	client.musicManager = new MusicManager(client);
 	client.tagDb = tagDb;
 
-	Bot.update(client.guilds.cache.size)
+	Bot.update(client.guilds.cache.size).catch(e => console.log(e.message))
 })
 .on("message", async message => {
 	if (message.author.bot || message.system || !message.content.startsWith(process.env.PREFIX)) return;
