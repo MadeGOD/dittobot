@@ -15,6 +15,8 @@ module.exports = {
         embed.addField('채널 주제', `${channel.topic || "**없음**"}`)
             .addField('채널 타입', `**${type[channel.type]}**`)
             .addField('🎂 채널 생성 시간', `**${ops.formatTime(channel.createdAt)}**`)
+        
+        if (channel.type === "voice") embed.addField('비트레이트', `**${channel.bitrate / 1000}kbps**`)
 
         message.channel.send(embed)
     }

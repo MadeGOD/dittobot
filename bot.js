@@ -92,7 +92,7 @@ client.on("ready", () => {
 				let channel = msg.guild.channels.cache.get(ch);
 
 				if (!channel && msg.mentions.channels) channel = msg.mentions.channels.first();
-				if (!channel && msg) channel = msg.guild.channels.cache.find(m => m.name.toLowerCase().includes(ch));
+				if (!channel && ch) channel = msg.guild.channels.cache.find(m => m.name.toLowerCase().includes(ch));
 				if (!channel) channel = msg.channel;
 
 				return channel
