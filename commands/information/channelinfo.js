@@ -17,6 +17,7 @@ module.exports = {
             .addField('🎂 채널 생성 시간', `**${ops.formatTime(channel.createdAt)}**`)
         
         if (channel.type === "voice") embed.addField('비트레이트', `**${channel.bitrate / 1000}kbps**`)
+        if (channel.type === 'text') embed.addField('슬로우모드', `**${channel.rateLimitPerUser ? `${channel.rateLimitPerUser}초` : '없음'}**`)
 
         message.channel.send(embed)
     }
