@@ -4,35 +4,18 @@ const { Client, Collection } = require("discord.js");
 const { readdirSync } = require("fs");
 const chalk = require("chalk");
 const koreanbots = require('koreanbots');
-const { VultrexDB } = require('vultrex.db')
 const table = (new(require('ascii-table'))).setHeading("Command", "Status");
 
 const Bot = new koreanbots.MyBot(process.env.KOREANBOTS_TOKEN);
 
-const tagDb = new VultrexDB({
-	provider: "sqlite",
-	table: "tag",
-	fileName: "db/tag"
-});
-
-const blacklist = new VultrexDB({
-	provider: "sqlite",
-	table: "blacklist",
-	fileName: "db/blacklist"
-})
-
 const client = new Client();
 
 client.login();
-tagDb.connect().then(() => console.log('tag DB is connected'));
-blacklist.connect().then(() => console.log('blacklist DB is connected'))
 
 client.commands = new Collection();
 client.aliases = new Collection();
 client.cooldowns = new Collection();
 client.categories = readdirSync("./commands/");
-client.tagDb = tagDb;
-client.blacklist = blacklist
 
 readdirSync("./commands/").forEach(dir => {
 	for (let file of readdirSync(`./commands/${dir}`).filter(f => f.endsWith(".js"))) {
@@ -65,8 +48,6 @@ client.on("ready", () => {
 })
 .on("message", async message => {
 	if (message.author.bot || message.system || !message.content.startsWith(process.env.PREFIX)) return;
-
-	if (await client.blacklist.get(message.author.id)) return message.channel.send(`${client.user.username} 블랙리스트에 들어가 있습니다.`)
 
 	if (message.channel.type === 'dm' && (message.author.id !== process.env.OWNER_ID)) {
 		message.channel.send(`DM에서는 ${client.user.username}을(를) 사용하실 수 없습니다.\n${client.user.username}이(가) 있는 서버에서 사용해 주세요.`);
