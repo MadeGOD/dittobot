@@ -3,6 +3,7 @@ const { MessageEmbed } = require('discord.js')
 module.exports = {
     name: "scplay",
     aliases: ['사운드클라우드', '사클', 'tkzmf', 'sc', 'tkdnsemzmffkdnem', 'soundcloud', 'ㄴ치묘', '내ㅕㅜㅇ치ㅐㅕㅇ', 'soundcloudplay', '내ㅕㅜㅇ치ㅐㅕ에ㅣ묘'],
+    usage: '디토야 사운드클라우드 <노래 이름|URL>',
     category: 'music',
     run: async (client, message, args, ops) => {
         const player = client.musicManager.queue.get(message.guild.id)
@@ -18,6 +19,6 @@ module.exports = {
         const song = await client.musicManager.getSongs(`scsearch: ${args.join(" ")}`);
         if (!song[0]) return message.channel.send(new MessageEmbed().setDescription(`❌ **${args.join(' ')}**(이)라는 노래를 찾을 수 없습니다.`).setColor(0xFF0000));
 
-        client.musicManager.handleVideo(message, message.member.voice.channel, song[0]);
+        client.musicManager.handleVideo(message, message.member.voice.channel, song[0])
     }
 }

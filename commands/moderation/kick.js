@@ -32,13 +32,11 @@ module.exports = {
 
         const promtEmbed = new MessageEmbed().setColor(0x00ff00).setDescription(`**${toKick}**님을 추방하실 건가요?`);
 
-        let filter = (reaction, user) => (reaction.emoji.name === '✅' || reaction.emoji.name === '❎') && user.id === message.author.id;
-
         message.channel.send(promtEmbed).then(async (msg) => {
             await msg.react('✅');
             await msg.react('❎');
 
-            msg.awaitReactions(filter, {
+            msg.awaitReactions((reaction, user) => (reaction.emoji.name === '✅' || reaction.emoji.name === '❎') && user.id === message.author.id, {
                 max: 1
             }).then((collected) => {
                 if (collected.array()[0].emoji.name === '✅') {

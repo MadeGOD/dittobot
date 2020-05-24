@@ -7,7 +7,6 @@ const koreanbots = require('koreanbots');
 const table = (new(require('ascii-table'))).setHeading("Command", "Status");
 
 const Bot = new koreanbots.MyBot(process.env.KOREANBOTS_TOKEN);
-
 const client = new Client();
 
 client.login();
@@ -91,12 +90,12 @@ client.on("ready", () => {
 			embed: {
 				musicError1: new MessageEmbed().setColor(0xFF0000).setTitle(`❌ 현재 재생 중인 음악이 없어요!`),
 				musicError2: new MessageEmbed().setColor(0xFF0000).setTitle(`❌ 음성 채널에 먼저 들어가 주세요!`),
-				musicError3: (name) => new MessageEmbed().setColor(0xFF0000).setDescription(`❌ **${name}** 채널로 들어가 주세요!`)
+				musicError3: name => new MessageEmbed().setColor(0xFF0000).setDescription(`❌ **${name}** 채널로 들어가 주세요!`)
 			}
 		};
 
 		if (command) {
-			if (command.developer && (message.author.id !== process.env.OWNER_ID)) return message.channel.send(`\`${client.user.username} 개발자\`만 가능합니다.`);
+			if (command.category === 'owner' && (message.author.id !== process.env.OWNER_ID)) return message.channel.send(`\`${client.user.username} 개발자\`만 가능합니다.`);
 			command.run(client, message, args, ops)
 		} else {
 			require("node-fetch")(`https://builder.pingpong.us/api/builder/${process.env.pingpong}/integration/v0.2/custom/${message.author.id}`, {

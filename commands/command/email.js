@@ -28,7 +28,7 @@ module.exports = {
             text: `${titleAndDescription[1]}\n\n--------------------------\n디스코드 유저 ${message.author.tag} 님이 디스코드 봇 ${client.user.tag} 으로 보낸 메일입니다.`
         }, err => {
             if (err) return message.channel.send(`Error...\n${err}`)
-            else message.channel.send(new MessageEmbed().setTitle('메일 전송').setColor(0xFFFF00).setDescription(`**받는 사람**\n\`\`\`${args[0]}\`\`\`\n**제목**\n\`\`\`fix\n${titleAndDescription[0]}\n\`\`\`\n**내용**\`\`\`yml\n${titleAndDescription[1]}\n\`\`\``))
+            else message.channel.send(new MessageEmbed().setTitle('메일 전송').setColor(0x00FF00).setDescription(`**받는 사람**\n\`\`\`${args[0]}\`\`\`\n**제목**\n\`\`\`fix\n${titleAndDescription[0]}\n\`\`\`\n**내용**\`\`\`yml\n${titleAndDescription[1]}\n\`\`\``))
         })
     }
 }

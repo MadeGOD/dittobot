@@ -4,7 +4,6 @@ module.exports = {
     name: "notice",
     aliases: ["공지", "공지사항", 'ㅜㅐ샻ㄷ', 'rhdwl', 'rhdwltkgkd'],
     category: 'owner',
-    developer: !0,
     run: async (client, message, args, ops) => {
         if (!args.join(' ')) return message.channel.send('내용을 써 주세요!');
 

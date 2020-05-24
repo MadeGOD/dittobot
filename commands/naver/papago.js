@@ -30,7 +30,7 @@ const nameToLang = {
 
 module.exports = {
     name: "papago",
-    aliases: ["파파고", "앵무새"],
+    aliases: ["파파고", "앵무새", 'vkvkrh', 'dodanto', 'ㅔ멤해'],
     category: "naver",
     usage: '디토야 파파고 <시작언어> <번역언어> <메세지>',
     run: async (client, message, args) => {

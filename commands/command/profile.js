@@ -9,4 +9,4 @@ module.exports = {
         let member = ops.getMember(message, args.join(' '))
         message.channel.send(new MessageEmbed().setColor(0xfffffe).setTitle(`${member.user.username}님의 프로필 사진`).setURL(member.user.displayAvatarURL({dynamic: true, format: 'png', size: 1024})).setImage(member.user.displayAvatarURL({dynamic: true, format: 'png', size: 1024})));
     }
-};
+}

@@ -5,6 +5,7 @@ const cheerio = require('cheerio');
 module.exports = {
     name: 'namuwiki',
     aliases: ['나무위키', '꺼무위키', 'ㅜ므ㅕ쟈ㅏㅑ', 'skandnlzl'],
+    usage: '디토야 나무위키 <내용>',
     category: 'crawling',
     run: async (client, message, args) => {
         if (!args.join(" ")) return;
@@ -16,9 +17,7 @@ module.exports = {
 
             let str = ``;
 
-            $('div.search-item').each((i, element) => {
-                str += `[${$(element).find('h4 > a').text().trim()}](https://namu.wiki${$(element).find('h4 > a').attr('href')})\n`
-            });
+            $('div.search-item').each((i, element) => str += `[${$(element).find('h4 > a').text().trim()}](https://namu.wiki${$(element).find('h4 > a').attr('href')})\n`);
 
             if (!str) return message.channel.send('검색 결과가 없습니다')
     

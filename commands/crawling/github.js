@@ -3,7 +3,8 @@ const { MessageEmbed } = require("discord.js");
 
 module.exports = {
     name: "github",
-    aliases: ["깃허브", "깃헙"],
+    aliases: ["깃허브", "깃헙", '햐소ㅕㅠ', 'rltgjqm', 'rltgjq'],
+    usage: '디토야 깃허브 <유저이름>',
     category: 'crawling',
     run: async (client, message, args, ops) => {
         if (!args.join(' ')) return;

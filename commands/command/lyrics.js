@@ -13,7 +13,7 @@ module.exports = {
 
         if (result.error) return message.channel.send(`\`${args.join(" ")}\`의 가사를 찾을 수 없습니다.`);
         else {
-            const embed = new MessageEmbed().setTitle(`${result.artist} - ${result.title}`).setThumbnail(result.albumArt).setColor(0xffff00);
+            const embed = new MessageEmbed().setTitle(`${result.artist} - ${result.title}`).setThumbnail(result.albumArt).setColor(0x00ff00);
             
             if (result.result.toString().length < 1700) {
                 embed.setDescription(`[🎵 바로가기](${result.url})\n\n${result.result.toString()}`);
@@ -21,7 +21,7 @@ module.exports = {
             } else {
                 embed.setDescription(`[🎵 바로가기](${result.url})\n\n${result.result.toString().substr(0, 1650)}`);
                 message.author.send(embed);
-                message.author.send(new MessageEmbed().setColor(0xffff00).setDescription(`${result.result.toString().replace(result.result.toString().substr(0, 1650), '')}`))
+                message.author.send(new MessageEmbed().setColor(0x00ff00).setDescription(`${result.result.toString().replace(result.result.toString().substr(0, 1650), '')}`))
             }
         }
     }

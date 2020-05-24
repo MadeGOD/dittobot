@@ -5,11 +5,12 @@ const fetch = require("node-fetch");
 module.exports = {
     name: "instar",
     aliases: ["인스타", "insta", "instargram", "인스타그램"],
+    usage: '디토야 인스타 <유저이름>',
     category: "crawling",
     run: async (client, message, args) => {
         if (!args.join(' ')) return message.reply("검색할 인스타그램 유저를 입력해 주세요!");
 
-        let res;
+        let res
 
         try {
             res = await fetch(`https://www.instagram.com/${encodeURI(args.join(" ").replace(/ /g, '+'))}/?__a=1`).then(e => e.json())

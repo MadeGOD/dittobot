@@ -3,9 +3,8 @@ const beautify = require("beautify");
 
 module.exports = {
     name: "eval",
-    aliases: ["ev", "ㄷㅍ미", 'ㄷㅍ'],
+    aliases: ["ㄷㅍ미"],
     category: "owner",
-    developer: !0,
     run: async (client, message, args, ops) => {
         if (!args.join(' ')) return;
 

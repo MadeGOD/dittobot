@@ -22,11 +22,11 @@ module.exports = {
             if (cmd.description) info += `\n**설명**\n${cmd.description}\n`;
             if (cmd.usage) {
                 info += `\n**사용 방법**\n${cmd.usage}\n`;
-                embed.setFooter(`<> = 필수, [] = 선택`);
-            };
+                embed.setFooter(`<> = 필수, [] = 선택, | = 또는`)
+            }
             if (cmd.category) info += `\n**카테고리**\n${category[cmd.category]}`;
         
-            message.channel.send(embed.setDescription(info).setColor(0x00ffff))
+            message.channel.send(embed.setDescription(info).setColor(0x00ff00))
         } else {
             const commandEmbed = new MessageEmbed().setColor(0x00ff00).setTitle(`${client.user.username} 도움말`).setFooter(`${ops.prefix} 도움 <명령어 이름> 으로 더 자세히 아실 수 있습니다.`);
         
@@ -91,7 +91,7 @@ const commandName = {
     'resume': '다시재생',
     'scplay': '사운드클라우드',
     'seek': 'seek',
-    shuffle: 'shuffle',
+    'shuffle': 'shuffle',
     'skip': '스킵',
     'skipto': '이동',
     'stop': '정지',

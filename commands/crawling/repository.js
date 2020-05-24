@@ -4,6 +4,7 @@ const { MessageEmbed } = require('discord.js');
 module.exports = {
     name: 'repository',
     aliases: ['레포지토리', '레포', 'repo', 'ㄱ데ㅐ', 'fpvh', 'fpvhwlxhfl', 'ㄱ데ㅐ냐새교'],
+    usage: '디토야 레포 <유저이름> <레포이름>',
     category: 'crawling',
     run: async (client, message, args, ops) => {
         if (!args[0]) return message.channel.send('유저 이름을 입력해 주세요!')

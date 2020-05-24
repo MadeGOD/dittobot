@@ -3,10 +3,10 @@ const Choose = ["✌", "✊", "✋"];
 
 module.exports = {
     name: "rps",
-    aliases: ["가위 바위 보", "가위바위보"],
+    aliases: ["가위바위보", 'rkdnlqkdnlqh', '겐'],
     category: "command",
     run: async (client, message, args) => {
-        const embed = new MessageEmbed().setColor(0xfffffe).setFooter(message.author.username, message.author.displayAvatarURL()).setTitle(`가위바위보`).setTimestamp();
+        const embed = new MessageEmbed().setColor(0x00ff00).setFooter(message.author.username, message.author.displayAvatarURL()).setTitle(`가위바위보`).setTimestamp();
 
         message.channel.send(embed).then(async t => {
             await t.react('✌');

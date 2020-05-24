@@ -2,7 +2,7 @@ const { MessageEmbed } = require('discord.js');
 
 module.exports = {
     name: 'remove',
-    aliases: ['제거'],
+    aliases: ['제거', 'wprj', 'ㄱ드ㅐㅍㄷ'],
     category: 'music',
     run: async (client, message, args, ops) => {
         const player = client.musicManager.queue.get(message.guild.id);

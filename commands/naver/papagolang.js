@@ -26,7 +26,7 @@ const langToName = {
 
 module.exports = {
     name: 'papagolang',
-    aliases: ['언어감지'],
+    aliases: ['언어감지', 'djsdjrkawl'],
     category: 'naver',
     usage: '디토야 언어감지 <메세지>',
     run: async (client, message, args) => {
