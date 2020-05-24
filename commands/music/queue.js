@@ -4,9 +4,9 @@ module.exports = {
     name: "queue",
     aliases: ['que', '재생목록', 'wotodahrfhr', '벼뎓', '대기열', 'eorlduf'],
     category: 'music',
-    run: async (client, message, args) => {
+    run: async (client, message, args, ops) => {
         const serverQueue = client.musicManager.queue.get(message.guild.id);
-        if (!serverQueue) return message.channel.send(new MessageEmbed().setColor(0xFF0000).setDescription(`❌ 현재 재생 중인 음악이 없어요!`));
+        if (!serverQueue) return message.channel.send(ops.embed.musicError1);
 
         let i = 0
 

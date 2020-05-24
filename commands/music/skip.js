@@ -4,10 +4,10 @@ module.exports = {
     name: "skip",
     aliases: ['스킵', 'tmzlq'],
     category: "music",
-    run: async (client, message, args) => {
+    run: async (client, message, args, ops) => {
         const serverQueue = client.musicManager.queue.get(message.guild.id);
-        if (!serverQueue) return message.channel.send(new MessageEmbed().setColor(0xFF0000).setDescription(`❌ 현재 재생 중인 음악이 없어요!`));
-        if (!message.member.voice.channel) return message.channel.send(new MessageEmbed().setColor(0xFF0000).setDescription(`❌ 음성 채널에 먼저 들어가 주세요!`))
+        if (!serverQueue) return message.channel.send(ops.embed.musicError1);
+        if (!message.member.voice.channel) return message.channel.send(ops.embed.musicError2)
         
         if (!serverQueue.playing) serverQueue.playing = true;
 

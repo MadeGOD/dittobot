@@ -4,9 +4,9 @@ module.exports = {
     name: "nowplaying",
     aliases: ['np', 'ㅞ', 'now-playing', 'nowplay', 'ㅜㅐ제ㅣ묘ㅑㅜㅎ', '현재음악', '현재곡', 'guswodmadkr', 'gusworhr', '지금곡', 'wlrmarhr', '지금음악', 'wlrmadmadkr', '지금노래', 'wlrmashfo', '현재노래', 'guswoshfo'],
     category: "music",
-    run: async (client, message, args) => {
+    run: async (client, message, args, ops) => {
         const serverQueue = client.musicManager.queue.get(message.guild.id);
-        if (!serverQueue) return message.channel.send(new MessageEmbed().setColor(0xFF0000).setDescription(`❌ 현재 재생 중인 음악이 없어요!`))
+        if (!serverQueue) return message.channel.send(ops.embed.musicError1)
 
         const song = serverQueue.songs[0];
 

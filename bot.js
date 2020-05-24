@@ -1,6 +1,6 @@
 require("dotenv").config();
 
-const { Client, Collection } = require("discord.js");
+const { Client, Collection, MessageEmbed } = require("discord.js");
 const { readdirSync } = require("fs");
 const chalk = require("chalk");
 const koreanbots = require('koreanbots');
@@ -87,6 +87,10 @@ client.on("ready", () => {
 				if (!channel) channel = msg.channel;
 
 				return channel
+			},
+			embed: {
+				musicError1: new MessageEmbed().setColor(0xFF0000).setDescription(`❌ 현재 재생 중인 음악이 없어요!`),
+				musicError2: new MessageEmbed().setColor(0xFF0000).setDescription(`❌ 음성 채널에 먼저 들어가 주세요!`)
 			}
 		};
 
