@@ -1,4 +1,4 @@
-const { ms, s, m, h } = require('./time-convert')
+const { ms, s, m, h } = require('time-convert')
 
 /**
  * @class Queue

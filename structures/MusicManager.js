@@ -51,7 +51,7 @@ module.exports = class MusicManager {
             }
         } else {
             serverQueue.songs.push(song);
-            message.channel.send(new MessageEmbed().setDescription(`✅ **${song.info.title}**이(가) 대기열에 추가되었습니다!`).setColor(0x00FF00));
+            message.channel.send(new MessageEmbed().setTitle(song.info.title).setURL(song.info.uri).setDescription(`✅ **${song.info.title} - ${song.info.author}**이(가) 대기열에 추가되었습니다!`).setColor(0x00FF00));
         }
     }
 
