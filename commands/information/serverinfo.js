@@ -7,7 +7,7 @@ module.exports = {
     run: async (client, message, args, ops) => {
         const embed = new MessageEmbed()
             .setTitle(`${message.guild.name} 서버의 정보`)
-            .setColor(0xffff00)
+            .setColor(0x00ff00)
             .setThumbnail(message.guild.iconURL())
             .setFooter(message.guild.name, message.guild.iconURL())
             .setTimestamp()
@@ -31,18 +31,18 @@ module.exports = {
             .addField(`${client.emojis.cache.get('686131200242352184')} 서버 부스트 횟수`, `**${message.guild.premiumSubscriptionCount}회**`, true)
 
 
-        const roleEmbed = new MessageEmbed().setColor(0xffff00).setTitle(`${message.guild.name} 서버의 역할 (${message.guild.roles.cache.filter(r => r.id !== message.guild.id).size}개)`).setDescription(message.guild.roles.cache.filter(r => r.id !== message.guild.id).map(e => e).join(", "));
+        const roleEmbed = new MessageEmbed().setColor(0x00ff00).setTitle(`${message.guild.name} 서버의 역할 (${message.guild.roles.cache.filter(r => r.id !== message.guild.id).size}개)`).setDescription(message.guild.roles.cache.filter(r => r.id !== message.guild.id).map(e => e).join(", "));
 
         if (message.guild.roles.cache.filter(r => r.id !== message.guild.id).size > 25) {
             roleEmbed.setDescription(message.guild.roles.cache.filter(n => n.id !== message.guild.id).map(e => e).splice(0, 25).join(", "));
             roleEmbed.setTitle(`${message.guild.name} 서버의 역할 (${message.guild.roles.cache.filter(r => r.id !== message.guild.id).size}개 중 25개)`);
         }
 
-        const emojiEmbed = new MessageEmbed().setColor(0xffff00).setTitle(`${message.guild.name} 서버의 이모지 (${message.guild.emojis.cache.size}개)`).setDescription(message.guild.emojis.cache.map(e => e.toString()).join(" "));
+        const emojiEmbed = new MessageEmbed().setColor(0x00ff00).setTitle(`${message.guild.name} 서버의 이모지 (${message.guild.emojis.cache.size}개)`).setDescription(message.guild.emojis.cache.map(e => e.toString()).join(" "));
 
-        if (message.guild.emojis.cache.size > 30) {
-            emojiEmbed.setDescription(message.guild.emojis.cache.map(e => e.toString()).splice(0, 30).join(" "));
-            emojiEmbed.setTitle(`${message.guild.name} 서버의 이모지 (${message.guild.emojis.cache.size}개 중 30개)`);
+        if (message.guild.emojis.cache.size > 40) {
+            emojiEmbed.setDescription(message.guild.emojis.cache.map(e => e.toString()).splice(0, 40).join(" "));
+            emojiEmbed.setTitle(`${message.guild.name} 서버의 이모지 (${message.guild.emojis.cache.size}개 중 40개)`);
         }
 
         message.channel.send(embed);

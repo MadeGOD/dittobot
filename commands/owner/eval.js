@@ -19,6 +19,7 @@ module.exports = {
             if (output.includes(client.token)) output = output.replace(new RegExp(client.token, "gi"), 'Secret');
 
             if (output.length > 1500) output = `${output.substr(0, 1495)}...`;
+            if (!output) output = '결과 없음';
 
             message.channel.send(new MessageEmbed().setTitle('Eval').setColor(0x00ff00).setDescription(`**📥 Input: **\n\`\`\`js\n${beautify(args.join(" "), { format: "js" })}\n\`\`\`\n**📤 Output: **\n\`\`\`js\n${output}\n\`\`\``))
         }).catch(e => {
