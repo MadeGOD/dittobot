@@ -1,5 +1,3 @@
-require("dotenv").config();
-
 const { Client, Collection, MessageEmbed } = require("discord.js");
 const { readdirSync } = require("fs");
 const chalk = require("chalk");
