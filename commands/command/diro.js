@@ -7,7 +7,7 @@ module.exports = {
     run: async (client, message, args) => {
         if (!args.join(' ')) return message.channel.send('단축할 URL을 입력해 주세요!')
 
-        const res = await fetch('https://diro.tk/api/create', {
+        const res = await fetch('https://diro.ml/api/create', {
             method: 'POST',
             body: JSON.stringify({
                 url: args.join(' ')
@@ -17,6 +17,6 @@ module.exports = {
             }
         }).then(e => e.json()).then(e => e.result)
 
-        message.channel.send(`https://diro.tk/${res}`)
+        message.channel.send(`https://diro.ml/${res}`)
     }
 }
