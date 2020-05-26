@@ -53,4 +53,4 @@ module.exports = {
 
         message.channel.send(new MessageEmbed().setAuthor('Papago', 'https://papago.naver.com/favicon.ico', 'https://papago.naver.com/').setTitle("파파고").setDescription(`**${langToName[srcLangType]} (${srcLangType})** -> **${langToName[tarLangType]} (${tarLangType})**\n\n**번역 전**\n\`\`\`fix\n${args.slice(2).join(" ")}\n\`\`\`\n**번역 후**\n\`\`\`yml\n${translatedText}\n\`\`\``).setColor(0x00ff00));
     }
-};
+}
