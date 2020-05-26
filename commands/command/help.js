@@ -54,6 +54,7 @@ const commandName = {
     'botinfo': '봇정보',
     'ping': '핑',
     'system': '시스템',
+    'diro': 'diro',
     'email': '이메일',
     'help': '도움',
     'invite': '초대링크',
@@ -98,6 +99,7 @@ const commandName = {
     'stop': '정지',
     'volume': '볼륨',
     '네이버실검': '네이버실검',
+    'me2.do': 'me2.do',
     'papago': '파파고',
     'papagolang': '언어감지',
     'weather': '날씨'
