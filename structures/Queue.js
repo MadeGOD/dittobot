@@ -19,6 +19,7 @@ module.exports = class Queue {
         this.volume = 100;
         this.playing = true;
         this.loop = false;
+        this.loopQueue = false;
     }
 
     /**

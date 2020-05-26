@@ -69,8 +69,11 @@ module.exports = class MusicManager {
                 .once("end", data => {
                     if (data.reason === "REPLACED") return;
 
-                    const shiffed = serverQueue.songs.shift();
-                    if (serverQueue.loop) {
+                    let shiffed
+
+                    if (!serverQueue.loop) shiffed = serverQueue.songs.shift();
+
+                    if (serverQueue.loopQueue) {
                         serverQueue.songs.push(shiffed);
                     }
 
