@@ -1,13 +1,13 @@
 const fetch = require('node-fetch')
 
 module.exports = {
-    name: 'diro',
-    aliases: ['디로', '야개', 'elfh'],
+    name: 'blow',
+    aliases: ['ㅠㅣㅐㅈ', 'blow.ga', 'ㅠㅣㅐㅈ.ㅎㅁ'],
     category: 'command',
     run: async (client, message, args) => {
         if (!args[0]) return message.channel.send('단축할 URL을 입력해 주세요!')
 
-        const res = await fetch('https://diro.ml/api/create', {
+        const res = await fetch('https://blow.ga/api/new', {
             method: 'POST',
             body: JSON.stringify({
                 url: args[0],
@@ -16,8 +16,8 @@ module.exports = {
             headers: {
                 'Content-Type': 'application/json'
             }
-        }).then(e => e.json()).then(e => e.result)
+        }).then(e => e.text()).then(e => e)
 
-        message.channel.send(`https://diro.ml/${res}`)
+        message.channel.send(`https://blow.ga/${res}`)
     }
 }
