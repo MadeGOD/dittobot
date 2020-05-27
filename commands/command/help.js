@@ -1,5 +1,4 @@
 const { MessageEmbed } = require("discord.js");
-const { stripIndents } = require("common-tags");
 
 module.exports = {
     name: "help",
@@ -32,7 +31,7 @@ module.exports = {
         
             const commands = category => client.commands.filter(cmd => cmd.category === category).map(cmd => `\`${commandName[cmd.name]}\``).join(", ");
         
-            const info = client.categories.filter(n => n !== "owner").map(a => stripIndents`**${category[a[0].toLowerCase() + a.slice(1)]}**\n${commands(a)}`).reduce((s, c) => `${s}\n\n${c}`)
+            const info = client.categories.filter(n => n !== "owner").map(a => `**${category[a[0].toLowerCase() + a.slice(1)]}**\n${commands(a)}`).reduce((s, c) => `${s}\n\n${c}`)
 
             message.channel.send(commandEmbed.setDescription(info))
         }
@@ -98,7 +97,7 @@ const commandName = {
     'skipto': '이동',
     'stop': '정지',
     'volume': '볼륨',
-    '네이버실검': '네이버실검',
+    'navertop': '네이버실검',
     'me2.do': 'me2.do',
     'papago': '파파고',
     'papagolang': '언어감지',
