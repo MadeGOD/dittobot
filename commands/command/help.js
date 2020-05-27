@@ -29,7 +29,7 @@ module.exports = {
         } else {
             const commandEmbed = new MessageEmbed().setColor(0x00ff00).setTitle(`${client.user.username} 도움말`).setFooter(`${ops.prefix} 도움 <명령어 이름> 으로 더 자세히 아실 수 있습니다.`);
         
-            const commands = category => client.commands.filter(cmd => cmd.category === category).map(cmd => `\`${commandName[cmd.name]}\``).join(", ");
+            const commands = category => client.commands.filter(cmd => cmd.category === category).map(cmd => `\`${commandName[cmd.name] ? commandName[cmd.name] : cmd.name}\``).join(", ");
         
             const info = client.categories.filter(n => n !== "owner").map(a => `**${category[a[0].toLowerCase() + a.slice(1)]}**\n${commands(a)}`).reduce((s, c) => `${s}\n\n${c}`)
 
@@ -53,7 +53,6 @@ const commandName = {
     'botinfo': '봇정보',
     'ping': '핑',
     'system': '시스템',
-    'diro': 'diro',
     'email': '이메일',
     'help': '도움',
     'invite': '초대링크',
@@ -67,7 +66,6 @@ const commandName = {
     'urlshorten': '단축',
     'covid-19': '코로나19',
     'disaster': '재난문자',
-    'docs': 'docs',
     'entry': '엔트리',
     'github': '깃허브',
     'hangang': '한강',
@@ -91,14 +89,11 @@ const commandName = {
     'remove': '제거',
     'resume': '다시재생',
     'scplay': '사운드클라우드',
-    'seek': 'seek',
-    'shuffle': 'shuffle',
     'skip': '스킵',
     'skipto': '이동',
     'stop': '정지',
     'volume': '볼륨',
     'navertop': '네이버실검',
-    'me2.do': 'me2.do',
     'papago': '파파고',
     'papagolang': '언어감지',
     'weather': '날씨'
