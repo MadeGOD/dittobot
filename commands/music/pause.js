@@ -1,8 +1,8 @@
-const { MessageEmbed } = require('discord.js')
+const { MessageEmbed } = require("discord.js")
 
 module.exports = {
     name: "pause",
-    aliases: ['일시정지', 'ㅔ면ㄷ', 'dlftlwjdwl'],
+    aliases: ["일시정지", "ㅔ면ㄷ", "dlftlwjdwl"],
     category: "music",
     run: async (client, message, args, ops) => {
         const player = client.musicManager.queue.get(message.guild.id);
@@ -16,4 +16,4 @@ module.exports = {
         player.pause();
         message.channel.send(new MessageEmbed().setColor(0x00FF00).setDescription(`✅ **${player.songs[0].info.title}**이(가) 일시 정지되었습니다!`));
     }
-};
+}

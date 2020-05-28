@@ -1,4 +1,4 @@
-const { ms, s, m, h } = require('time-convert')
+const { ms, s, m, h } = require("time-convert")
 
 /**
  * @class Queue
@@ -64,13 +64,13 @@ module.exports = class Queue {
     */
 
     songProgress(count = 20) {
-        const res = new Array(count).fill('▬')
-        res[Math.floor((this.player.state.position / this.songs[0].info.length) * count)] = '🔘'
-        return res.join('')
+        const res = new Array(count).fill("▬")
+        res[Math.floor((this.player.state.position / this.songs[0].info.length) * count)] = "🔘"
+        return res.join("")
     }
 
     format(s, m, h) {
-        if (isNaN(s) || isNaN(m) || isNaN(h)) return '00:00:00'
+        if (isNaN(s) || isNaN(m) || isNaN(h)) return "00:00:00"
         s = s < 10 ? `0${s}` : s
         m = m < 10 ? `0${m}` : m
         h = h < 10 ? `0${h}` : h

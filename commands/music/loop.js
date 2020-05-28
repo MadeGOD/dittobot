@@ -1,9 +1,9 @@
-const { MessageEmbed } = require('discord.js')
+const { MessageEmbed } = require("discord.js")
 
 module.exports = {
-    name: 'loop',
-    aliases: ['루프', '뤂', 'ㅣㅐㅐㅔ', 'fnvm', '반복', 'qksqhr'],
-    category: 'music',
+    name: "loop",
+    aliases: ["루프", "뤂", "ㅣㅐㅐㅔ", "fnvm", "반복", "qksqhr"],
+    category: "music",
     run: async (client, message, args, ops) => {
         const player = client.musicManager.queue.get(message.guild.id);
 

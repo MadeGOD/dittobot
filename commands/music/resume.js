@@ -1,9 +1,9 @@
-const { MessageEmbed } = require('discord.js')
+const { MessageEmbed } = require("discord.js")
 
 module.exports = {
-    name: 'resume',
-    aliases: ['ㄱㄷ녀ㅡㄷ', '다시재생', 'ektlwotod', 'resu', 'ㄱㄷ녀'],
-    category: 'music',
+    name: "resume",
+    aliases: ["ㄱㄷ녀ㅡㄷ", "다시재생", "ektlwotod", "resu", "ㄱㄷ녀"],
+    category: "music",
     run: async (client, message, args, ops) => {
         const player = client.musicManager.queue.get(message.guild.id);
 
@@ -16,4 +16,4 @@ module.exports = {
         player.resume();
         message.channel.send(new MessageEmbed().setColor(0x00FF00).setDescription(`✅ **${player.songs[0].info.title}**이(가) 다시 재생됩니다!`));
     }
-};
+}

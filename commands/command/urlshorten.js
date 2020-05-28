@@ -1,8 +1,8 @@
-const { shorten, custom } = require('isgd');
+const { shorten, custom } = require("isgd");
 
 module.exports = {
     name: "urlshorten",
-    aliases: ["url단축", "단축", 'ekscnr'],
+    aliases: ["url단축", "단축", "ekscnr"],
     usage: "디토야 단축 <URL> [CUSTOM]",
     category: "command",
     run: async (client, message, args, ops) => {

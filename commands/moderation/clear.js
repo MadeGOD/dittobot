@@ -2,7 +2,7 @@ module.exports = {
     name: "clear",
     aliases: ["삭제", "청소", "delete", "칟ㅁㄱ", "ㅇ딛ㅅㄷ", "tkrwp", "cjdth", "지워", "wldnj", "clean", "칟무", "클린"],
     category: "moderation",
-    usage: '디토야 삭제 <수>',
+    usage: "디토야 삭제 <수>",
     run: async (client, message, args) => {
         if (message.deletable) message.delete();
     

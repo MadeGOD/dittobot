@@ -1,8 +1,8 @@
-const { MessageEmbed } = require('discord.js')
+const { MessageEmbed } = require("discord.js")
 
 module.exports = {
     name: "skip",
-    aliases: ['스킵', 'tmzlq'],
+    aliases: ["스킵", "tmzlq"],
     category: "music",
     run: async (client, message, args, ops) => {
         const player = client.musicManager.queue.get(message.guild.id);
@@ -16,4 +16,4 @@ module.exports = {
         player.skip();
         message.channel.send(new MessageEmbed().setColor(0x00FF00).setTitle("스킵 완료!").setDescription(`✅ **[${player.songs[0].info.title}](${player.songs[0].info.uri})**이(가) 스킵되었습니다!`));
     }
-};
+}
