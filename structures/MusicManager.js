@@ -18,7 +18,7 @@ module.exports = class MusicManager {
         });
         this.manager.connect().then(() => console.log("Lavalink Connected"));
         
-        this.queue = new Collection();
+        this.queue = new Collection()
     }
 
     async handleVideo(message, voiceChannel, song) {
@@ -59,7 +59,7 @@ module.exports = class MusicManager {
         const serverQueue = this.queue.get(guild.id);
 
         if (!song) {
-            serverQueue.textChannel.send(new MessageEmbed().setTitle('✅ 모든 음악 재생 완료!').setColor(0x00FF00));
+            serverQueue.textChannel.send(new MessageEmbed().setTitle("✅ 모든 음악 재생 완료!").setColor(0x00FF00));
             this.manager.leave(guild.id);
             this.queue.delete(guild.id);
         } else {

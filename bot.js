@@ -1,8 +1,8 @@
 const { Client, Collection, MessageEmbed } = require("discord.js");
 const { readdirSync } = require("fs");
 const chalk = require("chalk");
-const koreanbots = require('koreanbots');
-const table = (new(require('ascii-table'))).setHeading("Command", "Status");
+const koreanbots = require("koreanbots");
+const table = (new(require("ascii-table"))).setHeading("Command", "Status");
 
 const Bot = new koreanbots.MyBot(process.env.KOREANBOTS_TOKEN);
 const client = new Client();
@@ -20,9 +20,9 @@ readdirSync("./commands/").forEach(dir => {
 
 		if (pull.name) {
 			client.commands.set(pull.name, pull);
-			table.addRow(file, '✅')
+			table.addRow(file, "✅")
 		} else {
-			table.addRow(file, '❌')
+			table.addRow(file, "❌")
 		}
 		
 		if (pull.aliases && Array.isArray(pull.aliases)) pull.aliases.forEach(a => client.aliases.set(a, pull.name))
@@ -38,7 +38,7 @@ client.on("ready", () => {
 		client.user.setActivity(activity[Math.floor(Math.random() * activity.length)])
 	}, 10000);
 
-	const MusicManager = require('./structures/MusicManager');
+	const MusicManager = require("./structures/MusicManager");
 	client.musicManager = new MusicManager(client);
 
 	Bot.update(client.guilds.cache.size).catch(e => console.log(e.message))
@@ -46,14 +46,14 @@ client.on("ready", () => {
 .on("message", async message => {
 	if (message.author.bot || message.system || !message.content.startsWith(process.env.PREFIX)) return;
 
-	if (message.channel.type === 'dm' && (message.author.id !== process.env.OWNER_ID)) {
+	if (message.channel.type === "dm" && (message.author.id !== process.env.OWNER_ID)) {
 		message.channel.send(`DM에서는 ${client.user.username}을(를) 사용하실 수 없습니다.\n${client.user.username}이(가) 있는 서버에서 사용해 주세요.`);
-		return console.log(`${chalk.green('DM Message')} ${message.author.username} (${message.author.id}): ${message.content}`)
+		return console.log(`${chalk.green("DM Message")} ${message.author.username} (${message.author.id}): ${message.content}`)
 	}
 
-	if (message.channel.type === 'text' && (message.author.id !== process.env.OWNER_ID)) console.log(`${chalk.yellow('Message')} ${message.author.username} (${message.author.id}): ${message.content} | GUILD: ${message.guild.name} (${message.guild.id}) | CHANNEL: ${message.channel.name} (${message.channel.id})`);
+	if (message.channel.type === "text" && (message.author.id !== process.env.OWNER_ID)) console.log(`${chalk.yellow("Message")} ${message.author.username} (${message.author.id}): ${message.content} | GUILD: ${message.guild.name} (${message.guild.id}) | CHANNEL: ${message.channel.name} (${message.channel.id})`);
 
-	if (message.channel.type === 'text' && !message.guild.me.hasPermission('EMBED_LINKS')) return message.channel.send(`${client.user.username}을(를) 원활하게 이용하실려면 **EMBED_LINKS**(링크 보내기) 권한이 필요합니다!`)
+	if (message.channel.type === "text" && !message.guild.me.hasPermission("EMBED_LINKS")) return message.channel.send(`${client.user.username}을(를) 원활하게 이용하실려면 **EMBED_LINKS**(링크 보내기) 권한이 필요합니다!`)
 
 	const args = message.content.slice(process.env.PREFIX.length).trim().split(/ +/g)
 	const cmd = args.shift().toLowerCase();
@@ -93,14 +93,14 @@ client.on("ready", () => {
 		};
 
 		if (command) {
-			if (command.category === 'owner' && (message.author.id !== process.env.OWNER_ID)) return message.channel.send(`\`${client.user.username} 개발자\`만 가능합니다.`);
+			if (command.category === "owner" && (message.author.id !== process.env.OWNER_ID)) return message.channel.send(`\`${client.user.username} 개발자\`만 가능합니다.`);
 			command.run(client, message, args, ops)
 		} else {
 			require("node-fetch")(`https://builder.pingpong.us/api/builder/${process.env.pingpong}/integration/v0.2/custom/${message.author.id}`, {
-				method: 'POST',
+				method: "POST",
 				headers: {
-					'Authorization': `Basic ${process.env.Authorization}`,
-					'Content-Type': 'application/json'
+					"Authorization": `Basic ${process.env.Authorization}`,
+					"Content-Type": "application/json"
 				},
 				body: JSON.stringify({
 					request: {
@@ -113,10 +113,10 @@ client.on("ready", () => {
 		console.error
 	}
 })
-.on('guildCreate', guild => console.log(`${chalk.blue('Guild Create')} name: ${guild.name} (${guild.id}), owner: ${guild.owner.user.tag} (${guild.ownerID})`))
-.on('guildDelete', guild => console.log(`${chalk.red('Guild Delete')} name: ${guild.name} (${guild.id}), onwer: ${guild.owner.user.tag} (${guild.ownerID})`))
-.on('rateLimit', rateLimit => console.log(`${chalk.blueBright('RateLimit')} limit: ${rateLimit.limit}, timeout: ${rateLimit.timeout}, method: ${rateLimit.method}, route: ${rateLimit.route}`))
-.on('error', console.error)
-.on('warn', console.warn);
+.on("guildCreate", guild => console.log(`${chalk.blue("Guild Create")} name: ${guild.name} (${guild.id}), owner: ${guild.owner.user.tag} (${guild.ownerID})`))
+.on("guildDelete", guild => console.log(`${chalk.red("Guild Delete")} name: ${guild.name} (${guild.id}), onwer: ${guild.owner.user.tag} (${guild.ownerID})`))
+.on("rateLimit", rateLimit => console.log(`${chalk.blueBright("RateLimit")} limit: ${rateLimit.limit}, timeout: ${rateLimit.timeout}, method: ${rateLimit.method}, route: ${rateLimit.route}`))
+.on("error", console.error)
+.on("warn", console.warn);
 
-process.on('unhandledRejection', console.error).on("uncaughtException", console.error).on('warning', console.warn);
+process.on("unhandledRejection", console.error).on("uncaughtException", console.error).on("warning", console.warn);

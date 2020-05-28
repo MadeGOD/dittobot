@@ -6,9 +6,9 @@
 
 ## Invite / 초대
 
-[Administrator](https://discordapp.com/oauth2/authorize?client_id=689817745562533891&permissions=8&scope=bot)
+[Administrator(관리자)](https://discordapp.com/oauth2/authorize?client_id=689817745562533891&permissions=8&scope=bot)
 
-[Recommend](https://discordapp.com/oauth2/authorize?client_id=689817745562533891&permissions=37092416cope=bot)
+[Recommend(추천)](https://discordapp.com/oauth2/authorize?client_id=689817745562533891&permissions=37092416cope=bot)
 
 ## Developer / 개발자
 
@@ -16,8 +16,10 @@
 
 ## 참고 / 사용한 오픈소스
 
-[Pod](https://github.com/Pneuma714/Pod) - tag.js
+[Pod](https://github.com/Pneuma714/Pod)
 
-[Araha](https://github.com/TeamZenithy/Araha) - Queue.js(songProgress, format, seek...), seek.js 등
+[Araha](https://github.com/TeamZenithy/Araha)
 
-[lavalink-musicbot](https://github.com/AlvvxL/lavalink-musicbot) - structures, music command
+[lavalink-musicbot](https://github.com/AlvvxL/lavalink-musicbot)
+
+[mswgenbot-v2](https://github.com/mswgen/mswgenbot-v2)
