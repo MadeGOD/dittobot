@@ -31,10 +31,10 @@ module.exports = {
             .addField(`${client.emojis.cache.get("686131200242352184")} 서버 부스트 횟수`, `**${message.guild.premiumSubscriptionCount}회**`, true)
 
 
-        const roleEmbed = new MessageEmbed().setColor(0x00ff00).setTitle(`${message.guild.name} 서버의 역할 (${message.guild.roles.cache.filter(r => r.id !== message.guild.id).size}개)`).setDescription(message.guild.roles.cache.filter(r => r.id !== message.guild.id).map(e => e).join(", "));
+        const roleEmbed = new MessageEmbed().setColor(0x00ff00).setTitle(`${message.guild.name} 서버의 역할 (${message.guild.roles.cache.filter(r => r.id !== message.guild.id).size}개)`).setDescription(message.guild.roles.cache.filter(r => r.id !== message.guild.id).join(", "));
 
         if (message.guild.roles.cache.filter(r => r.id !== message.guild.id).size > 25) {
-            roleEmbed.setDescription(message.guild.roles.cache.filter(n => n.id !== message.guild.id).map(e => e).splice(0, 25).join(", "));
+            roleEmbed.setDescription(message.guild.roles.cache.filter(n => n.id !== message.guild.id).splice(0, 25).join(", "));
             roleEmbed.setTitle(`${message.guild.name} 서버의 역할 (${message.guild.roles.cache.filter(r => r.id !== message.guild.id).size}개 중 25개)`);
         }
 
