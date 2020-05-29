@@ -38,9 +38,9 @@ module.exports = {
         }
 
         message.channel.send(embed);
-        if (member.roles.cache.size) message.channel.send(embed2);
+        if (member.roles.cache.size) message.channel.send(embed2)
     }
-};
+}
 
 const status = {
     online: ":green_circle: 온라인",
