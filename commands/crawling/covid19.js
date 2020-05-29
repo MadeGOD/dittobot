@@ -4,8 +4,8 @@ const axios = require("axios");
 const cheerio = require("cheerio");
 
 module.exports = {
-    name: "covid-19",
-    aliases: ["코로나", "코로나바이러스", "코로나현황", "신종코로나바이러스", "코로나19", "corona", "covid19", "우한폐렴", "zhfhsk"],
+    name: "covid19",
+    aliases: ["코로나", "코로나바이러스", "코로나현황", "신종코로나바이러스", "코로나19", "corona", "covid-19", "우한폐렴", "zhfhsk"],
     category: "crawling",
     run: async (client, message, args) => {
         const { features: [{attributes: {confirmed, recovered, deaths}}] } = await fetch("https://is.gd/hihhls").then(res => res.json());

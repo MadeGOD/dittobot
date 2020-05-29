@@ -1,12 +1,12 @@
 const { shorten, custom } = require("isgd");
 
 module.exports = {
-    name: "urlshorten",
-    aliases: ["url단축", "단축", "ekscnr"],
-    usage: "디토야 단축 <URL> [CUSTOM]",
+    name: "isgd",
+    aliases: ["ㅑㄴㅎㅇ", "is.gd", "ㅑㄴ.ㅎㅇ"],
+    usage: "디토야 is.gd <URL> [CUSTOM]",
     category: "command",
     run: async (client, message, args, ops) => {
-        if (!args[0]) return message.channel.send(`**명령어 사용법**\n\`${ops.prefix}단축 <URL> [CUSTOM]\``);
+        if (!args[0]) return message.channel.send("단축할 URL을 입력해 주세요!");
 
         if (!args[1]) shorten(args[0], res => message.channel.send(res))
         else custom(args[0], args[1], res => message.channel.send(res))
