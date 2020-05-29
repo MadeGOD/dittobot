@@ -1,5 +1,4 @@
 const { MessageEmbed } = require("discord.js");
-const { stripIndents } = require("common-tags");
 const fetch = require("node-fetch");
 
 module.exports = {
@@ -14,9 +13,10 @@ module.exports = {
 
         try {
             res = await fetch(`https://www.instagram.com/${encodeURI(args.join(" ").replace(/ /g, "+"))}/?__a=1`).then(e => e.json())
+            if (!res.graphql) return message.channel.send(`${args.join(" ")} 이라는 유저를 찾을 수 없습니다`)
         } catch (e) {
             return message.channel.send(`Error...\n${e}`)
-        };
+        }
 
         const account = res.graphql.user;
 
@@ -29,11 +29,11 @@ module.exports = {
             .addFields([
                 {
                     name: "계정 이름",
-                    value: stripIndents`**${account.username}**`
+                    value: `**${account.username}**`
                 },
                 {
                     name: "닉네임",
-                    value: stripIndents`**${account.full_name}**`
+                    value: `**${account.full_name}**`
                 },
                 {
                     name: "소개글",

@@ -17,7 +17,9 @@ module.exports = {
 
             let str = ``;
 
-            $("div.search-item").each((i, element) => str += `[${$(element).find("h4 > a").text().trim()}](https://namu.wiki${$(element).find("h4 > a").attr("href")})\n`);
+            $("div.search-item").each((i, element) => {
+                if (i < 9) str += `[${$(element).find("h4 > a").text().trim()}](https://namu.wiki${$(element).find("h4 > a").attr("href")})\n`
+            });
 
             if (!str) return message.channel.send("검색 결과가 없습니다")
     
