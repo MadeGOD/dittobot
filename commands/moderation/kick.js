@@ -14,7 +14,7 @@ module.exports = {
         if (!message.member.hasPermission("KICK_MEMBERS")) return message.channel.send("❌ 추방 권한이 필요해요...");
         if (!message.guild.me.hasPermission("KICK_MEMBERS")) return message.channel.send(`❌ ${client.user.username}에게 추방 권한이 필요해요...`);
 
-        const toKick = ops.getMember(message, args.join(' '));
+        const toKick = message.mentions.members.first() || message.guild.members.cache.get(args[0]);
 
         if (!toKick) return message.channel.send('멤버를 찾을 수 없습니다...');
 

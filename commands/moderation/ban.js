@@ -14,23 +14,23 @@ module.exports = {
         if (!message.member.hasPermission("BAN_MEMBERS")) return message.channel.send("❌ 차단 권한이 필요해요...");
         if (!message.guild.me.hasPermission("BAN_MEMBERS")) return message.channel.send(`❌ ${client.user.username}에게 차단 권한이 필요해요...`);
 
-        const toKick = ops.getMember(message, args.join(" "));
+        const toBan = message.mentions.members.first() || message.guild.members.cache.get(args[0]);
 
-        if (!toKick) return message.channel.send("멤버를 찾을 수 없습니다...");
+        if (!toBan) return message.channel.send("멤버를 찾을 수 없습니다...");
 
-        if (message.author.id === toKick.id) return message.channel.send("자기 자신을 차단할 수 없습니다...");
-        if (client.user.id === toKick.id) return message.channel.send(`${client.user.username}으로 ${client.user.username}을 차단할 수 없습니다...`);
+        if (message.author.id === toBan.id) return message.channel.send("자기 자신을 차단할 수 없습니다...");
+        if (client.user.id === toBan.id) return message.channel.send(`${client.user.username}으로 ${client.user.username}을 차단할 수 없습니다...`);
 
-        if (!toKick.bannable) return message.channel.send("역할이 높아서 차단을 못 하겠네요...");
+        if (!toBan.bannable) return message.channel.send("역할이 높아서 차단을 못 하겠네요...");
 
         const embed = new MessageEmbed().setColor(0xffff00)
-            .setThumbnail(toKick.user.displayAvatarURL())
+            .setThumbnail(toBan.user.displayAvatarURL())
             .setFooter(message.author.username, message.author.displayAvatarURL())
             .setTimestamp()
             .setTitle("멤버 차단")
-            .setDescription(stripIndents`**차단된 멤버**\n${toKick}\n\n**차단한 사람**\n${message.author}\n\n**이유**\n${args.slice(1).join(" ") ? args.slice(1).join(" ") : "없음"}`);
+            .setDescription(stripIndents`**차단된 멤버**\n${toBan}\n\n**차단한 사람**\n${message.author}\n\n**이유**\n${args.slice(1).join(" ") ? args.slice(1).join(" ") : "없음"}`);
 
-        const promtEmbed = new MessageEmbed().setColor(0x00ff00).setDescription(`**${toKick}**님을 차단하실 건가요?`);
+        const promtEmbed = new MessageEmbed().setColor(0x00ff00).setDescription(`**${toBan}**님을 차단하실 건가요?`);
 
         message.channel.send(promtEmbed).then(async (msg) => {
             await msg.react("✅");
@@ -42,7 +42,7 @@ module.exports = {
                 if (collected.array()[0].emoji.name === "✅") {
                     msg.delete();
 
-                    toKick.ban({reason: args.slice(1).join(" ") || null}).catch(err => message.channel.send(`Error...\n${err}`));
+                    toBan.ban({reason: args.slice(1).join(" ") || null}).catch(err => message.channel.send(`Error...\n${err}`));
     
                     message.channel.send(embed)
                 } else {
