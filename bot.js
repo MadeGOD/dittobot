@@ -1,11 +1,10 @@
-const { Client, Collection, MessageEmbed } = require("discord.js");
-const { readdirSync } = require("fs");
-const chalk = require("chalk");
-const koreanbots = require("koreanbots");
-const table = (new(require("ascii-table"))).setHeading("Command", "Status");
-
-const Bot = new koreanbots.MyBot(process.env.KOREANBOTS_TOKEN);
-const client = new Client();
+const { Client, Collection, MessageEmbed } = require("discord.js"),
+	{ readdirSync } = require("fs"),
+	chalk = require("chalk"),
+	koreanbots = require("koreanbots"),
+	table = (new(require("ascii-table"))).setHeading("Command", "Status"),
+	Bot = new koreanbots.MyBot(process.env.KOREANBOTS_TOKEN),
+	client = new Client();
 
 client.login();
 
@@ -24,7 +23,7 @@ readdirSync("./commands/").forEach(dir => {
 		} else {
 			table.addRow(file, "❌")
 		}
-		
+
 		if (pull.aliases && Array.isArray(pull.aliases)) pull.aliases.forEach(a => client.aliases.set(a, pull.name))
 	}
 });
@@ -38,8 +37,7 @@ client.on("ready", () => {
 		client.user.setActivity(activity[Math.floor(Math.random() * activity.length)])
 	}, 10000);
 
-	const MusicManager = require("./structures/MusicManager");
-	client.musicManager = new MusicManager(client);
+	client.musicManager = new(require("./structures/MusicManager"))(client);
 
 	Bot.update(client.guilds.cache.size).catch(e => console.log(e.message))
 })
@@ -55,9 +53,9 @@ client.on("ready", () => {
 
 	if (message.channel.type === "text" && !message.guild.me.hasPermission("EMBED_LINKS")) return message.channel.send(`${client.user.username}을(를) 원활하게 이용하실려면 **EMBED_LINKS**(링크 보내기) 권한이 필요합니다!`)
 
-	const args = message.content.slice(process.env.PREFIX.length).trim().split(/ +/g)
-	const cmd = args.shift().toLowerCase();
-	const command = client.commands.get(cmd) || client.commands.get(client.aliases.get(cmd));
+	const args = message.content.slice(process.env.PREFIX.length).trim().split(/ +/g),
+		cmd = args.shift().toLowerCase(),
+		command = client.commands.get(cmd) || client.commands.get(client.aliases.get(cmd));
 
 	try {
 		const ops = {
