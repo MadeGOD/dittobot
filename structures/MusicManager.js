@@ -16,7 +16,8 @@ module.exports = class MusicManager {
             user: client.user.id,
             shards: client.shard ? client.shard.count : 0
         });
-        this.manager.connect().then(() => console.log("Lavalink Connected"));
+
+        this.manager.connect().then(() => console.log("Lavalink Connected")).catch(console.error);
         
         this.queue = new Collection()
     }
@@ -88,14 +89,6 @@ module.exports = class MusicManager {
         const node = this.manager.nodes.get("default");
         const result = await Rest.load(node, query);
 
-        switch(result.loadType) {
-            case "TRACK_LOADED": {
-                return result.tracks
-            }
-
-            case "SEARCH_RESULT": {
-                return result.tracks
-            }
-        }
+        return result.tracks
     }
 }
