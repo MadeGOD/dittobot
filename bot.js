@@ -63,7 +63,7 @@ client.on("ready", () => {
 			prefix: process.env.PREFIX,
 			formatTime: time => {
 				const date = new Date(time);
-				return `${date.getFullYear()}년 ${date.getMonth() + 1}월 ${date.getDate()}일 ${date.getHours()}시 ${date.getMinutes()}분 ${date.getSeconds()}초`
+				return `${date.getFullYear()}년 ${date.getMonth() + 1}월 ${date.getDate()}일 ${date.getHours() + 1}시 ${date.getMinutes() + 1}분 ${date.getSeconds() + 1}초`
 			},
 			getMember: (msg, mem) => {
 				let member = msg.guild.members.cache.get(mem);
