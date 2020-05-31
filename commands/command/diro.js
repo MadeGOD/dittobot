@@ -16,8 +16,8 @@ module.exports = {
             headers: {
                 "Content-Type": "application/json"
             }
-        }).then(e => e.json()).then(e => e.result)
+        }).then(e => e.json())
 
-        message.channel.send(`https://diro.ml/${res}`)
+        message.channel.send(res.error ? res.result : `https://diro.ml/${res.result}`)
     }
 }

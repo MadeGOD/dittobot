@@ -18,6 +18,6 @@ module.exports = {
             }
         }).then(e => e.text()).then(e => e)
 
-        message.channel.send(`https://blow.ga/${res}`)
+        message.channel.send(res === "ERR" ? "Error" : `https://blow.ga/${res}`)
     }
 }
