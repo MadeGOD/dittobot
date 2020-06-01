@@ -1,10 +1,11 @@
-const { Client, Collection, MessageEmbed } = require("discord.js"),
+const { Client, Collection } = require("discord.js"),
 	{ readdirSync } = require("fs"),
 	chalk = require("chalk"),
 	koreanbots = require("koreanbots"),
 	table = (new(require("ascii-table"))).setHeading("Command", "Status"),
 	Bot = new koreanbots.MyBot(process.env.KOREANBOTS_TOKEN),
-	client = new Client();
+	client = new Client(),
+	ops = require('./ops')
 
 client.login();
 
@@ -33,9 +34,7 @@ client.on("ready", () => {
 
 	const activity = [`${client.guilds.cache.size}개의 서버`, `${client.users.cache.filter(e => !e.bot).size}명의 유저`, `${client.guilds.cache.size} guilds`, `${client.users.cache.filter(e => !e.bot).size} users`, `https://is.gd/dittoBot`];
 
-	setInterval(() => {
-		client.user.setActivity(activity[Math.floor(Math.random() * activity.length)])
-	}, 10000);
+	setInterval(() => client.user.setActivity(activity[Math.floor(Math.random() * activity.length)]), 10000);
 
 	client.musicManager = new(require("./structures/MusicManager"))(client);
 
@@ -58,38 +57,6 @@ client.on("ready", () => {
 		command = client.commands.get(cmd) || client.commands.get(client.aliases.get(cmd));
 
 	try {
-		const ops = {
-			ownerID: process.env.OWNER_ID,
-			prefix: process.env.PREFIX,
-			formatTime: time => {
-				const date = new Date(time);
-				return `${date.getFullYear()}년 ${date.getMonth() + 1}월 ${date.getDate()}일 ${date.getHours() + 1}시 ${date.getMinutes() + 1}분 ${date.getSeconds() + 1}초`
-			},
-			getMember: (msg, mem) => {
-				let member = msg.guild.members.cache.get(mem);
-
-				if (!member && msg.mentions.members) member = msg.mentions.members.first();
-				if (!member && mem) member = msg.guild.members.cache.find(m => m.displayName.toLowerCase().includes(mem) || m.user.username.toLowerCase().includes(mem) || m.user.tag.toLowerCase().includes(mem));
-				if (!member) member = msg.member;
-
-				return member
-			},
-			getChannel: (msg, ch) => {
-				let channel = msg.guild.channels.cache.get(ch);
-
-				if (!channel && msg.mentions.channels) channel = msg.mentions.channels.first();
-				if (!channel && ch) channel = msg.guild.channels.cache.find(m => m.name.toLowerCase().includes(ch));
-				if (!channel) channel = msg.channel;
-
-				return channel
-			},
-			embed: {
-				musicError1: new MessageEmbed().setColor(0xFF0000).setTitle(`❌ 현재 재생 중인 음악이 없어요!`),
-				musicError2: new MessageEmbed().setColor(0xFF0000).setTitle(`❌ 음성 채널에 먼저 들어가 주세요!`),
-				musicError3: name => new MessageEmbed().setColor(0xFF0000).setDescription(`❌ **${name}** 채널로 들어가 주세요!`)
-			}
-		};
-
 		if (command) {
 			if (command.category === "owner" && (message.author.id !== process.env.OWNER_ID)) return message.channel.send(`\`${client.user.username} 개발자\`만 가능합니다.`);
 			command.run(client, message, args, ops)

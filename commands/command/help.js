@@ -1,4 +1,6 @@
 const { MessageEmbed } = require("discord.js");
+const koreanbots = require('koreanbots')
+const checkVote = (new(koreanbots.MyBot)(process.env.KOREANBOTS_TOKEN)).checkVote
 
 module.exports = {
     name: "help",
@@ -25,6 +27,7 @@ module.exports = {
             const res = client.categories.filter(n => n !== "owner").map(e => `**${category[e]}**\n${commands(e)}`).reduce((s, c) => `${s}\n\n${c}`)
             
             message.channel.send(new MessageEmbed().setColor(0x00ff00).setTitle(`${client.user.username} 도움말`).setFooter(`${ops.prefix}도움 <명령어 이름> 으로 더 자세히 아실 수 있습니다.`).setDescription(res))
+            message.channel.send(new MessageEmbed().setColor(0xff198d).setTitle('KoreanBots').setURL(`https://koreanbots.dev/bots/${client.user.id}`).setDescription(`❤ **${await koreanbots.Bots.getByID(client.user.id).then(e => e.data.votes)}개**\n\n${await checkVote(message.author.id).then(e => e.voted ? '하트를 눌러주셔서 감사합니다!' : `하트를 눌러주세요!\n[들어가기](https://koreanbots.dev/bots/${client.user.id})`)}`))
         }
     }
 }
