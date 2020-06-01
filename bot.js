@@ -39,7 +39,7 @@ client.on("ready", () => {
 
 	client.musicManager = new(require("./structures/MusicManager"))(client);
 
-	Bot.update(client.guilds.cache.size).catch(e => console.log(e.message))
+	Bot.update(client.guilds.cache.size).catch(e => console.error(e.message))
 })
 .on("message", async message => {
 	if (message.author.bot || message.system || !message.content.startsWith(process.env.PREFIX)) return;
@@ -108,7 +108,7 @@ client.on("ready", () => {
 			}).then(r => r.json()).then(({ response: { replies: [{ text }] } }) => message.channel.send(text))
 		}
 	} catch(e) {
-		console.error
+		console.error(e.message | e)
 	}
 })
 .on("guildCreate", guild => console.log(`${chalk.blue("Guild Create")} name: ${guild.name} (${guild.id}), owner: ${guild.owner.user.tag} (${guild.ownerID})`))
