@@ -1,4 +1,4 @@
-const { Client, Collection } = require("discord.js"),
+const { Client, Collection, MessageEmbed } = require("discord.js"),
 	{ readdirSync } = require("fs"),
 	chalk = require("chalk"),
 	koreanbots = require("koreanbots"),
@@ -38,7 +38,7 @@ client.on("ready", () => {
 
 	client.musicManager = new(require("./structures/MusicManager"))(client);
 
-	Bot.update(client.guilds.cache.size).catch(e => console.error(e.message))
+	Bot.update(client.guilds.cache.size).then(e => console.log(e.code)).catch(e => console.error(e.message))
 })
 .on("message", async message => {
 	if (message.author.bot || message.system || !message.content.startsWith(process.env.PREFIX)) return;
@@ -82,6 +82,33 @@ client.on("ready", () => {
 .on("guildDelete", guild => console.log(`${chalk.red("Guild Delete")} name: ${guild.name} (${guild.id}), onwer: ${guild.owner.user.tag} (${guild.ownerID})`))
 .on("rateLimit", rateLimit => console.log(`${chalk.blueBright("RateLimit")} limit: ${rateLimit.limit}, timeout: ${rateLimit.timeout}, method: ${rateLimit.method}, route: ${rateLimit.route}`))
 .on("error", console.error)
-.on("warn", console.warn);
+.on("warn", console.warn)
+.on('guildMemberAdd', member => {
+	const channel = member.guild.channels.cache.find(a => a.name === "디토봇-로그")
+
+	if (channel) channel.send(new MessageEmbed().setTitle(`유저가 들어왔습니다.`).setDescription(`들어온 멤버\n\`\`\`yml\ntag: ${member.user.tag}\nid: ${member.id}\n\`\`\``).setColor(0x00ff00))
+})
+.on('guildMemberRemove', member => {
+	const channel = member.guild.channels.cache.find(a => a.name === "디토봇-로그")
+
+	if (channel) channel.send(new MessageEmbed().setTitle(`유저가 나갔습니다.`).setDescription(`나간 멤버\n\`\`\`yml\ntag: ${member.user.tag}\nid: ${member.id}\n\`\`\``).setColor(0x00ff00))
+})
+.on('messageUpdate', (old, newMessage) => {
+	if (old.editable) return
+
+	const channel = old.guild.channels.cache.find(a => a.name === "디토봇-로그")
+
+	if (channel) channel.send(new MessageEmbed().setTitle(`메세지 수정`).setDescription(`수정 전\n\`\`\`yml\n${old.content}\n\`\`\`\n수정 후\n\`\`\`fix\n${newMessage.content}\n\`\`\``).setColor(0x00ff00))
+})
+.on('messageDelete', message => {
+	const channel = message.guild.channels.cache.find(a => a.name === "디토봇-로그")
+
+	if (channel) channel.send(new MessageEmbed().setTitle(`메세지 삭제`).setDescription(`삭제된 메세지\n\`\`\`yml\n${message.content}\n\`\`\``).setColor(0x00ff00))
+})
+.on('roleCreate', role => {
+	const channel = role.guild.channels.cache.find(a => a.name === "디토봇-로그")
+
+	if (channel) channel.send(new MessageEmbed().setTitle('역할 생성').setDescription(`역할 정보\n\`\`\`yml\n이름: ${role.name}\n\`\`\``))
+})
 
 process.on("unhandledRejection", console.error).on("uncaughtException", console.error).on("warning", console.warn);
