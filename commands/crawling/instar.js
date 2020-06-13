@@ -13,7 +13,7 @@ module.exports = {
 
         try {
             res = await fetch(`https://www.instagram.com/${encodeURI(args.join(" ").replace(/ /g, "+"))}/?__a=1`).then(e => e.json())
-            if (!res.graphql) return message.channel.send(`${args.join(" ")} 이라는 유저를 찾을 수 없습니다`)
+            if (!res.graphql) return message.channel.send(`${args.join(" ")} (이)라는 유저를 찾을 수 없습니다`)
         } catch (e) {
             return message.channel.send(`Error...\n${e}`)
         }
