@@ -1,9 +1,7 @@
-const { Client, Collection, MessageEmbed } = require("discord.js"),
+const { Client, Collection } = require("discord.js"),
 	{ readdirSync } = require("fs"),
 	chalk = require("chalk"),
-	koreanbots = require("koreanbots"),
 	table = (new(require("ascii-table"))).setHeading("Command", "Status"),
-	Bot = new koreanbots.MyBot(process.env.KOREANBOTS_TOKEN),
 	client = new Client(),
 	ops = require('./ops')
 
@@ -12,7 +10,7 @@ client.login();
 client.commands = new Collection();
 client.aliases = new Collection();
 client.cooldowns = new Collection();
-client.categories = readdirSync("./commands/");
+client.categories = readdirSync("./commands/").filter(a => a !== "owner");
 
 readdirSync("./commands/").forEach(dir => {
 	for (let file of readdirSync(`./commands/${dir}`).filter(f => f.endsWith(".js"))) {
@@ -38,27 +36,27 @@ client.on("ready", () => {
 
 	client.musicManager = new(require("./structures/MusicManager"))(client);
 
-	Bot.update(client.guilds.cache.size).then(e => console.log(e.code)).catch(e => console.error(e.message))
+	ops.MyBot.update(client.guilds.cache.size).then(e => console.log(e.code)).catch(e => console.error(e.message))
 })
-.on("message", async message => {
-	if (message.author.bot || message.system || !message.content.startsWith(process.env.PREFIX)) return;
+.on("message", message => {
+	if (message.author.bot || message.system || !message.content.startsWith(ops.prefix)) return;
 
-	if (message.channel.type === "dm" && (message.author.id !== process.env.OWNER_ID)) {
+	if (message.channel.type === "dm" && (message.author.id !== ops.ownerID)) {
 		message.channel.send(`DM에서는 ${client.user.username}을(를) 사용하실 수 없습니다.\n${client.user.username}이(가) 있는 서버에서 사용해 주세요.`);
 		return console.log(`${chalk.green("DM Message")} ${message.author.username} (${message.author.id}): ${message.content}`)
 	}
 
-	if (message.channel.type === "text" && (message.author.id !== process.env.OWNER_ID)) console.log(`${chalk.yellow("Message")} ${message.author.username} (${message.author.id}): ${message.content} | GUILD: ${message.guild.name} (${message.guild.id}) | CHANNEL: ${message.channel.name} (${message.channel.id})`);
+	if (message.channel.type === "text" && (message.author.id !== ops.ownerID)) console.log(`${chalk.yellow("Message")} ${message.author.username} (${message.author.id}): ${message.content} | GUILD: ${message.guild.name} (${message.guild.id}) | CHANNEL: ${message.channel.name} (${message.channel.id})`);
 
 	if (message.channel.type === "text" && !message.guild.me.hasPermission("EMBED_LINKS")) return message.channel.send(`${client.user.username}을(를) 원활하게 이용하실려면 **EMBED_LINKS**(링크 보내기) 권한이 필요합니다!`)
 
-	const args = message.content.slice(process.env.PREFIX.length).trim().split(/ +/g),
+	const args = message.content.slice(ops.prefix.length).trim().split(/ +/g),
 		cmd = args.shift().toLowerCase(),
 		command = client.commands.get(cmd) || client.commands.get(client.aliases.get(cmd));
 
 	try {
 		if (command) {
-			if (command.category === "owner" && (message.author.id !== process.env.OWNER_ID)) return message.channel.send(`\`${client.user.username} 개발자\`만 가능합니다.`);
+			if (command.category === "owner" && (message.author.id !== ops.ownerID)) return message.channel.send(`\`${client.user.username} 개발자\`만 가능합니다.`);
 			command.run(client, message, args, ops)
 		} else {
 			require("node-fetch")(`https://builder.pingpong.us/api/builder/${process.env.pingpong}/integration/v0.2/custom/${message.author.id}`, {
@@ -83,32 +81,5 @@ client.on("ready", () => {
 .on("rateLimit", rateLimit => console.log(`${chalk.blueBright("RateLimit")} limit: ${rateLimit.limit}, timeout: ${rateLimit.timeout}, method: ${rateLimit.method}, route: ${rateLimit.route}`))
 .on("error", console.error)
 .on("warn", console.warn)
-.on('guildMemberAdd', member => {
-	const channel = member.guild.channels.cache.find(a => a.name === "디토봇-로그")
-
-	if (channel) channel.send(new MessageEmbed().setTitle(`유저가 들어왔습니다.`).setDescription(`들어온 멤버\n\`\`\`yml\ntag: ${member.user.tag}\nid: ${member.id}\n\`\`\``).setColor(0x00ff00))
-})
-.on('guildMemberRemove', member => {
-	const channel = member.guild.channels.cache.find(a => a.name === "디토봇-로그")
-
-	if (channel) channel.send(new MessageEmbed().setTitle(`유저가 나갔습니다.`).setDescription(`나간 멤버\n\`\`\`yml\ntag: ${member.user.tag}\nid: ${member.id}\n\`\`\``).setColor(0x00ff00))
-})
-.on('messageUpdate', (old, newMessage) => {
-	if (old.editable) return
-
-	const channel = old.guild.channels.cache.find(a => a.name === "디토봇-로그")
-
-	if (channel) channel.send(new MessageEmbed().setTitle(`메세지 수정`).setDescription(`수정 전\n\`\`\`yml\n${old.content}\n\`\`\`\n수정 후\n\`\`\`fix\n${newMessage.content}\n\`\`\``).setColor(0x00ff00))
-})
-.on('messageDelete', message => {
-	const channel = message.guild.channels.cache.find(a => a.name === "디토봇-로그")
-
-	if (channel) channel.send(new MessageEmbed().setTitle(`메세지 삭제`).setDescription(`삭제된 메세지\n\`\`\`yml\n${message.content}\n\`\`\``).setColor(0x00ff00))
-})
-.on('roleCreate', role => {
-	const channel = role.guild.channels.cache.find(a => a.name === "디토봇-로그")
-
-	if (channel) channel.send(new MessageEmbed().setTitle('역할 생성').setDescription(`역할 정보\n\`\`\`yml\n이름: ${role.name}\n\`\`\``))
-})
 
 process.on("unhandledRejection", console.error).on("uncaughtException", console.error).on("warning", console.warn);

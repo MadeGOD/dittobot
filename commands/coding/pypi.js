@@ -4,7 +4,7 @@ const { MessageEmbed } = require('discord.js')
 module.exports = {
     name: 'pypi',
     aliases: ['ㅔㅛㅔㅑ'],
-    category: 'crawling',
+    category: 'coding',
     run: async (client, message, args, ops) => {
         if (!args[0]) return
 

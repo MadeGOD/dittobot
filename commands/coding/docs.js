@@ -4,7 +4,7 @@ const fetch = require("node-fetch");
 module.exports = {
     name: "docs",
     aliases: ["닥스", "독스", "앷ㄴ"],
-    category: "crawling",
+    category: "coding",
     run: async (client, message, args) => {
         if (!args.join(" ")) return;
 

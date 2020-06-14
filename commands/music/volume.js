@@ -9,7 +9,7 @@ module.exports = {
 
         if (!player) return message.channel.send(ops.embed.musicError1);
         if (!message.member.voice.channel) return message.channel.send(ops.embed.musicError2)
-        if (player && (message.member.voice.channelID !== player.voiceChannel.id)) return message.channel.send(ops.embed.musicError3(player.voiceChannel.name))
+        if (player && (message.member.voice.channelID !== player.voiceChannel.id)) return message.channel.send(ops.embed.musicError3(player))
 
         if (!args[0]) return message.channel.send(`현재 볼륨은 **\`${player.volume}%\`** 입니다!`);
 

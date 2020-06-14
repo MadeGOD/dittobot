@@ -1,8 +1,10 @@
-const { MessageEmbed } = require('discord.js')
+const { MessageEmbed } = require('discord.js'),
+    koreanbots = require("koreanbots")
 
 module.exports = {
     ownerID: process.env.OWNER_ID,
     prefix: process.env.PREFIX,
+    MyBot: new koreanbots.MyBot(process.env.KOREANBOTS_TOKEN),
     formatTime: time => {
         const date = new Date(time);
         return `${date.getFullYear()}년 ${date.getMonth() + 1}월 ${date.getDate()}일 ${date.getHours()}시 ${date.getMinutes()}분 ${date.getSeconds()}초`
@@ -28,6 +30,6 @@ module.exports = {
     embed: {
         musicError1: new MessageEmbed().setColor(0xFF0000).setTitle(`❌ 현재 재생 중인 음악이 없어요!`),
         musicError2: new MessageEmbed().setColor(0xFF0000).setTitle(`❌ 음성 채널에 먼저 들어가 주세요!`),
-        musicError3: name => new MessageEmbed().setColor(0xFF0000).setDescription(`❌ **${name}** 채널로 들어가 주세요!`)
+        musicError3: player => new MessageEmbed().setColor(0xFF0000).setDescription(`❌ **${player.voiceChannel.name}** 채널로 들어가 주세요!`)
     }
 }

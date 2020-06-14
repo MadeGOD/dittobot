@@ -1,12 +1,10 @@
 const { MessageEmbed } = require("discord.js");
-const koreanbots = require('koreanbots')
-const checkVote = (new(koreanbots.MyBot)(process.env.KOREANBOTS_TOKEN)).checkVote
 
 module.exports = {
     name: "help",
     aliases: ["도움", "ㅗ디ㅔ", "ehdna", "도움말"],
     category: "command",
-    usage: "디토야 도움 | 디토야 도움 [명령어 이름]",
+    usage: "디토야 도움 [명령어 이름]",
     description: "help command",
     run: async (client, message, args, ops) => {
         if (args.join(" ")) {
@@ -16,7 +14,7 @@ module.exports = {
         
             if (!cmd) return message.channel.send(new MessageEmbed().setColor(0xff0000).setTitle(`**${args.join(" ").toLowerCase()}**에 대한 명령어를 찾을 수 없습니다.`));
             
-            if (cmd.aliases) info = `\n**별칭**\n${cmd.aliases.map(a => `${a}`).join(", ")}\n`;
+            if (cmd.aliases) info = `\n**별칭**\n${cmd.aliases.join(", ")}\n`;
             if (cmd.description) info += `\n**설명**\n${cmd.description}\n`;
             if (cmd.usage) info += `\n**사용 방법**\n${cmd.usage}\n`;
             if (cmd.category) info += `\n**카테고리**\n${category[cmd.category]}`;
@@ -24,16 +22,16 @@ module.exports = {
             message.channel.send(new MessageEmbed().setTitle(`${cmd.name} 명령어 정보`).setDescription(info).setColor(0x00ff00).setFooter("<> = 필수, [] = 선택, | = 또는"))
         } else {
             const commands = category => client.commands.filter(cmd => cmd.category === category).map(cmd => `\`${commandName[cmd.name] ? commandName[cmd.name] : cmd.name}\``).join(", ");
-            const res = client.categories.filter(n => n !== "owner").map(e => `**${category[e]}**\n${commands(e)}`).reduce((s, c) => `${s}\n\n${c}`)
+            const res = client.categories.map(e => `**${category[e]}**\n${commands(e)}`).reduce((s, c) => `${s}\n\n${c}`)
             
             message.channel.send(new MessageEmbed().setColor(0x00ff00).setTitle(`${client.user.username} 도움말`).setFooter(`${ops.prefix}도움 <명령어 이름> 으로 더 자세히 아실 수 있습니다.`).setDescription(res))
-            message.channel.send(new MessageEmbed().setColor(0xff198d).setTitle('KoreanBots').setURL(`https://koreanbots.dev/bots/${client.user.id}`).setDescription(`❤ **${await koreanbots.Bots.getByID(client.user.id).then(e => e.data.votes)}개**\n\n${await checkVote(message.author.id).then(e => e.voted ? '하트를 눌러주셔서 감사합니다!' : `하트를 눌러주세요!\n[들어가기](https://koreanbots.dev/bots/${client.user.id})`)}`))
         }
     }
 }
 
 const category = {
     botinfo: "봇정보",
+    coding: '코딩',
     command: "커맨드",
     crawling: "크롤링",
     information: "정보",
@@ -54,8 +52,8 @@ const commandName = {
     profile: "프사",
     rps: "가위바위보",
     say: "말해",
-    serverlist: "서버목록",
     suggestion: "건의",
+    translate: '번역',
     tag: "태그",
     urlshorten: "단축",
     covid19: "코로나19",

@@ -12,7 +12,7 @@ module.exports = {
         if (!message.guild.me.hasPermission("SPEAK")) return message.channel.send(new MessageEmbed().setDescription("❌ 음성 채널에서 말할 수 있는 권한이 필요해요! (SPEAK 권한)").setColor(0xFF0000))
         
         if (!message.member.voice.channel) return message.channel.send(ops.embed.musicError2)
-        if (player && (message.member.voice.channelID !== player.voiceChannel.id)) return message.channel.send(ops.embed.musicError3(player.voiceChannel.name))
+        if (player && (message.member.voice.channelID !== player.voiceChannel.id)) return message.channel.send(ops.embed.musicError3(player))
 
         if (!args.join(" ")) return message.channel.send(new MessageEmbed().setColor(0xFF0000).setDescription(`❌ 재생할 노래의 이름 또는 URL을 입력해 주세요!`))
 

@@ -9,7 +9,7 @@ module.exports = {
 
         if (!player) return message.channel.send(ops.embed.musicError1);
         if (!message.member.voice.channel) return message.channel.send(ops.embed.musicError2)
-        if (player && (message.member.voice.channelID !== player.voiceChannel.id)) return message.channel.send(ops.embed.musicError3(player.voiceChannel.name))
+        if (player && (message.member.voice.channelID !== player.voiceChannel.id)) return message.channel.send(ops.embed.musicError3(player))
 
         player.loopQueue = !player.loopQueue;
         message.channel.send(new MessageEmbed().setColor(0x00FF00).setDescription(`✅ ${player.loopQueue ? "지금부터 대기열이 반복됩니다!" : "지금부터 대기열 반복이 되지 않습니다!"}`));
