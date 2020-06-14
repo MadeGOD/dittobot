@@ -24,7 +24,8 @@ module.exports = {
                 { name: "버전", value: res.info.version, inline: true },
                 { name: "라이센스", value: res.info.license || "없음", inline: true },
                 { name: "제작", value: res.info.author, inline: true },
-                { name: "만들어진 날짜", value: ops.formatTime(res.releases[Object.keys(res.releases)[0]][0].upload_time), inline: true }
+                { name: "만들어진 날짜", value: ops.formatTime(res.releases[Object.keys(res.releases)[0]][0].upload_time), inline: true },
+                { name: "업데이트 날짜", value: ops.formatTime(res.releases[Object.keys(res.releases).pop()][0].upload_time), inline: true }
             ])
         )
     }

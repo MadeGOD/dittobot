@@ -22,8 +22,6 @@ module.exports = {
             if (!output) output = "결과 없음";
 
             message.channel.send(new MessageEmbed().setTitle("Eval").setColor(0x00ff00).setDescription(`**📥 Input: **\n\`\`\`js\n${beautify(args.join(" "), { format: "js" })}\n\`\`\`\n**📤 Output: **\n\`\`\`js\n${output}\n\`\`\``))
-        }).catch(e => {
-            message.channel.send(new MessageEmbed().setTitle("Eval").setColor(0xff0000).setDescription(`**📥 Input: **\n\`\`\`js\n${beautify(args.join(" "), { format: "js" })}\n\`\`\`\n**📤 Output: **\n\`\`\`js\n${e}\n\`\`\``))
-        })
+        }).catch(e => message.channel.send(new MessageEmbed().setTitle("Eval").setColor(0xff0000).setDescription(`**📥 Input: **\n\`\`\`js\n${beautify(args.join(" "), { format: "js" })}\n\`\`\`\n**📤 Output: **\n\`\`\`js\n${e}\n\`\`\``)))
     }
 }
