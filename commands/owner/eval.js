@@ -8,7 +8,7 @@ module.exports = {
     run: async (client, message, args, ops) => {
         if (!args.join(" ")) return;
 
-        let input = `const Discord = require("discord.js");\nconst axios = require("axios");\nconst cheerio = require("cheerio");\nconst fetch = require("node-fetch");\nconst fs = require("fs");\nconst child = require("child_process");\n${args.join(" ")}`;
+        let input = `const Discord = require("discord.js");\nconst axios = require("axios");\nconst cheerio = require("cheerio");\nconst fetch = require("node-fetch");\nconst fs = require("fs");\n${args.join(" ")}`;
 
         let type;
         new Promise(resolve => resolve(eval(input))).then(res => {

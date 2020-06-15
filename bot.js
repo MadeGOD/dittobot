@@ -5,38 +5,36 @@ const { Client, Collection } = require("discord.js"),
 	client = new Client(),
 	ops = require('./ops')
 
-client.login();
+client.login()
 
 client.commands = new Collection();
 client.aliases = new Collection();
 client.cooldowns = new Collection();
-client.categories = readdirSync("./commands/").filter(a => a !== "owner");
+client.categories = readdirSync("./commands/");
 
 readdirSync("./commands/").forEach(dir => {
-	for (let file of readdirSync(`./commands/${dir}`).filter(f => f.endsWith(".js"))) {
+	readdirSync(`./commands/${dir}`).filter(f => f.endsWith(".js")).forEach(file => {
 		let pull = require(`./commands/${dir}/${file}`);
 
 		if (pull.name) {
-			client.commands.set(pull.name, pull);
+			client.commands.set(pull.name, pull)
 			table.addRow(file, "✅")
-		} else {
-			table.addRow(file, "❌")
-		}
+		} else table.addRow(file, "❌")
 
 		if (pull.aliases && Array.isArray(pull.aliases)) pull.aliases.forEach(a => client.aliases.set(a, pull.name))
-	}
+	})
 });
 
 client.on("ready", () => {
 	console.log(`${table.toString()}\nLogin ${client.user.username}\n----------------------------`);
 
-	const activity = [`${client.guilds.cache.size}개의 서버`, `${client.users.cache.filter(e => !e.bot).size}명의 유저`, `${client.guilds.cache.size} guilds`, `${client.users.cache.filter(e => !e.bot).size} users`, `https://is.gd/dittoBot`];
+	const activity = [`${client.guilds.cache.size}개의 서버`, `${client.users.cache.filter(e => !e.bot).size}명의 유저`, `${client.guilds.cache.size} guilds`, `${client.users.cache.filter(e => !e.bot).size} users`];
 
-	setInterval(() => client.user.setActivity(activity[Math.floor(Math.random() * activity.length)]), 10000);
-
-	client.musicManager = new(require("./structures/MusicManager"))(client);
+	setInterval(() => client.user.setActivity(activity[Math.floor(Math.random() * activity.length)]), 10000)
 
 	ops.MyBot.update(client.guilds.cache.size).then(e => console.log(e.code)).catch(e => console.error(e.message))
+
+	client.musicManager = new(require("./structures/MusicManager"))(client)
 })
 .on("message", message => {
 	if (message.author.bot || message.system || !message.content.startsWith(ops.prefix)) return;
@@ -82,4 +80,4 @@ client.on("ready", () => {
 .on("error", console.error)
 .on("warn", console.warn)
 
-process.on("unhandledRejection", console.error).on("uncaughtException", console.error).on("warning", console.warn);
+process.on("unhandledRejection", console.error).on("uncaughtException", console.error).on("warning", console.warn)

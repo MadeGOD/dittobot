@@ -10,7 +10,7 @@ module.exports = {
         const m = await message.channel.send(embed);
 
         readdirSync("./commands/").forEach(dir => {
-            for (let file of readdirSync(`./commands/${dir}`).filter(f => f.endsWith(".js"))) {
+            readdirSync(`./commands/${dir}`).filter(f => f.endsWith(".js")).forEach(file => {
                 let pull = require(`../${dir}/${file}`);
 
                 if (pull.name) {
@@ -19,7 +19,7 @@ module.exports = {
                 }
 
                 if (pull.aliases && Array.isArray(pull.aliases)) pull.aliases.forEach(a => client.aliases.set(a, pull.name))
-            }
+            })
         })
         
         m.edit(embed.setTitle(`✅ 모든 파일을 리로드 완료! (${client.commands.size}개)`))
