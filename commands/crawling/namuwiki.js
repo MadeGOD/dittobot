@@ -15,7 +15,7 @@ module.exports = {
 
             const $ = cheerio.load(res.data);
 
-            let str = ``;
+            let str = '';
 
             $("div.search-item").each((i, element) => {
                 if (i < 9) str += `[${$(element).find("h4 > a").text().trim()}](https://namu.wiki${$(element).find("h4 > a").attr("href")})\n`

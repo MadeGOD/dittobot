@@ -3,7 +3,7 @@ const { MessageEmbed } = require("discord.js");
 
 module.exports = {
     name: "lyrics",
-    aliases: ["가사검색", "lyric", "가사"],
+    aliases: ["가사", "rktk", "ㅣㅛ걏ㄴ"],
     category: "command",
     usage: "디토야 가사 <노래 이름>",
     run: async (client, message, args, tools) => {

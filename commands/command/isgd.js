@@ -5,7 +5,7 @@ module.exports = {
     aliases: ["ㅑㄴㅎㅇ", "is.gd", "ㅑㄴ.ㅎㅇ"],
     usage: "디토야 is.gd <URL> [CUSTOM]",
     category: "command",
-    run: async (client, message, args, ops) => {
+    run: async (client, message, args) => {
         if (!args[0]) return message.channel.send("단축할 URL을 입력해 주세요!");
 
         if (!args[1]) shorten(args[0], res => message.channel.send(res))

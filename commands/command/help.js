@@ -71,6 +71,7 @@ const commandName = {
     ban: "차단",
     clear: "삭제",
     kick: "추방",
+    slowmode: '슬로우모드',
     unban: "언밴",
     loop: "반복",
     loopqueue: "대기열반복",

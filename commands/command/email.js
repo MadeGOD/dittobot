@@ -3,7 +3,7 @@ const { MessageEmbed } = require("discord.js")
 
 module.exports = {
     name: "email",
-    aliases: ["mail", "드먀ㅣ", "gmail", "이메일", "메일", "dlapdlf"],
+    aliases: ["이메일", "드먀ㅣ", "gmail", "mail", "메일", "dlapdlf"],
     category: "command",
     usage: "디토야 이메일 <이메일> 제목/내용",
     run: async (client, message, args) => {

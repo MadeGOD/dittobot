@@ -16,13 +16,9 @@ module.exports = {
             .addField("🆔 ID", stripIndents`**${member.user.id}**`)
 
         if (member.user.presence.status !== "offline" && !member.user.bot) {
-            if (member.user.presence.clientStatus.desktop) {
-                embed.addField(`${client.emojis.cache.get("700242370804973578")} 디스코드 클라이언트`, `**🖥 디스코드 앱**`)
-            } else if (member.user.presence.clientStatus.web) {
-                embed.addField(`${client.emojis.cache.get("700242370804973578")} 디스코드 클라이언트`, `**⌨ 웹**`)
-            } else if (member.user.presence.clientStatus.mobile) {
-                embed.addField(`${client.emojis.cache.get("700242370804973578")} 디스코드 클라이언트`, `**📱 모바일**`)
-            }
+            if (member.user.presence.clientStatus.desktop) embed.addField(`${client.emojis.cache.get("700242370804973578")} 디스코드 클라이언트`, `**🖥 디스코드 앱**`)
+            else if (member.user.presence.clientStatus.web) embed.addField(`${client.emojis.cache.get("700242370804973578")} 디스코드 클라이언트`, `**⌨ 웹**`)
+            else if (member.user.presence.clientStatus.mobile) embed.addField(`${client.emojis.cache.get("700242370804973578")} 디스코드 클라이언트`, `**📱 모바일**`)
         }
 
         embed.addField("상태", `**${status[member.user.presence.status]} (${member.user.presence.status})**`)
