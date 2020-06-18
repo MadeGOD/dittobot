@@ -28,8 +28,8 @@ module.exports = {
         return channel
     },
     embed: {
-        musicError1: new MessageEmbed().setColor(0xFF0000).setTitle(`❌ 현재 재생 중인 음악이 없어요!`),
-        musicError2: new MessageEmbed().setColor(0xFF0000).setTitle(`❌ 음성 채널에 먼저 들어가 주세요!`),
+        musicError1: new MessageEmbed().setColor(0xFF0000).setTitle('❌ 현재 재생 중인 음악이 없어요!'),
+        musicError2: new MessageEmbed().setColor(0xFF0000).setTitle('❌ 음성 채널에 먼저 들어가 주세요!'),
         musicError3: player => new MessageEmbed().setColor(0xFF0000).setDescription(`❌ **${player.voiceChannel.name}** 채널로 들어가 주세요!`)
     }
 }
