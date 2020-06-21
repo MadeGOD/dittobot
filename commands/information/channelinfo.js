@@ -12,7 +12,7 @@ module.exports = {
 
         if (channel.parent) embed.addField("카테고리", `**${channel.parent.name}**`)
 
-        embed.addField("채널 주제", `${channel.topic || "**없음**"}`)
+        embed.addField("채널 주제", `**${channel.topic || "없음"}**`)
             .addField("채널 타입", `**${type[channel.type]}**`)
             .addField("🎂 채널 생성 시간", `**${ops.formatTime(channel.createdAt)}**`)
         
