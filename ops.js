@@ -9,21 +9,21 @@ module.exports = {
         const date = new Date(time);
         return `${date.getFullYear()}년 ${date.getMonth() + 1}월 ${date.getDate()}일 ${date.getHours()}시 ${date.getMinutes()}분 ${date.getSeconds()}초`
     },
-    getMember: (msg, mem) => {
-        let member = msg.guild.members.cache.get(mem);
+    getMember: (message, mem) => {
+        let member = message.guild.members.cache.get(mem);
 
-        if (!member && msg.mentions.members) member = msg.mentions.members.first();
-        if (!member && mem) member = msg.guild.members.cache.find(m => m.displayName.toLowerCase().includes(mem) || m.user.username.toLowerCase().includes(mem) || m.user.tag.toLowerCase().includes(mem));
-        if (!member) member = msg.member;
+        if (!member && message.mentions.members) member = message.mentions.members.first();
+        if (!member && mem) member = message.guild.members.cache.find(m => m.displayName.toLowerCase().includes(mem) || m.user.username.toLowerCase().includes(mem) || m.user.tag.toLowerCase().includes(mem));
+        if (!member) member = message.member;
 
         return member
     },
-    getChannel: (msg, ch) => {
-        let channel = msg.guild.channels.cache.get(ch);
+    getChannel: (message, ch) => {
+        let channel = msg.guild.channels.cache.get(ch)
 
-        if (!channel && msg.mentions.channels) channel = msg.mentions.channels.first();
-        if (!channel && ch) channel = msg.guild.channels.cache.find(m => m.name.toLowerCase().includes(ch));
-        if (!channel) channel = msg.channel;
+        if (!channel && message.mentions.channels) channel = message.mentions.channels.first()
+        if (!channel && ch) channel = message.guild.channels.cache.find(m => m.name.toLowerCase().includes(ch))
+        if (!channel) channel = message.channel
 
         return channel
     },
