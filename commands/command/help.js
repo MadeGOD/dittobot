@@ -23,7 +23,7 @@ module.exports = {
             message.channel.send(new MessageEmbed().setTitle(`${cmd.name} 명령어 정보`).setDescription(info).setColor(0x00ff00).setFooter("<> = 필수, [] = 선택, | = 또는"))
         } else {
             const commands = category => client.commands.filter(cmd => cmd.category === category).map(cmd => `\`${commandNames[cmd.name] ? commandNames[cmd.name] : cmd.name}\``).join(", ")
-            const res = client.categories.filter(a => a !== "owner").map(e => `**${category[e]}**\n${commands(e)}`).reduce((s, c) => `${s}\n\n${c}`)
+            const res = client.categories.filter(a => a !== "owner").map(e => `**${categories[e]}**\n${commands(e)}`).reduce((s, c) => `${s}\n\n${c}`)
             
             message.channel.send(new MessageEmbed().setColor(0x00ff00).setTitle(`${client.user.username} 도움말`).setFooter(`${ops.prefix}도움 <명령어 이름> 으로 더 자세히 아실 수 있습니다.`).setDescription(res))
         }
