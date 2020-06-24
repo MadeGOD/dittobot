@@ -6,20 +6,20 @@ module.exports = {
     prefix: process.env.PREFIX,
     MyBot: new koreanbots.MyBot(process.env.KOREANBOTS_TOKEN),
     formatTime: time => {
-        const date = new Date(time);
+        const date = new Date(time)
         return `${date.getFullYear()}년 ${date.getMonth() + 1}월 ${date.getDate()}일 ${date.getHours()}시 ${date.getMinutes()}분 ${date.getSeconds()}초`
     },
     getMember: (message, mem) => {
         let member = message.guild.members.cache.get(mem);
 
-        if (!member && message.mentions.members) member = message.mentions.members.first();
-        if (!member && mem) member = message.guild.members.cache.find(m => m.displayName.toLowerCase().includes(mem) || m.user.username.toLowerCase().includes(mem) || m.user.tag.toLowerCase().includes(mem));
-        if (!member) member = message.member;
+        if (!member && message.mentions.members) member = message.mentions.members.first()
+        if (!member && mem) member = message.guild.members.cache.find(m => m.displayName.toLowerCase().includes(mem) || m.user.username.toLowerCase().includes(mem) || m.user.tag.toLowerCase().includes(mem))
+        if (!member) member = message.member
 
         return member
     },
     getChannel: (message, ch) => {
-        let channel = msg.guild.channels.cache.get(ch)
+        let channel = message.guild.channels.cache.get(ch)
 
         if (!channel && message.mentions.channels) channel = message.mentions.channels.first()
         if (!channel && ch) channel = message.guild.channels.cache.find(m => m.name.toLowerCase().includes(ch))

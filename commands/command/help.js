@@ -8,20 +8,21 @@ module.exports = {
     description: "help command",
     run: async (client, message, args, ops) => {
         if (args.join(" ")) {
-            const cmd = client.commands.get(args.join(" ").toLowerCase()) || client.commands.get(client.aliases.get(args.join(" ").toLowerCase()))
+            const command = args.join(" ").toLowerCase()
+            const cmd = client.commands.get(commandNames) || client.commands.get(client.aliases.get(command))
         
             let info = ""
         
-            if (!cmd) return message.channel.send(new MessageEmbed().setColor(0xff0000).setTitle(`**${args.join(" ").toLowerCase()}**에 대한 명령어를 찾을 수 없습니다.`))
+            if (!cmd) return message.channel.send(new MessageEmbed().setColor(0xff0000).setTitle(`**${command}**에 대한 명령어를 찾을 수 없습니다.`))
             
             if (cmd.aliases) info = `\n**별칭**\n${cmd.aliases.join(", ")}\n`
             if (cmd.description) info += `\n**설명**\n${cmd.description}\n`
             if (cmd.usage) info += `\n**사용 방법**\n${cmd.usage}\n`
-            if (cmd.category) info += `\n**카테고리**\n${category[cmd.category]}`
+            if (cmd.category) info += `\n**카테고리**\n${categories[cmd.category]}`
         
             message.channel.send(new MessageEmbed().setTitle(`${cmd.name} 명령어 정보`).setDescription(info).setColor(0x00ff00).setFooter("<> = 필수, [] = 선택, | = 또는"))
         } else {
-            const commands = category => client.commands.filter(cmd => cmd.category === category).map(cmd => `\`${commandName[cmd.name] ? commandName[cmd.name] : cmd.name}\``).join(", ")
+            const commands = category => client.commands.filter(cmd => cmd.category === category).map(cmd => `\`${commandNames[cmd.name] ? commandNames[cmd.name] : cmd.name}\``).join(", ")
             const res = client.categories.filter(a => a !== "owner").map(e => `**${category[e]}**\n${commands(e)}`).reduce((s, c) => `${s}\n\n${c}`)
             
             message.channel.send(new MessageEmbed().setColor(0x00ff00).setTitle(`${client.user.username} 도움말`).setFooter(`${ops.prefix}도움 <명령어 이름> 으로 더 자세히 아실 수 있습니다.`).setDescription(res))
@@ -29,7 +30,7 @@ module.exports = {
     }
 }
 
-const category = {
+const categories = {
     botinfo: "봇정보",
     coding: '코딩',
     command: "커맨드",
@@ -41,7 +42,7 @@ const category = {
     naver: "네이버"
 }
 
-const commandName = {
+const commandNames = {
     botinfo: "봇정보",
     ping: "핑",
     system: "시스템",
