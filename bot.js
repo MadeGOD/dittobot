@@ -9,7 +9,6 @@ client.login()
 
 client.commands = new Collection()
 client.aliases = new Collection()
-client.cooldowns = new Collection()
 client.categories = readdirSync("./commands/")
 
 readdirSync("./commands/").forEach(dir => {
