@@ -1,5 +1,5 @@
-const { MessageEmbed } = require("discord.js");
-const { stripIndents } = require("common-tags");
+const { MessageEmbed } = require("discord.js"),
+    { stripIndents } = require("common-tags")
 
 module.exports = {
     name: "ban",

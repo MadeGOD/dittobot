@@ -1,18 +1,18 @@
-const cheerio = require("cheerio");
-const { MessageEmbed } = require("discord.js");
-const axios = require("axios");
+const cheerio = require("cheerio"),
+    { MessageEmbed } = require("discord.js"),
+    axios = require("axios")
 
 module.exports = {
     name: "weather",
     aliases: ["날씨", "skfTl", "ㅈㄷㅁ솓ㄱ"],
     category: "naver",
     run: async (client, message, args) => {
-        /*if (!args[0]) return;
+        /*if (!args[0]) return
 
         await axios.get(`https://search.naver.com/search.naver?sm=top_hty&fbm=1&ie=utf8&query=${encodeURI(`${args.join(" ").replace(/[\{\}\[\]\/?.,;:|\)*~`!^\-_+<>@\#$%&\\\=\(\"\"]/gi, "")} 날씨`)}`).then(res => {
-            if (res.status !== 200) return;
+            if (res.status !== 200) return
 
-            const $ = cheerio.load(res.data);
+            const $ = cheerio.load(res.data)
 
             const get = {
                 region: $("div.sort_box > div.lst_select > div.select_box > span.btn_select > em").text(),
@@ -46,13 +46,13 @@ module.exports = {
                 lowestTemperature: $("div.today_area > div.main_info > div.info_data > ul.info_list > li:nth-child(2) > span.merge > span.min").text().split("˚")[0],
                 peakTemperature: $("div.today_area > div.main_info > div.info_data > ul.info_list > li:nth-child(2) > span.merge > span.max").text().split("˚")[0],
                 update: $("div.guide_bx._guideBox > p.guide > span.guide_txt > span.update").eq(0).text()
-            };
+            }
 
-            let s = `자외선: **${get.ultravioletRays.result} ${get.ultravioletRays.stats} ${ultravioletRays[get.ultravioletRays.stats]}**`;
+            let s = `자외선: **${get.ultravioletRays.result} ${get.ultravioletRays.stats} ${ultravioletRays[get.ultravioletRays.stats]}**`
 
-            if (!get.region || get.region.includes(process.env.REGION)) return message.channel.send("지역을 찾을 수 없습니다.");
+            if (!get.region || get.region.includes(process.env.REGION)) return message.channel.send("지역을 찾을 수 없습니다.")
 
-            if (!get.ultravioletRays.result) s = `시간당 강수량: **${get.precipitationPerHour}mm**`;
+            if (!get.ultravioletRays.result) s = `시간당 강수량: **${get.precipitationPerHour}mm**`
     
             message.channel.send(new MessageEmbed().setColor(0x00ffff).setTimestamp().setFooter(message.author.username, message.author.displayAvatarURL())
             .setFooter(`${get.update} 업데이트`)
@@ -64,7 +64,7 @@ module.exports = {
             ]))
         })*/
     }
-};
+}
 
 const findDust = {
     "매우좋음": "😀",
@@ -72,7 +72,7 @@ const findDust = {
     "보통": "🙂",
     "나쁨": "🙁",
     "매우나쁨": "😷"
-};
+}
 
 const ultravioletRays = {
     "매우낮음": "😀",
@@ -80,7 +80,7 @@ const ultravioletRays = {
     "보통": "🙂",
     "높음": "🙁",
     "매우높음": "☹"
-};
+}
 
 const stats = {
     "맑음": "☀",

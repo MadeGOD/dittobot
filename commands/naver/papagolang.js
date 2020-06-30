@@ -1,5 +1,5 @@
-const fetch = require("node-fetch");
-const { MessageEmbed } = require("discord.js");
+const fetch = require("node-fetch"),
+    { MessageEmbed } = require("discord.js")
 
 const langToName = {
     ko: "한국어",
@@ -22,7 +22,7 @@ const langToName = {
     it: "이탈리아어",
     unk: "알 수 없음",
     undefined: "알 수 없음"
-};
+}
 
 module.exports = {
     name: "papagolang",
@@ -30,7 +30,7 @@ module.exports = {
     category: "naver",
     usage: "디토야 언어감지 <메세지>",
     run: async (client, message, args) => {
-        if (!args.join(" ")) return;
+        if (!args.join(" ")) return
 
         const { langCode } = await fetch("https://openapi.naver.com/v1/papago/detectLangs", {
             method: "POST",
@@ -44,4 +44,4 @@ module.exports = {
 
         message.channel.send(new MessageEmbed().setAuthor("Papago", "https://papago.naver.com/favicon.ico", "https://papago.naver.com/").setTitle("파파고 언어감지").setColor(0x00ff00).setDescription(`\`\`\`fix\n${args.join(" ")}\n\`\`\`\n**결과**\`\`\`yml\n${langToName[langCode]} (${langCode})\n\`\`\``))
     }
-};
+}

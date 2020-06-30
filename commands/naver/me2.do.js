@@ -1,5 +1,5 @@
-const fetch = require("node-fetch")
-const { MessageEmbed } = require("discord.js")
+const fetch = require("node-fetch"),
+    { MessageEmbed } = require("discord.js")
 
 module.exports = {
     name: "me2.do",
@@ -16,7 +16,7 @@ module.exports = {
                 "X-Naver-Client-Secret": process.env.NAVER_API_CLIENT_SECRET
             },
             body: `url=${args.join(" ")}`
-        }).then(e => e.json());
+        }).then(e => e.json())
 
         message.channel.send(new MessageEmbed().setTitle("단축 결과").setColor(0x00ff00).setDescription(`[\`\`\`\n들어가기\n\`\`\`](${url})\n${url}`))
     }

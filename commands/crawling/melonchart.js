@@ -1,6 +1,6 @@
-const cheerio = require("cheerio");
-const axios = require("axios");
-const { MessageEmbed } = require("discord.js");
+const cheerio = require("cheerio"),
+    axios = require("axios"),
+    { MessageEmbed } = require("discord.js")
 
 module.exports = {
     name: "melonchart",

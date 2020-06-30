@@ -1,5 +1,5 @@
-const { MessageEmbed } = require("discord.js");
-const { stripIndents } = require("common-tags");
+const { MessageEmbed } = require("discord.js"),
+    { stripIndents } = require("common-tags")
 
 module.exports = {
     name: "userinfo",
@@ -33,7 +33,7 @@ module.exports = {
             embed2.setTitle(`${member.user.username}님의 역할 (${member.roles.cache.filter(n => n.id !== message.guild.id).size}개 중 25개)`)
         }
 
-        message.channel.send(embed);
+        message.channel.send(embed)
         if (member.roles.cache.size) message.channel.send(embed2)
     }
 }

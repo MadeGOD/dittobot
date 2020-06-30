@@ -1,5 +1,5 @@
-const { MessageEmbed } = require("discord.js");
-const fetch = require("node-fetch");
+const { MessageEmbed } = require("discord.js"),
+    fetch = require("node-fetch")
 
 module.exports = {
     name: "instar",
@@ -7,7 +7,7 @@ module.exports = {
     usage: "디토야 인스타 <유저이름>",
     category: "crawling",
     run: async (client, message, args) => {
-        if (!args.join(" ")) return message.reply("검색할 인스타그램 유저를 입력해 주세요!");
+        if (!args.join(" ")) return message.reply("검색할 인스타그램 유저를 입력해 주세요!")
 
         let res
 
@@ -18,7 +18,7 @@ module.exports = {
             return message.channel.send(`Error...\n${e}`)
         }
 
-        const account = res.graphql.user;
+        const account = res.graphql.user
 
         message.channel.send(new MessageEmbed().setAuthor("Instargram", "https://www.instagram.com/static/images/ico/favicon-192.png/68d99ba29cc8.png", "https://www.instagram.com/").setColor(0xff00bd).setTimestamp()
             .setFooter(account.username, account.profile_pic_url_hd)

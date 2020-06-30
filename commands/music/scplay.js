@@ -16,8 +16,8 @@ module.exports = {
 
         if (!args.join(" ")) return message.channel.send(new MessageEmbed().setColor(0xFF0000).setDescription(`❌ 재생할 노래의 이름 또는 URL을 입력해 주세요!`))
 
-        const song = await client.musicManager.getSongs(`scsearch: ${args.join(" ")}`);
-        if (!song[0]) return message.channel.send(new MessageEmbed().setDescription(`❌ **${args.join(" ")}**(이)라는 노래를 찾을 수 없습니다.`).setColor(0xFF0000));
+        const song = await client.musicManager.getSongs(`scsearch: ${args.join(" ")}`)
+        if (!song[0]) return message.channel.send(new MessageEmbed().setDescription(`❌ **${args.join(" ")}**(이)라는 노래를 찾을 수 없습니다.`).setColor(0xFF0000))
 
         client.musicManager.handleVideo(message, message.member.voice.channel, song[0])
     }

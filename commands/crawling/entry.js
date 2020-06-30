@@ -1,5 +1,5 @@
-const fetch = require("node-fetch")
-const { MessageEmbed } = require("discord.js")
+const fetch = require("node-fetch"),
+    { MessageEmbed } = require("discord.js")
 
 module.exports = {
     name: "entry",
@@ -27,16 +27,16 @@ module.exports = {
 
         if (blogImage) embed.setImage(`https://playentry.org/uploads/profile/${_id.substr(0, 2)}/${_id.substr(2, 2)}/blog_${_id}.png`)
         
-        let like = 0, visitCount = 0, commentCount = 0, childCount = 0
+        let likeCount = 0, visitCount = 0, commentCount = 0, childCount = 0
 
         for (let i of project.data) {
-            like += i.likeCnt
+            likeCount += i.likeCnt
             visitCount += i.visit
             commentCount += i.comment
             childCount += i.childCnt
         }
 
-        embed.addField("❤ 좋아요 수", parseInt(like).toLocaleString(), true).addField("👀 조회수", parseInt(visitCount).toLocaleString(), true).addField("🗨 작품 댓글 수", parseInt(commentCount).toLocaleString(), true).addField("작품 사본 수", parseInt(childCount).toLocaleString(), true).addField("💬 글 수", parseInt(discuss.count).toLocaleString(), true)
+        embed.addField("❤ 좋아요 수", parseInt(likeCount).toLocaleString(), true).addField("👀 조회수", parseInt(visitCount).toLocaleString(), true).addField("🗨 작품 댓글 수", parseInt(commentCount).toLocaleString(), true).addField("작품 사본 수", parseInt(childCount).toLocaleString(), true).addField("💬 글 수", parseInt(discuss.count).toLocaleString(), true)
 
         message.channel.send(embed)
     }

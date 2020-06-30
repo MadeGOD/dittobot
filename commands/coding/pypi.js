@@ -1,5 +1,5 @@
-const fetch = require('node-fetch')
-const { MessageEmbed } = require('discord.js')
+const fetch = require('node-fetch'),
+    { MessageEmbed } = require('discord.js')
 
 module.exports = {
     name: 'pypi',

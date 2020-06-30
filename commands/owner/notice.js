@@ -1,11 +1,11 @@
-const { MessageEmbed } = require("discord.js");
+const { MessageEmbed } = require("discord.js")
 
 module.exports = {
     name: "notice",
     aliases: ["공지", "공지사항", "ㅜㅐ샻ㄷ", "rhdwl", "rhdwltkgkd"],
     category: "owner",
     run: async (client, message, args) => {
-        if (!args.join(" ")) return message.channel.send("내용을 써 주세요!");
+        if (!args.join(" ")) return message.channel.send("내용을 써 주세요!")
 
         /*
             공지 코드 출처: https://github.com/Bluebear645/maple/blob/master/commands/%5B%EB%8B%A8%ED%92%8D%EC%95%84%5D%20%EC%A0%84%EC%B2%B4%EA%B3%B5%EC%A7%80.js
@@ -13,24 +13,24 @@ module.exports = {
         */
 
         message.channel.send(new MessageEmbed().setTitle(`${client.user.username} 공지사항`).setDescription(`\`\`\`\n${args.join(" ")}\n\`\`\``).setColor("RANDOM")).then(async th => {
-            await th.react("⭕");
-            await th.react("❌");
+            await th.react("⭕")
+            await th.react("❌")
             
             th.awaitReactions((reaction, user) => (reaction.emoji.name === "❌" || reaction.emoji.name === "⭕") && user.id === message.author.id, {
                 max: 1
             }).then(collected => {
                 if (collected.array()[0].emoji.name === "⭕") {
-                    let result = '';
+                    let result = ''
 
                     client.guilds.cache.forEach(g => {
-                        let gc;
+                        let gc
 
                         g.channels.cache.forEach(c => {
-                            if (c.name.includes(client.user.username) || c.name.includes("bot-notice") || c.name.includes("bot_notice") || c.name.includes("botnotice") || c.name.includes("봇공지") || c.name.includes("봇-공지") || c.name.includes("봇_공지")) gc = c.id;
-                        });
+                            if (c.name.includes(client.user.username) || c.name.includes("bot-notice") || c.name.includes("bot_notice") || c.name.includes("botnotice") || c.name.includes("봇공지") || c.name.includes("봇-공지") || c.name.includes("봇_공지")) gc = c.id
+                        })
 
-                        const Ch = client.channels.cache.get(gc);
-                        let ment = '';
+                        const Ch = client.channels.cache.get(gc)
+                        let ment = ''
 
                         try {
                             if (!Ch.permissionsFor(g.me).has("SEND_MESSAGES")) ment = `${g.name}: 발신 실패 (메시지 발신 불가)\n`

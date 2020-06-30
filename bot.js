@@ -69,8 +69,8 @@ client.on("ready", () => {
 				})
 			}).then(r => r.json()).then(({ response: { replies: [{ text }] } }) => message.channel.send(text))
 		}
-	} catch(e) {
-		console.error(e.message | e)
+	} catch(error) {
+		console.error(error.message | error)
 	}
 })
 .on("guildCreate", guild => console.log(`${chalk.blue("Guild Create")} name: ${guild.name} (${guild.id}), owner: ${guild.owner.user.tag} (${guild.ownerID})`))

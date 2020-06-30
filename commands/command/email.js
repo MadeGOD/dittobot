@@ -1,5 +1,5 @@
-const mail = require("nodemailer")
-const { MessageEmbed } = require("discord.js")
+const mail = require("nodemailer"),
+    { MessageEmbed } = require("discord.js")
 
 module.exports = {
     name: "email",

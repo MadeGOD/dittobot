@@ -1,5 +1,5 @@
-const lyrics = (new(require("slyrics")));
-const { MessageEmbed } = require("discord.js");
+const lyrics = (new(require("slyrics"))),
+    { MessageEmbed } = require("discord.js")
 
 module.exports = {
     name: "lyrics",
@@ -7,20 +7,20 @@ module.exports = {
     category: "command",
     usage: "디토야 가사 <노래 이름>",
     run: async (client, message, args, tools) => {
-        if (!args.join(" ")) return message.channel.send("가사를 검색할 노래 이름을 입력해 주세요!");
+        if (!args.join(" ")) return message.channel.send("가사를 검색할 노래 이름을 입력해 주세요!")
 
-        const result = await lyrics.get("melon", args.join(" "));
+        const result = await lyrics.get("melon", args.join(" "))
 
-        if (result.error) return message.channel.send(`\`${args.join(" ")}\`의 가사를 찾을 수 없습니다.`);
+        if (result.error) return message.channel.send(`\`${args.join(" ")}\`의 가사를 찾을 수 없습니다.`)
         else {
-            const embed = new MessageEmbed().setTitle(`${result.artist} - ${result.title}`).setThumbnail(result.albumArt).setColor(0x00ff00);
+            const embed = new MessageEmbed().setTitle(`${result.artist} - ${result.title}`).setThumbnail(result.albumArt).setColor(0x00ff00)
             
             if (result.result.toString().length < 1700) {
-                embed.setDescription(`[🎵 바로가기](${result.url})\n\n${result.result.toString()}`);
+                embed.setDescription(`[🎵 바로가기](${result.url})\n\n${result.result.toString()}`)
                 message.author.send(embed)
             } else {
-                embed.setDescription(`[🎵 바로가기](${result.url})\n\n${result.result.toString().substr(0, 1650)}`);
-                message.author.send(embed);
+                embed.setDescription(`[🎵 바로가기](${result.url})\n\n${result.result.toString().substr(0, 1650)}`)
+                message.author.send(embed)
                 message.author.send(new MessageEmbed().setColor(0x00ff00).setDescription(`${result.result.toString().replace(result.result.toString().substr(0, 1650), "")}`))
             }
         }

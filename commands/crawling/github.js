@@ -1,5 +1,5 @@
-const fetch = require("node-fetch");
-const { MessageEmbed } = require("discord.js");
+const fetch = require("node-fetch"),
+    { MessageEmbed } = require("discord.js")
 
 module.exports = {
     name: "github",
@@ -7,11 +7,11 @@ module.exports = {
     usage: "디토야 깃허브 <유저이름>",
     category: "crawling",
     run: async (client, message, args, ops) => {
-        if (!args.join(" ")) return;
+        if (!args.join(" ")) return
 
-        const { login, avatar_url, location, created_at, followers, following, email, blog, html_url, bio, public_repos, public_gists, type } = await fetch(`https://api.github.com/users/${encodeURI(args.join(" "))}`).then(e => e.json());
+        const { login, avatar_url, location, created_at, followers, following, email, blog, html_url, bio, public_repos, public_gists, type } = await fetch(`https://api.github.com/users/${encodeURI(args.join(" "))}`).then(e => e.json())
 
-        if (!login) return message.channel.send(`\`${args.join(" ")}\` (이)라는 유저를 찾을 수 없습니다...`);
+        if (!login) return message.channel.send(`\`${args.join(" ")}\` (이)라는 유저를 찾을 수 없습니다...`)
 
         message.channel.send(new MessageEmbed().setTitle(`${login}님의 정보`).setColor(0x000000).setAuthor("Github", "https://github.githubassets.com/favicons/favicon.png", "https://github.com/").setFooter(login, avatar_url).setDescription(`[들어가기](${html_url})`).setThumbnail(avatar_url)
         .addFields([

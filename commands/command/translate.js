@@ -1,5 +1,5 @@
-const { MessageEmbed } = require('discord.js')
-const translate = require('@vitalets/google-translate-api')
+const { MessageEmbed } = require('discord.js'),
+    translate = require('@vitalets/google-translate-api')
 
 module.exports = {
     name: 'translate',

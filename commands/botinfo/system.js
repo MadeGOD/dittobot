@@ -1,5 +1,5 @@
-const { MessageEmbed } = require("discord.js");
-const os = require("os");
+const { MessageEmbed } = require("discord.js"),
+    os = require("os")
 
 module.exports = {
     name: "system",
