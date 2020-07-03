@@ -45,7 +45,7 @@ module.exports = {
                         } finally {
                             if (ment) result += ment
                         }
-                    });
+                    })
             
                     th.edit(new MessageEmbed().setTitle("공지사항 발신 완료").setDescription(`**결과**\n\`\`\`\n${result || "모든 서버에 발신 완료"}\n\`\`\``).setColor(0x00ff00))
                 } else {
