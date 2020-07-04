@@ -4,7 +4,7 @@ module.exports = {
     name: "help",
     aliases: ["도움", "ㅗ디ㅔ", "ehdna", "도움말"],
     category: "command",
-    usage: "디토야 도움 [명령어 이름]",
+    usage: "{prefix}도움 [명령어 이름]",
     description: "help command",
     run: async (client, message, args, ops) => {
         if (args.join(" ")) {
@@ -17,7 +17,7 @@ module.exports = {
             
             if (cmd.aliases) info = `\n**별칭**\n${cmd.aliases.join(", ")}\n`
             if (cmd.description) info += `\n**설명**\n${cmd.description}\n`
-            if (cmd.usage) info += `\n**사용 방법**\n${cmd.usage}\n`
+            if (cmd.usage) info += `\n**사용 방법**\n${cmd.usage.replace(/{prefix}/gi, ops.prefix)}\n`
             if (cmd.category) info += `\n**카테고리**\n${categories[cmd.category]}`
         
             message.channel.send(new MessageEmbed().setTitle(`${cmd.name} 명령어 정보`).setDescription(info).setColor(0x00ff00).setFooter("<> = 필수, [] = 선택, | = 또는"))
@@ -25,7 +25,7 @@ module.exports = {
             const commands = category => client.commands.filter(cmd => cmd.category === category).map(cmd => `\`${commandNames[cmd.name] ? commandNames[cmd.name] : cmd.name}\``).join(", ")
             const res = client.categories.filter(a => a !== "owner").map(e => `**${categories[e]}**\n${commands(e)}`).reduce((s, c) => `${s}\n\n${c}`)
             
-            message.channel.send(new MessageEmbed().setColor(0x00ff00).setTitle(`${client.user.username} 도움말`).setFooter(`${ops.prefix}도움 <명령어 이름> 으로 더 자세히 아실 수 있습니다.`).setDescription(res))
+            message.channel.send(new MessageEmbed().setColor(0x00ff00).setTitle(`${client.user.username} 도움말`).setFooter(`${ops.prefix}도움 [명령어 이름]`).setDescription(res))
         }
     }
 }
