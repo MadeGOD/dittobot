@@ -17,9 +17,9 @@ module.exports = {
             .addField("🙎‍♂️ 서버 유저", `**ALL: ${message.guild.memberCount} (USER: ${message.guild.members.cache.filter(m => !m.user.bot).size} | BOT: ${message.guild.members.cache.filter(m => m.user.bot).size})**`)
             .addField("🎂 서버 생일", `**${ops.formatTime(message.guild.createdAt)}**`)
             .addField("💬 채팅 채널", `**ALL: ${message.guild.channels.cache.size} (TEXT: ${message.guild.channels.cache.filter(x => x.type === "text").size} | CATEGORY: ${message.guild.channels.cache.filter(x => x.type === "category").size} | VOICE: ${message.guild.channels.cache.filter(x => x.type === "voice").size})**`)
-            .addField("💤 잠수 채널", `**${message.guild.afkChannel ? message.guild.afkChannel.name : "없음"}**`, true)
+            .addField("💤 비활성화 채널", `**${message.guild.afkChannel ? message.guild.afkChannel.name : "없음"}**`, true)
 
-        if (message.guild.afkChannel) embed.addField("⏰ 잠수 시간 제한", `**${afkTimeout[message.guild.afkTimeout]}**`, true)
+        if (message.guild.afkChannel) embed.addField("⏰ 비활성화 시간 제한", `**${afkTimeout[message.guild.afkTimeout]}**`, true)
 
         embed.addField("🔐 서버 보안", `**${verificationLevel[message.guild.verificationLevel]}**`)
             .addField("📱 2단계 인증", `**${mfaLevel[message.guild.mfaLevel]}**`)
