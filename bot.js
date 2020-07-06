@@ -38,14 +38,8 @@ client.on("ready", () => {
 .on("message", message => {
 	if (message.author.bot || message.system || !message.content.startsWith(ops.prefix)) return
 
-	if (message.channel.type === "dm" && (message.author.id !== ops.ownerID)) {
-		message.channel.send(`DM에서는 ${client.user.username}을(를) 사용하실 수 없습니다.\n${client.user.username}이(가) 있는 서버에서 사용해 주세요.`)
-		return console.log(`${chalk.green("DM Message")} ${message.author.username} (${message.author.id}): ${message.content}`)
-	}
-
-	if (message.channel.type === "text" && (message.author.id !== ops.ownerID)) console.log(`${chalk.yellow("Message")} ${message.author.username} (${message.author.id}): ${message.content} | GUILD: ${message.guild.name} (${message.guild.id}) | CHANNEL: ${message.channel.name} (${message.channel.id})`)
-
-	if (message.channel.type === "text" && !message.guild.me.hasPermission("EMBED_LINKS")) return message.channel.send(`${client.user.username}을(를) 원활하게 이용하실려면 **EMBED_LINKS**(링크 보내기) 권한이 필요합니다!`)
+	if ((message.channel.type === "dm") && (message.author.id !== ops.ownerID)) return message.channel.send(`DM에서는 ${client.user.username}을(를) 사용하실 수 없습니다.\n${client.user.username}이(가) 있는 서버에서 사용해 주세요.`)
+	if ((message.channel.type === "text") && !message.guild.me.hasPermission("EMBED_LINKS")) return message.channel.send(`${client.user.username}을(를) 원활하게 이용하실려면 **EMBED_LINKS**(링크 보내기) 권한이 필요합니다!`)
 
 	const args = message.content.slice(ops.prefix.length).trim().split(/ +/g),
 		cmd = args.shift().toLowerCase(),
@@ -53,7 +47,7 @@ client.on("ready", () => {
 
 	try {
 		if (command) {
-			if (command.category === "owner" && (message.author.id !== ops.ownerID)) return message.channel.send(`\`${client.user.username} 개발자\`만 가능합니다.`)
+			if ((command.category === "owner") && (message.author.id !== ops.ownerID)) return message.channel.send(`\`${client.user.username} 개발자\`만 가능합니다.`)
 			command.run(client, message, args, ops)
 		} else {
 			require("node-fetch")(`https://builder.pingpong.us/api/builder/${process.env.pingpong}/integration/v0.2/custom/${message.author.id}`, {

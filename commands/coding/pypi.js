@@ -19,7 +19,7 @@ module.exports = {
         message.channel.send(new MessageEmbed().setAuthor('PyPi', 'https://raw.githubusercontent.com/github/explore/666de02829613e0244e9441b114edb85781e972c/topics/pip/pip.png', 'https://pypi.org/')
             .setTitle(res.info.name)
             .setURL(res.info.package_url)
-            .setDescription(res.info.summary.length > 500 ? `${res.info.summary.substr(0, 495)}...` : res.info.summary || "없음")
+            .setDescription(res.info.summary.length > 500 ? `${res.info.summary.substr(0, 495)}...` : res.info.summary || "설명 없음")
             .addFields([
                 { name: "버전", value: res.info.version, inline: true },
                 { name: "라이센스", value: res.info.license || "없음", inline: true },

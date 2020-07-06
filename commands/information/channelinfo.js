@@ -12,9 +12,9 @@ module.exports = {
 
         if (channel.parent) embed.addField("카테고리", `**${channel.parent.name}**`)
 
-        embed.addField("채널 주제", `**${channel.topic || "없음"}**`)
-            .addField("채널 타입", `**${type[channel.type]}**`)
-            .addField("🎂 채널 생성 시간", `**${ops.formatTime(channel.createdAt)}**`)
+        embed.addField("주제", `**${channel.topic || "없음"}**`)
+            .addField("타입", `**${type[channel.type]}**`)
+            .addField("🎂 생성일", `**${ops.formatTime(channel.createdAt)}**`)
         
         if (channel.type === "voice") embed.addField("비트레이트", `**${channel.bitrate / 1000}kbps**`)
         if (channel.type === "text") embed.addField("슬로우모드", `**${channel.rateLimitPerUser ? `${channel.rateLimitPerUser}초` : "없음"}**`)

@@ -91,7 +91,7 @@ const afkTimeout = {
 
 const verificationLevel = {
     NONE: "제한 없음",
-    LOW: "이메일이 인증이 완료된 Disocrd 계정",
+    LOW: "이메일이 인증이 완료된 Discord 계정",
     MEDIUM: "Discord에 가입한 지 5분",
     HIGH: "이 서버에 멤버가 된 지 10분",
     VERY_HIGH: "휴대폰 인증이 완료된 Discord 계정"
