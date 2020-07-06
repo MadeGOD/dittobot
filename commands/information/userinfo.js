@@ -25,7 +25,7 @@ module.exports = {
             .addField("📥 서버에 들어온 날짜", `**${ops.formatTime(member.joinedAt)}**`)
             .addField("📥 디스코드 가입 날짜", `**${ops.formatTime(member.user.createdAt)}**`)
 
-        member.presence.activities[0] && embed.addField("상태 메세지/게임", member.presence.activities.map(a => `${a.type === "CUSTOM_STATUS" ? `상태메세지: **${a.emoji ? a.emoji && a.state ? `${a.emoji} ${a.state}` : a.emoji : a.state}**` : `게임: **${a.name}**`}`).join("\n"))
+        if (member.presence.activities[0]) embed.addField("상태 메세지/게임", member.presence.activities.map(a => `${a.type === "CUSTOM_STATUS" ? `상태메세지: **${a.emoji ? a.emoji && a.state ? `${a.emoji} ${a.state}` : a.emoji : a.state}**` : `게임: **${a.name}**`}`).join("\n"))
 
         const embed2 = new MessageEmbed().setTitle(`${member.user.username}님의 역할 (${member.roles.cache.filter(n => n.id !== message.guild.id).size}개)`).setDescription(member.roles.cache.filter(r => r.id !== message.guild.id).map(r => r).join(", ") || "없음").setColor(member.displayHexColor === "#000000" ? "#FFFFFF" : member.displayHexColor)
         if (member.roles.cache.filter(n => n.id !== message.guild.id).size > 25) {
