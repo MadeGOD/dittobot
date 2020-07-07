@@ -31,7 +31,7 @@ client.on("ready", () => {
 
 	setInterval(() => client.user.setActivity(activity[Math.floor(Math.random() * activity.length)]), 10000)
 
-	ops.MyBot.update(client.guilds.cache.size).then(e => console.log(e.code)).catch(e => console.error(e.message))
+	//ops.MyBot.update(client.guilds.cache.size).then(e => console.log(e.code)).catch(e => console.error(e.message))
 
 	client.musicManager = new(require("./structures/MusicManager"))(client)
 })
