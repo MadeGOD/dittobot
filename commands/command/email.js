@@ -5,13 +5,13 @@ module.exports = {
     name: "email",
     aliases: ["이메일", "드먀ㅣ", "gmail", "mail", "메일", "dlapdlf"],
     category: "command",
-    usage: "디토야 이메일 <이메일> 제목/내용",
+    usage: "{prefix}이메일 <보낼 이메일> 제목/내용",
     run: async (client, message, args) => {
-        if (!args[0]) return
+        if (!args[0]) return message.channel.send(`사용 방법: ${ops.prefix}이메일 <보낼 이메일> 제목/내용`)
 
         const titleAndDescription = args.slice(1).join(" ").split("/")
 
-        if (!titleAndDescription[0] || !titleAndDescription[1]) return
+        if (!titleAndDescription[0] || !titleAndDescription[1]) return message.channel.send('제목과 내용을 입력해 주세요.')
 
         let transporter = mail.createTransport({
             service: "gmail",

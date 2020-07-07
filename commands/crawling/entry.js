@@ -29,12 +29,12 @@ module.exports = {
         
         let likeCount = 0, visitCount = 0, commentCount = 0, childCount = 0
 
-        for (let i of project.data) {
+        project.data.forEach(i => {
             likeCount += i.likeCnt
             visitCount += i.visit
             commentCount += i.comment
             childCount += i.childCnt
-        }
+        })
 
         embed.addField("❤ 좋아요 수", parseInt(likeCount).toLocaleString(), true).addField("👀 조회수", parseInt(visitCount).toLocaleString(), true).addField("🗨 작품 댓글 수", parseInt(commentCount).toLocaleString(), true).addField("작품 사본 수", parseInt(childCount).toLocaleString(), true).addField("💬 글 수", parseInt(discuss.count).toLocaleString(), true)
 

@@ -36,7 +36,7 @@ module.exports = {
     run: async (client, message, args) => {
         if (!args[0] || !args[1] || !args.slice(2).join(" ")) return
 
-        if (!languageList.includes(args[0]) || !languageList.includes(args[1])) return message.channel.send("파파고 API에서 지원하지 않는 언어가 들어 있습니다.")
+        if (!languageList.includes(args[0]) || !languageList.includes(args[1])) return message.channel.send("파파고 API에서 지원하지 않는 언어가 포함되어 있습니다.")
 
         const srcLang = nameToLang[args[0]] || args[0]
         const tarLang = nameToLang[args[1]] || args[1]

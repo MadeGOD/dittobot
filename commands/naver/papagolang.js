@@ -20,8 +20,7 @@ const langToName = {
     th: "태국어",
     ru: "러시아어",
     it: "이탈리아어",
-    unk: "알 수 없음",
-    undefined: "알 수 없음"
+    unk: "알 수 없음"
 }
 
 module.exports = {

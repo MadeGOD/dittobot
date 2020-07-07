@@ -67,8 +67,6 @@ client.on("ready", () => {
 		console.error(error.message | error)
 	}
 })
-.on("guildCreate", guild => console.log(`${chalk.blue("Guild Create")} name: ${guild.name} (${guild.id}), owner: ${guild.owner.user.tag} (${guild.ownerID})`))
-.on("guildDelete", guild => console.log(`${chalk.red("Guild Delete")} name: ${guild.name} (${guild.id}), onwer: ${guild.owner.user.tag} (${guild.ownerID})`))
 .on("rateLimit", rateLimit => console.log(`${chalk.blueBright("RateLimit")} limit: ${rateLimit.limit}, timeout: ${rateLimit.timeout}, method: ${rateLimit.method}, route: ${rateLimit.route}`))
 .on("error", console.error)
 .on("warn", console.warn)

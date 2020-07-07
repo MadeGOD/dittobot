@@ -16,7 +16,7 @@ module.exports = {
             }
         }).then(e => e.json())
 
-        if (!res.items[0]) return message.channel.send(`${args.join(' ')} (이)라는 영화를 찾을 수 없습니다`)
+        if (!res.items[0]) return message.channel.send(`${args.join(' ')} (이)라는 영화를 찾을 수 없습니다.`)
 
         const { items: [ { title, subtitle, link, image, pubDate, director, actor, userRating } ] } = res
 

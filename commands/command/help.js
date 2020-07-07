@@ -23,7 +23,7 @@ module.exports = {
             message.channel.send(new MessageEmbed().setTitle(`${cmd.name} 명령어 정보`).setDescription(info).setColor(0x00ff00).setFooter("<> = 필수, [] = 선택, | = 또는"))
         } else {
             const commands = category => client.commands.filter(cmd => cmd.category === category).map(cmd => `\`${commandNames[cmd.name] ? commandNames[cmd.name] : cmd.name}\``).join(", ")
-            const res = client.categories.filter(a => a !== "owner").map(e => `**${categories[e]}**\n${commands(e)}`).reduce((s, c) => `${s}\n\n${c}`)
+            const res = client.categories.map(e => `**${categories[e]}**\n${commands(e)}`).reduce((s, c) => `${s}\n\n${c}`)
             
             message.channel.send(new MessageEmbed().setColor(0x00ff00).setTitle(`${client.user.username} 도움말`).setFooter(`${ops.prefix}도움 [명령어 이름]`).setDescription(res))
         }
@@ -39,7 +39,8 @@ const categories = {
     moderation: "관리",
     money: "돈",
     music: "음악",
-    naver: "네이버"
+    naver: "네이버",
+    owner: '제작자'
 }
 
 const commandNames = {
@@ -90,6 +91,5 @@ const commandNames = {
     movie: "영화",
     navertop: "네이버실검",
     papago: "파파고",
-    papagolang: "언어감지",
-    weather: "날씨"
+    papagolang: "언어감지"
 }
