@@ -44,7 +44,7 @@ module.exports = client => {
         .use((req, res) => {
             res.status(404).send({
                 code: res.statusCode,
-                message: 'Not found'
+                error: 'Not found'
             })
         })
         .listen(process.env.API_PORT, () => console.log('Server Started... (API)'))
