@@ -33,8 +33,6 @@ client.on("ready", () => {
 	ops.MyBot.update(client.guilds.cache.size).then(e => console.log(e.code)).catch(e => console.error(e.message))
 
 	client.musicManager = new(require("./structures/MusicManager"))(client)
-	
-	require('./api')(client)
 })
 .on("message", message => {
 	if (message.author.bot || message.system || !message.content.startsWith(ops.prefix)) return
