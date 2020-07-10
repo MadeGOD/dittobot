@@ -1,6 +1,5 @@
 const { Client, Collection } = require("discord.js"),
 	{ readdirSync } = require("fs"),
-	chalk = require("chalk"),
 	table = (new(require("ascii-table"))).setHeading("Command", "Status"),
 	client = new Client(),
 	ops = require('./ops')
