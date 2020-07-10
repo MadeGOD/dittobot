@@ -31,7 +31,7 @@ client.on("ready", () => {
 
 	setInterval(() => client.user.setActivity(activity[Math.floor(Math.random() * activity.length)]), 10000)
 
-	// ops.MyBot.update(client.guilds.cache.size).then(e => console.log(e.code)).catch(e => console.error(e.message))
+	ops.MyBot.update(client.guilds.cache.size).then(e => console.log(e.code)).catch(e => console.error(e.message))
 
 	client.musicManager = new(require("./structures/MusicManager"))(client)
 	
@@ -69,7 +69,6 @@ client.on("ready", () => {
 		console.error(error.message | error)
 	}
 })
-.on("rateLimit", rateLimit => console.log(`${chalk.blueBright("RateLimit")} limit: ${rateLimit.limit}, timeout: ${rateLimit.timeout}, method: ${rateLimit.method}, route: ${rateLimit.route}`))
 .on("error", console.error)
 .on("warn", console.warn)
 
