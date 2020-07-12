@@ -15,11 +15,7 @@ module.exports = {
             .addField(`${client.emojis.cache.get("709051340067962950")} 디스코드 태그`, `**${member.user.tag}**`)
             .addField("🆔 ID", stripIndents`**${member.user.id}**`)
 
-        if (member.user.presence.status !== "offline" && !member.user.bot) {
-            if (member.user.presence.clientStatus.desktop) embed.addField(`${client.emojis.cache.get("709051340067962950")} 디스코드 클라이언트`, `**🖥 디스코드 앱**`)
-            else if (member.user.presence.clientStatus.web) embed.addField(`${client.emojis.cache.get("709051340067962950")} 디스코드 클라이언트`, `**⌨ 웹**`)
-            else if (member.user.presence.clientStatus.mobile) embed.addField(`${client.emojis.cache.get("709051340067962950")} 디스코드 클라이언트`, `**📱 모바일**`)
-        }
+        if (member.user.presence.status !== "offline" && !member.user.bot) embed.addField(`${client.emojis.cache.get("709051340067962950")} 디스코드 클라이언트`, `**${Object.keys(member.user.presence.clientStatus).map(e => clientStatus[e]).join(', ')}**`)
 
         embed.addField("상태", `**${status[member.user.presence.status]} (${member.user.presence.status})**`)
             .addField("📥 서버에 들어온 날짜", `**${ops.formatTime(member.joinedAt)}**`)
@@ -43,4 +39,10 @@ const status = {
     idle: ":crescent_moon: 자리 비움",
     dnd: ":no_entry: 다른 용무 중",
     offline: ":white_square_button: 오프라인"
+}
+
+const clientStatus = {
+    desktop: '🖥 디스코드 앱',
+    web: '⌨ 웹',
+    mobile: '📱 모바일'
 }
