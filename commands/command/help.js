@@ -52,6 +52,7 @@ const commandNames = {
     invite: "초대링크",
     lyrics: "가사",
     profile: "프사",
+    profile_create: '프사만들기',
     rps: "가위바위보",
     say: "말해",
     suggestion: "건의",
