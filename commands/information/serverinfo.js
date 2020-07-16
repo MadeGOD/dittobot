@@ -48,6 +48,7 @@ module.exports = {
 
         if (message.member.hasPermission("MANAGE_ROLES") && message.guild.me.hasPermission("MANAGE_ROLES") && message.guild.roles.cache.filter(e => e.id !== message.guild.id).size) message.channel.send(roleEmbed)
         if (message.member.hasPermission("MANAGE_EMOJIS") && message.guild.me.hasPermission("MANAGE_EMOJIS") && message.guild.emojis.cache.size) message.channel.send(emojiEmbed)
+        if (message.guild.premiumSubscriptionCount) message.channel.send(new MessageEmbed().setTitle(`${message.guild.name} 서버의 부스트`).setColor(0xf47fff).setDescription(message.guild.members.cache.filter(a => a.premiumSince).map(e => `${e.user.tag} | ${ops.formatTime(e.premiumSince)}`).join('\n')))
     }
 }
 
