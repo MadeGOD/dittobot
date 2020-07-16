@@ -20,7 +20,19 @@ module.exports = {
             if (output.length > 1500) output = `${output.substr(0, 1495)}...`
             if (!output) output = "결과 없음"
 
-            message.channel.send(new MessageEmbed().setTitle("Eval").setColor(0x00ff00).setDescription(`**📥 Input: **\n\`\`\`js\n${args.join(" ")}\n\`\`\`\n**📤 Output: **\n\`\`\`js\n${output}\n\`\`\``))
-        }).catch(e => message.channel.send(new MessageEmbed().setTitle("Eval").setColor(0xff0000).setDescription(`**📥 Input: **\n\`\`\`js\n${args.join(" ")}\n\`\`\`\n**📤 Output: **\n\`\`\`js\n${e}\n\`\`\``)))
+            message.channel.send(new MessageEmbed().setTitle("Eval").setColor(0x00ff00).setDescription(`**📥 Input: **\n\`\`\`js\n${args.join(" ")}\n\`\`\`\n**📤 Output: **\n\`\`\`js\n${output}\n\`\`\``)).then(a => {
+                a.react('🗑️')
+
+                a.awaitReactions((reaction, user) => (reaction.emoji.name === '🗑️') && user.id === ops.ownerID, {
+                    max: 1
+                }).then(collected => collected.array()[0].emoji.name === '🗑️' && a.delete())
+            })
+        }).catch(e => message.channel.send(new MessageEmbed().setTitle("Eval").setColor(0xff0000).setDescription(`**📥 Input: **\n\`\`\`js\n${args.join(" ")}\n\`\`\`\n**📤 Output: **\n\`\`\`js\n${e}\n\`\`\``)).then(a => {
+            a.react('🗑️')
+
+            a.awaitReactions((reaction, user) => (reaction.emoji.name === '🗑️') && user.id === ops.ownerID, {
+                max: 1
+            }).then(collected => collected.array()[0].emoji.name === '🗑️' && a.delete())
+        }))
     }
 }
