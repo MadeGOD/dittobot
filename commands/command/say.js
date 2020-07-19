@@ -3,7 +3,7 @@ const { MessageEmbed } = require("discord.js")
 module.exports = {
     name: "say",
     aliases: ["말해", "따라해", "akfgo", "ㄴ묘"],
-    usage: '디토야 말해 [임베드|익명] [익명] <말>',
+    usage: '{prefix}말해 [임베드|익명] [익명] <말>',
     category: "command",
     run: async (client, message, args) => {
         if (!args.join(' ')) return

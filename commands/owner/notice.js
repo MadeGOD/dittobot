@@ -7,17 +7,13 @@ module.exports = {
     run: async (client, message, args) => {
         if (!args.join(" ")) return message.channel.send("내용을 써 주세요!")
 
-        /*
-            공지 코드 출처: https://github.com/Bluebear645/maple/blob/master/commands/%5B%EB%8B%A8%ED%92%8D%EC%95%84%5D%20%EC%A0%84%EC%B2%B4%EA%B3%B5%EC%A7%80.js
-            Discord.Js Notice Bot by 오아시스 (iOas // Oasics#5074)
-        */
-
         message.channel.send(new MessageEmbed().setTitle(`${client.user.username} 공지사항`).setDescription(`\`\`\`\n${args.join(" ")}\n\`\`\``).setColor("RANDOM")).then(async th => {
             await th.react("⭕")
             await th.react("❌")
             
             th.awaitReactions((reaction, user) => (reaction.emoji.name === "❌" || reaction.emoji.name === "⭕") && user.id === message.author.id, {
-                max: 1
+                max: 1,
+                time: 20000
             }).then(collected => {
                 if (collected.array()[0].emoji.name === "⭕") {
                     let result = ''
@@ -26,7 +22,7 @@ module.exports = {
                         let gc
 
                         g.channels.cache.forEach(c => {
-                            if (c.name.includes(client.user.username) || c.name.includes("bot-notice") || c.name.includes("bot_notice") || c.name.includes("botnotice") || c.name.includes("봇공지") || c.name.includes("봇-공지") || c.name.includes("봇_공지")) gc = c.id
+                            if (c.name.includes(client.user.username) || c.name.includes("봇공지") || c.name.includes("봇-공지") || c.name.includes("봇_공지")) gc = c.id
                         })
 
                         const Ch = client.channels.cache.get(gc)

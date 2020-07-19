@@ -12,8 +12,8 @@ module.exports = {
             const cmd = client.commands.get(commandNames) || client.commands.get(client.aliases.get(command))
         
             let info = ""
-        
-            if (!cmd) return message.channel.send(new MessageEmbed().setColor(0xff0000).setTitle(`**${command}**에 대한 명령어를 찾을 수 없습니다.`))
+
+            if (!cmd) return message.channel.send(new MessageEmbed().setColor(0xff0000).setTitle(`**${command}**의 대한 명령어를 찾을 수 없습니다.`))
             
             if (cmd.aliases) info = `\n**별칭**\n${cmd.aliases.join(", ")}\n`
             if (cmd.description) info += `\n**설명**\n${cmd.description}\n`

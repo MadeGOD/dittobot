@@ -21,5 +21,3 @@
 [lavalink-musicbot](https://github.com/AlvvxL/lavalink-musicbot)
 
 [mswgenbot-v2](https://github.com/mswgen/mswgenbot-v2)
-
-[maple](https://github.com/Bluebear645/maple) (공지 기능)

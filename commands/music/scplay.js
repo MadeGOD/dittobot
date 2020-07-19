@@ -3,7 +3,7 @@ const { MessageEmbed } = require("discord.js")
 module.exports = {
     name: "scplay",
     aliases: ["사운드클라우드", "사클", "tkzmf", "sc", "tkdnsemzmffkdnem", "soundcloud", "ㄴ치묘", "내ㅕㅜㅇ치ㅐㅕㅇ", "soundcloudplay", "내ㅕㅜㅇ치ㅐㅕ에ㅣ묘"],
-    usage: "디토야 사운드클라우드 <노래 이름|URL>",
+    usage: "{prefix}사운드클라우드 <노래 이름|URL>",
     category: "music",
     run: async (client, message, args, ops) => {
         const player = client.musicManager.queue.get(message.guild.id)

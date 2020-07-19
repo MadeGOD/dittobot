@@ -5,7 +5,7 @@ module.exports = {
     name: 'translate',
     aliases: ['번역', 'ㅅㄱ무님ㅅㄷ', 'qjsdur'],
     category: 'command',
-    usage: '디토야 번역 <시작언어|자동> <번역언어> <메세지>',
+    usage: '{prefix}번역 <시작언어|자동> <번역언어> <메세지>',
     run: async (client, message, args) => {
         if (args[0] === 'auto' || args[0] === '자동') {
             if (!args[1]) return message.channel.send('번역 언어를 입력해 주세요')

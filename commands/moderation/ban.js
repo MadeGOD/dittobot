@@ -1,5 +1,4 @@
-const { MessageEmbed } = require("discord.js"),
-    { stripIndents } = require("common-tags")
+const { MessageEmbed } = require("discord.js")
 
 module.exports = {
     name: "ban",
@@ -24,7 +23,7 @@ module.exports = {
             .setFooter(message.author.username, message.author.displayAvatarURL())
             .setTimestamp()
             .setTitle("멤버 차단")
-            .setDescription(stripIndents`**차단된 멤버**\n${user}\n\n**차단한 사람**\n${message.author}\n\n**이유**\n${args.slice(1).join(" ") ? args.slice(1).join(" ") : "없음"}`)
+            .setDescription(`**차단된 멤버**\n${user}\n\n**차단한 사람**\n${message.author}\n\n**이유**\n${args.slice(1).join(" ") || "없음"}`)
 
         const promtEmbed = new MessageEmbed().setColor(0x00ff00).setDescription(`**${user}(${user.id})**님을 차단하실 건가요?`)
 

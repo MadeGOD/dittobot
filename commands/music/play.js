@@ -3,7 +3,7 @@ const { MessageEmbed } = require("discord.js")
 module.exports = {
     name: "play",
     aliases: ["플레이", "재생", "ㅔㅣ묘", "vmffpdl", "wotod", "pla", "pl"],
-    usage: "디토야 재생 <노래 이름|URL>",
+    usage: "{prefix}재생 <노래 이름|URL>",
     category: "music",
     run: async (client, message, args, ops) => {
         const player = client.musicManager.queue.get(message.guild.id)

@@ -18,6 +18,6 @@ module.exports = {
             body: `url=${args.join(" ")}`
         }).then(e => e.json())
 
-        message.channel.send(new MessageEmbed().setTitle("단축 결과").setColor(0x00ff00).setDescription(`[\`\`\`\n들어가기\n\`\`\`](${url})\n${url}`))
+        message.channel.send(new MessageEmbed().setTitle("단축 결과").setColor(0x00ff00).setDescription(url))
     }
 }

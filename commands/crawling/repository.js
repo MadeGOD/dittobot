@@ -14,16 +14,16 @@ module.exports = {
 
         if (!html_url) return message.channel.send(`${args[0]} (이)라는 유저의 ${args[1]} (이)라는 레포지토리를 찾을 수 없습니다...`)
 
-        message.channel.send(new MessageEmbed().setTitle(name).setColor(0x000000).setAuthor("Github", "https://github.githubassets.com/favicons/favicon.png", "https://github.com/").setFooter(owner.login, owner.avatar_url).setDescription(`[들어가기](${html_url})`)
+        message.channel.send(new MessageEmbed().setTitle(name).setURL(html_url).setColor(0x000000).setAuthor("Github", "https://github.githubassets.com/favicons/favicon.png", "https://github.com/").setFooter(owner.login, owner.avatar_url)
         .addFields([
-            { name: "이름", value: `**${name}**`},
-            { name: "설명", value: `**${description ? description : "없음"}**`, inline: true },
-            { name: "홈페이지", value: `**${homepage ? homepage : "없음"}**`, inline: true },
-            { name: "주요 언어", value: `**${language ? language : "없음"}**` },
-            { name: "스타 수", value: `**${stargazers_count ? stargazers_count : 0}개**`, inline: true },
-            { name: 'Fork 수', value: `**${forks_count}**`, inline: true },
-            { name: "라이센스", value: `**${license ? license.name : "없음"}**`} ,
-            { name: "생성 날짜", value: `**${ops.formatTime(created_at)}**` }
+            { name: "이름", value: name },
+            { name: "설명", value: description || "없음", inline: true },
+            { name: "홈페이지", value: homepage || "없음", inline: true },
+            { name: "주요 언어", value: language || "없음" },
+            { name: "스타 수", value: `${stargazers_count}개`, inline: true },
+            { name: 'Fork 수', value: forks_count, inline: true },
+            { name: "라이센스", value: license ? license.name : "없음" } ,
+            { name: "생성 날짜", value: ops.formatTime(created_at) }
         ]))
     }
 }

@@ -1,5 +1,4 @@
-const { MessageEmbed } = require("discord.js"),
-    { stripIndents } = require("common-tags")
+const { MessageEmbed } = require("discord.js")
 
 module.exports = {
     name: "kick",
@@ -24,7 +23,7 @@ module.exports = {
             .setFooter(message.author.username, message.author.displayAvatarURL())
             .setTimestamp()
             .setTitle('멤버 추방')
-            .setDescription(stripIndents`**추방된 멤버**\n${user}\n\n**추방한 사람**\n${message.author}\n\n**이유**\n${args.slice(1).join(" ") ? args.slice(1).join(" ") : "없움"}`)
+            .setDescription(`**추방된 멤버**\n${user}\n\n**추방한 사람**\n${message.author}\n\n**이유**\n${args.slice(1).join(" ") || "없음"}`)
 
         const promtEmbed = new MessageEmbed().setColor(0x00ff00).setDescription(`**${user}(${user.id})**님을 추방하실 건가요?`)
 

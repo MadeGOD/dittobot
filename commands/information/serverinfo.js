@@ -11,38 +11,27 @@ module.exports = {
             .setThumbnail(message.guild.iconURL())
             .setFooter(message.guild.name, message.guild.iconURL())
             .setTimestamp()
-            .addField("👑 서버 주인", `**${message.guild.owner.user.username}\n(ID: ${message.guild.ownerID})**`)
-            .addField("🌎 서버 지역", `**${region[message.guild.region]}**`)
-            .addField("🆔 서버 ID", `**${message.guild.id}**`)
-            .addField("🙎‍♂️ 서버 유저", `**ALL: ${message.guild.memberCount} (USER: ${message.guild.members.cache.filter(m => !m.user.bot).size} | BOT: ${message.guild.members.cache.filter(m => m.user.bot).size})**`)
-            .addField("🎂 서버 생일", `**${ops.formatTime(message.guild.createdAt)}**`)
-            .addField("💬 채팅 채널", `**ALL: ${message.guild.channels.cache.size} (TEXT: ${message.guild.channels.cache.filter(x => x.type === "text").size} | CATEGORY: ${message.guild.channels.cache.filter(x => x.type === "category").size} | VOICE: ${message.guild.channels.cache.filter(x => x.type === "voice").size})**`)
-            .addField("💤 비활성화 채널", `**${message.guild.afkChannel ? message.guild.afkChannel.name : "없음"}**`, true)
+            .addField("👑 서버 주인", `${message.guild.owner.user.username}\n(ID: ${message.guild.ownerID})`)
+            .addField("🌎 서버 지역", region[message.guild.region])
+            .addField("🆔 서버 ID", message.guild.id)
+            .addField("🙎‍♂️ 서버 유저", `ALL: ${message.guild.memberCount} (USER: ${message.guild.members.cache.filter(m => !m.user.bot).size} | BOT: ${message.guild.members.cache.filter(m => m.user.bot).size})`)
+            .addField("🎂 서버 생일", ops.formatTime(message.guild.createdAt))
+            .addField("💬 채팅 채널", `ALL: ${message.guild.channels.cache.size} (TEXT: ${message.guild.channels.cache.filter(x => x.type === "text").size} | CATEGORY: ${message.guild.channels.cache.filter(x => x.type === "category").size} | VOICE: ${message.guild.channels.cache.filter(x => x.type === "voice").size})`)
+            .addField("💤 비활성화 채널", message.guild.afkChannel ? message.guild.afkChannel.name : "없음", true)
 
-        if (message.guild.afkChannel) embed.addField("⏰ 비활성화 시간 제한", `**${afkTimeout[message.guild.afkTimeout]}**`, true)
+        if (message.guild.afkChannel) embed.addField("⏰ 비활성화 시간 제한", afkTimeout[message.guild.afkTimeout], true)
 
-        embed.addField("🔐 서버 보안", `**${verificationLevel[message.guild.verificationLevel]}**`)
-            .addField("📱 2단계 인증", `**${mfaLevel[message.guild.mfaLevel]}**`)
-            .addField("📡 시스템 메세지 채널", `**${message.guild.systemChannel ? message.guild.systemChannel : "없음"}**`)
-            .addField("📺 유해 미디어 콘텐츠 필터", `**${explicitContentFilter[message.guild.explicitContentFilter]}**`)
-            .addField("🔔 알림 설정 초기화", `**${defaultMessageNotifications[message.guild.defaultMessageNotifications]}**`)
-            .addField("🎙 음성 채널에 접속한 수", `**${message.guild.voiceStates.cache.size}명**`)
-            .addField(`${client.emojis.cache.get("686131200242352184")} 서버 부스트 레벨`, `**${message.guild.premiumTier}레벨**`, true)
-            .addField(`${client.emojis.cache.get("686131200242352184")} 서버 부스트 횟수`, `**${message.guild.premiumSubscriptionCount}회**`, true)
+        embed.addField("🔐 서버 보안", verificationLevel[message.guild.verificationLevel])
+            .addField("📱 2단계 인증", mfaLevel[message.guild.mfaLevel])
+            .addField("📡 시스템 메세지 채널", message.guild.systemChannel ? message.guild.systemChannel : "없음")
+            .addField("📺 유해 미디어 콘텐츠 필터", explicitContentFilter[message.guild.explicitContentFilter])
+            .addField("🔔 알림 설정 초기화", defaultMessageNotifications[message.guild.defaultMessageNotifications])
+            .addField("🎙 음성 채널에 접속한 수", `${message.guild.voiceStates.cache.size}명`)
+            .addField(`${client.emojis.cache.get("686131200242352184")} 서버 부스트 레벨`, `${message.guild.premiumTier}레벨`, true)
+            .addField(`${client.emojis.cache.get("686131200242352184")} 서버 부스트 횟수`, `${message.guild.premiumSubscriptionCount}회`, true)
 
-        const roleEmbed = new MessageEmbed().setColor(0x00ff00).setTitle(`${message.guild.name} 서버의 역할 (${message.guild.roles.cache.filter(r => r.id !== message.guild.id).size}개)`).setDescription(message.guild.roles.cache.filter(r => r.id !== message.guild.id).map(e => e).join(", "))
-
-        if (message.guild.roles.cache.filter(r => r.id !== message.guild.id).size > 25) {
-            roleEmbed.setDescription(message.guild.roles.cache.filter(n => n.id !== message.guild.id).map(e => e).slice(0, 25).join(", "));
-            roleEmbed.setTitle(`${message.guild.name} 서버의 역할 (${message.guild.roles.cache.filter(r => r.id !== message.guild.id).size}개 중 25개)`);
-        }
-
-        const emojiEmbed = new MessageEmbed().setColor(0x00ff00).setTitle(`${message.guild.name} 서버의 이모지 (${message.guild.emojis.cache.size}개)`).setDescription(message.guild.emojis.cache.map(e => e.toString()).join(" "))
-
-        if (message.guild.emojis.cache.size > 40) {
-            emojiEmbed.setDescription(message.guild.emojis.cache.map(e => e.toString()).splice(0, 40).join(" "))
-            emojiEmbed.setTitle(`${message.guild.name} 서버의 이모지 (${message.guild.emojis.cache.size}개 중 40개)`)
-        }
+        const roleEmbed = new MessageEmbed().setColor(0x00ff00).setTitle(message.guild.roles.cache.filter(r => r.id !== message.guild.id).size > 30 ? `${message.guild.name} 서버의 역할 (${message.guild.roles.cache.filter(r => r.id !== message.guild.id).size}개 중 30개)` :`${message.guild.name} 서버의 역할 (${message.guild.roles.cache.filter(r => r.id !== message.guild.id).size}개)`).setDescription(message.guild.roles.cache.filter(r => r.id !== message.guild.id).map(e => e).slice(0, 30).join(", "))
+        const emojiEmbed = new MessageEmbed().setColor(0x00ff00).setTitle(message.guild.emojis.cache.size > 30 ? `${message.guild.name} 서버의 이모지 (${message.guild.emojis.cache.size}개 중 30개)` :`${message.guild.name} 서버의 이모지 (${message.guild.emojis.cache.size}개)`).setDescription(message.guild.emojis.cache.map(e => e.toString()).slice(0, 30).join(" "))
 
         message.channel.send(embed)
 
