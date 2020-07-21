@@ -1,6 +1,5 @@
 const { MessageEmbed } = require("discord.js"),
     fetch = require("node-fetch"),
-    axios = require('axios'),
     cheerio = require("cheerio")
 
 module.exports = {
@@ -10,10 +9,8 @@ module.exports = {
     run: async (client, message, args) => {
         const { features: [{ attributes: { confirmed, recovered, deaths } }] } = await fetch("https://is.gd/hihhls").then(res => res.json())
 
-        await axios.get("http://ncov.mohw.go.kr/").then(res => {
-            if (res.status !== 200) return
-
-            const $ = cheerio.load(res.data)
+        fetch("http://ncov.mohw.go.kr/").then(e => e.text()).then(res => {
+            const $ = cheerio.load(res)
 
             let str = ""
 
