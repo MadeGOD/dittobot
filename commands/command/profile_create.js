@@ -13,7 +13,7 @@ module.exports = {
 
         const canvas = createCanvas(512, 512)
         const ctx = canvas.getContext('2d')
-        const value = args.slice(1).join(' ') || args[0]
+        const value = args.slice(1).join(' ') || args.join(' ')
 
         ctx.fillStyle = 'rgb(51, 51, 51)'
         ctx.fillRect(0, 0, canvas.width, canvas.height)
