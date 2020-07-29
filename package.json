@@ -7,27 +7,32 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node index.js"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ditto7890/dittobot.git"
+  },
+  "keywords": [],
   "author": "",
   "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ditto7890/dittobot/issues"
+  },
+  "homepage": "https://github.com/ditto7890/dittobot#readme",
+  "devDependencies": {
+    "eslint": "^7.5.0"
+  },
   "dependencies": {
-    "@discordjs/opus": "^0.1.0",
-    "@lavacord/discord.js": "0.0.6",
+    "@lavacord/discord.js": "0.0.7",
     "@vitalets/google-translate-api": "^3.0.0",
     "ascii-table": "0.0.9",
     "axios": "^0.19.2",
     "canvas": "^2.6.1",
-    "cheerio": "^1.0.0-rc.3",
     "discord.js": "^12.2.0",
     "dotenv": "^8.2.0",
     "isgd": "^1.1.3",
-    "koreanbots": "^1.0.9",
+    "koreanbots": "^1.1.4",
     "lavacord": "^1.1.9",
-    "node-fetch": "^2.6.0",
-    "nodemailer": "^6.4.6",
-    "slyrics": "^0.1.42",
-    "time-convert": "0.0.2"
-  },
-  "devDependencies": {
-    "eslint": "^6.8.0"
+    "nodemailer": "^6.4.10",
+    "slyrics": "^0.1.42"
   }
 }

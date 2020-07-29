@@ -32,10 +32,10 @@ module.exports = {
 }
 
 const status = {
-    online: ":green_circle: 온라인",
-    idle: ":crescent_moon: 자리 비움",
-    dnd: ":no_entry: 다른 용무 중",
-    offline: ":white_square_button: 오프라인"
+    online: "🟢 온라인",
+    idle: "🌙 자리 비움",
+    dnd: "⛔ 다른 용무 중",
+    offline: "🔳 오프라인"
 }
 
 const clientStatus = {
