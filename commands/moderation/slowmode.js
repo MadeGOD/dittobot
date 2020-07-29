@@ -4,6 +4,7 @@ module.exports = {
     category: 'moderation',
     usage: '{prefix}슬로우모드 [초]',
     run: async (client, message, args) => {
+        if (message.channel.type !== "text") await message.channel.send('텍스트 채널에서만 가능한 명령어입니다.')
         if (!args[0]) return message.channel.send(`${message.channel.name}의 슬로우모드는 ${message.channel.rateLimitPerUser}초입니다.`)
         if (isNaN(args[0]) || args[0] < 0 || args[0] > 21600 || args[0].includes('.')) return message.channel.send('0 ~ 21600 사이의 자연수만 입력해 주세요.')
 
