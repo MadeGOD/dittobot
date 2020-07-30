@@ -5,11 +5,11 @@ module.exports = {
     ownerID: process.env.OWNER_ID,
     prefix: process.env.PREFIX,
     MyBot: new koreanbots.MyBot(process.env.KOREANBOTS_TOKEN),
-    formatTime: time => {
+    formatTime(time) {
         const date = new Date(time)
         return `${date.getFullYear()}년 ${date.getMonth() + 1}월 ${date.getDate()}일 ${date.getHours()}시 ${date.getMinutes()}분 ${date.getSeconds()}초`
     },
-    getMember: (message, mem) => {
+    getMember(message, mem) {
         let member = message.guild.members.cache.get(mem);
 
         if (!member && message.mentions.members) member = message.mentions.members.first()
@@ -18,7 +18,7 @@ module.exports = {
 
         return member
     },
-    getChannel: (message, ch) => {
+    getChannel(message, ch) {
         let channel = message.guild.channels.cache.get(ch)
 
         if (!channel && message.mentions.channels) channel = message.mentions.channels.first()

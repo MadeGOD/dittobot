@@ -56,7 +56,7 @@ const defaultMessageNotifications = {
 
 const region = {
     "south-korea": ":flag_kr: 대한민국 (South Korea)",
-    "japan": ":flag_jp: 일본 (Japan)**",
+    "japan": ":flag_jp: 일본 (Japan)",
     "brazil": ":flag_br: 브라질 (Brazil)",
     "india": ":flag_in: 인도 (India)",
     "europe": ":flag_eu: 유럽 (Europe)",
