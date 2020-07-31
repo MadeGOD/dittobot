@@ -13,7 +13,7 @@ module.exports = {
         let member = message.guild.members.cache.get(mem);
 
         if (!member && message.mentions.members) member = message.mentions.members.first()
-        if (!member && mem) member = message.guild.members.cache.find(m => m.displayName.toLowerCase().includes(mem) || m.user.username.toLowerCase().includes(mem) || m.user.tag.toLowerCase().includes(mem))
+        if (!member && mem) member = message.guild.members.cache.find(m => m.displayName.toLowerCase().includes(mem) || m.user.username.toLowerCase().includes(mem) || m.user.tag.toLowerCase() === mem)
         if (!member) member = message.member
 
         return member
