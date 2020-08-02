@@ -4,8 +4,9 @@ const { MessageAttachment } = require('discord.js')
 module.exports = {
     name: 'profile_create',
     aliases: ['프사만들기', '프사제작', 'vmtkaksemfrl', 'pc', 'ㅔ개랴ㅣㄷ_ㅊㄱㄷㅁㅅㄷ', 'profile-create', 'ㅔ개랴ㅣㄷ-ㅊㄱㄷㅁㅅㄷ', 'vmtkwpwkr'],
+    description: 'https://profile.ditto7890.ga/create 기능을 옮긴 명령어',
     run: async (client, message, args) => {
-        if (!args[0]) return message.channel.send('폰트 크기를 입력해 주세요.')
+        if (!args[0]) return message.channel.send('폰트 크기 또는 내용을 입력해 주세요.')
 
         const px = isNaN(args[0]) ? 256 : args[0]
 
@@ -18,7 +19,8 @@ module.exports = {
         ctx.fillStyle = 'rgb(51, 51, 51)'
         ctx.fillRect(0, 0, canvas.width, canvas.height)
         ctx.font = `${px}px CookieRun Black`
-        ctx.textBaseline = 'middle'
+        if (value.includes('\n')) ctx.textBaseline = 'bottom'
+        else ctx.textBaseline = 'middle'
         ctx.textAlign = "center"
 
         ctx.fillStyle = "white"

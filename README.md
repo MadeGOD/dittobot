@@ -1,6 +1,6 @@
 # DittoBot
 
-[![ditto7890](https://img.shields.io/badge/made%20by-ditto7890%235158-green?style=for-the-badge&logo=discord&logoColor=white)](https://discord.com/users/604617640891121664)
+[![ditto7890](https://img.shields.io/badge/made%20by-ditto7890%235158-green?style=for-the-badge&logo=discord&logoColor=white)](https://github.com/ditto7890)
 
 ## Invite / 초대
 
@@ -10,7 +10,7 @@
 
 ## Developer / 개발자
 
-* ditto7890#5158
+* [ditto7890#3856](https://discord.com/users/604617640891121664)
 
 ## 참고 / 사용한 오픈소스
 
