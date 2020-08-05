@@ -19,8 +19,10 @@ module.exports = {
         ctx.fillStyle = 'rgb(51, 51, 51)'
         ctx.fillRect(0, 0, canvas.width, canvas.height)
         ctx.font = `${px}px CookieRun Black`
+
         if (value.includes('\n')) ctx.textBaseline = 'bottom'
         else ctx.textBaseline = 'middle'
+        
         ctx.textAlign = "center"
 
         ctx.fillStyle = "white"

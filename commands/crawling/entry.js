@@ -3,7 +3,7 @@ const fetch = require("node-fetch"),
 
 module.exports = {
     name: "entry",
-    aliases: ["엔트리", "dpsxmfl", "둣교", "엔틜", "dpsxmlf"],
+    aliases: ["엔트리", "dpsxmfl", "둣교", "엔틜", "dpsxmlf", '망트리', 'akdxmfl'],
     category: "crawling",
     run: async (client, message, args) => {
         if (!args.join(" ")) return message.channel.send("검색할 엔트리 유저 닉네임을 입력해 주세요!")

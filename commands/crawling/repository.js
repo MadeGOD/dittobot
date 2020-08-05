@@ -17,12 +17,12 @@ module.exports = {
         message.channel.send(new MessageEmbed().setTitle(name).setURL(html_url).setColor(0x000000).setAuthor("Github", "https://github.githubassets.com/favicons/favicon.png", "https://github.com/").setFooter(owner.login, owner.avatar_url)
         .addFields([
             { name: "이름", value: name },
-            { name: "설명", value: description || "없음", inline: true },
+            { name: "설명", value: description || "없음" },
             { name: "홈페이지", value: homepage || "없음", inline: true },
-            { name: "주요 언어", value: language || "없음" },
+            { name: "주요 언어", value: language || "없음", inline: true },
             { name: "스타 수", value: `${stargazers_count}개`, inline: true },
             { name: 'Fork 수', value: forks_count, inline: true },
-            { name: "라이센스", value: license ? license.name : "없음" } ,
+            { name: "라이센스", value: license ? license.name : "없음", inline: true } ,
             { name: "생성 날짜", value: ops.formatTime(created_at) }
         ]))
     }
