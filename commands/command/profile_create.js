@@ -14,15 +14,18 @@ module.exports = {
 
         if (px > 512 || px < 5) return message.channel.send('5 ~ 512의 수를 입력해 주세요.')
 
-        const value = args.slice(1).join(' ') || args.join(' ')
+        const width = 512
+        const height = 512
 
-        const canvas = createCanvas(512, 512)
+        let value = args.slice(1).join(' ') || args.join(' ')
+
+        const canvas = createCanvas(width, height)
         const ctx = canvas.getContext('2d')
 
-        const svgCanvas = createCanvas(512, 512, 'svg')
+        const svgCanvas = createCanvas(width, height, 'svg')
         const svgCtx = svgCanvas.getContext('2d')
 
-        const pdfCanvas = createCanvas(512, 512, 'pdf')
+        const pdfCanvas = createCanvas(width, height, 'pdf')
         const pdfCtx = pdfCanvas.getContext('2d')
 
         ctx.fillStyle = '#333333'
@@ -40,14 +43,15 @@ module.exports = {
         pdfCtx.font = `${px}px CookieRun Black`
         pdfCtx.textAlign = "center"
 
-        if (value.includes('\n')) ctx.textBaseline = 'bottom'
-        else ctx.textBaseline = 'middle'
-
-        if (value.includes('\n')) svgCtx.textBaseline = 'bottom'
-        else svgCtx.textBaseline = 'middle'
-
-        if (value.includes('\n')) pdfCtx.textBaseline = 'bottom'
-        else pdfCtx.textBaseline = 'middle'
+        if (value.includes('\n')) {
+            ctx.textBaseline = 'bottom'
+            svgCtx.textBaseline = 'bottom'
+            pdfCtx.textBaseline = 'bottom'
+        } else {
+            ctx.textBaseline = 'middle'
+            svgCtx.textBaseline = 'middle'
+            pdfCtx.textBaseline = 'middle'
+        }
 
         ctx.fillStyle = "white"
         ctx.strokeStyle = "white"
