@@ -14,7 +14,7 @@ module.exports = {
             res = await fetch(`https://playentry.org/api/getUserByUsername/${encodeURI(args.join(" "))}`).then(e => e.json())
             if (!res) return message.channel.send(`${args.join(" ")}(이)라는 유저를 찾을 수 없습니다...\n1. 탈퇴한 유저\n2. 존재하지 않는 유저`)
         } catch (e) {
-            return message.channel.send(`에러\n${e}`)
+            return message.channel.send(`알 수 없는 에러가 발생했습니다.\n${e}`)
         }
 
         const { username, description, _id, role, avatarImage, blogImage } = res
@@ -36,7 +36,9 @@ module.exports = {
             childCount += i.childCnt
         })
 
-        embed.addField("❤ 좋아요 수", parseInt(likeCount).toLocaleString(), true).addField("👀 조회수", parseInt(visitCount).toLocaleString(), true).addField("🗨 작품 댓글 수", parseInt(commentCount).toLocaleString(), true).addField("작품 사본 수", parseInt(childCount).toLocaleString(), true).addField("💬 글 수", parseInt(discuss.count).toLocaleString(), true)
+        embed.addField("❤ 좋아요 수", parseInt(likeCount).toLocaleString(), true).addField("👀 조회수", parseInt(visitCount).toLocaleString(), true).addField("🗨 작품 댓글 수", parseInt(commentCount).toLocaleString(), true)
+        if (role !== 'admin') embed.addField("작품 사본 수", parseInt(childCount).toLocaleString(), true)
+        embed.addField("💬 글 수", parseInt(discuss.count).toLocaleString(), true)
 
         message.channel.send(embed)
     }
